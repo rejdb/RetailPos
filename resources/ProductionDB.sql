@@ -2054,7 +2054,7 @@ CREATE TABLE `ref_item_family` (
 --
 -- Table structure for table `ref_item_type`
 --
-
+DROP TABLE IF EXISTS `ref_item_type`;
 CREATE TABLE `ref_item_type` (
   `TypeID` int(11) NOT NULL,
   `Description` varchar(30) NOT NULL
@@ -2830,7 +2830,7 @@ select t0.*
 from md_user t0 
 INNER JOIN ref_user_target t1 on t0.UID = t1.UserID
 LEFT JOIN ref_user_branch t2 on t0.UID = t2.UserID
-LEFT JOIN md_branches t3 on t2.BranchID = t3.BranchID
+LEFT JOIN md_branches t3 on t2.BranchID = t3.BranchID;
 
 -- --------------------------------------------------------
 
@@ -3307,7 +3307,7 @@ SELECT t0.*
 , IF(t0.Status=0,"For Activation",IF(t0.Status=1,"Activated","Cancelled")) as StatusDesc
 , (SELECT I0.DisplayName FROM md_user I0 WHERE I0.UID = t0.CreatedBy) as SoldBy
 FROM trx_sales_postpaid t0
-INNER JOIN view_branches t1 ON t0.Branch = t1.BranchID
+INNER JOIN view_branches t1 ON t0.Branch = t1.BranchID;
 
 -- --------------------------------------------------------
 
