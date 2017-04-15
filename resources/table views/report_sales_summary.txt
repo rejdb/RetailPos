@@ -1,0 +1,4 @@
+CREATE VIEW report_sales_summary AS
+SELECT * 
+FROM (SELECT *,'invoice' as Module FROM `view_sales` UNION ALL
+SELECT *,'return' FROM `view_return`) AS a

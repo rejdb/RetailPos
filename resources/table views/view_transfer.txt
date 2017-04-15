@@ -1,0 +1,22 @@
+CREATE VIEW view_transfer AS
+SELECT T0.*
+,IF(T0.TransferType=0,(SELECT I0.Description FROM md_branches I0 WHERE I0.BranchID=T0.InvFrom),(SELECT I0.WhsName FROM md_warehouses I0 WHERE I0.WhsCode=T0.InvFrom)) as TransferFrom
+,IF(T0.TransferType=0,(SELECT I0.Description FROM md_branches I0 WHERE I0.BranchID=T0.InvTo),(SELECT I0.WhsName FROM md_warehouses I0 WHERE I0.WhsCode=T0.InvTo)) as TransferTo
+,IF(T0.TransferType=0,'Store Transfer','Warehouse Transfer') as TransType
+,T1.BranchCode
+,T1.Description
+,T1.BranchEmail
+,T1.Address
+,T1.CategoryDesc
+,T1.GroupDesc
+,T1.TypeDesc
+,T1.ChannelDesc
+,T1.CityDesc
+,T1.IsTaxInclude
+,T1.Avatar
+,T2.DisplayName
+,(SELECT I0.DisplayName FROM md_user I0 WHERE I0.UID = T0.Approver) as 'ApprovedBy'
+,(SELECT I0.DisplayName FROM md_user I0 WHERE I0.UID = T0.Receiver) as 'ReceivedBy'
+FROM trx_transfer T0 
+INNER JOIN view_branches T1 ON T0.Branch = T1.BranchID
+INNER JOIN md_user T2 ON T0.CreatedBy = T2.UID

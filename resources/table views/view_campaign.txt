@@ -1,0 +1,12 @@
+CREATE VIEW view_campaign AS
+SELECT t0.*,
+t1.BranchID,
+t3.Description as 'BranchName',
+t2.PID,
+t4.ProductDesc,
+t2.SRP
+FROM md_campaign t0
+LEFT JOIN stp_campaign_branch t1 ON t0.CampaignID = t1.CampaignID
+LEFT JOIN stp_campaign_item t2 ON t0.CampaignID = t2.CampaignID
+LEFT JOIN md_branches t3 ON t1.BranchID = t3.BranchID
+LEFT JOIN md_items t4 ON t2.PID = t4.PID

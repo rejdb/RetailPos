@@ -1,0 +1,24 @@
+CREATE VIEW view_smr AS
+SELECT T0.*
+,T1.BranchCode
+,T1.Description as BranchDesc
+,T1.CategoryDesc
+,T1.ChannelDesc
+,T1.CityDesc
+,T1.TypeDesc
+,T1.GroupDesc
+,T2.BarCode
+,T2.ProductDesc
+,T2.SKU
+,T2.BrandDesc
+,T2.CategoryDesc as ItemCategory
+,T2.CycleDesc
+,T2.FamilyDesc
+,T2.TypeDesc as ItemTypeDesc
+,T2.StdCost
+,T2.CurrentPrice
+,T3.WhsName
+FROM trx_stocks_movement T0
+INNER JOIN view_branches T1 ON T0.Branch=T1.BranchID
+INNER JOIN view_items T2 ON T0.Product=T2.PID
+INNER JOIN md_warehouses T3 ON T0.Warehouse=T3.WhsCode

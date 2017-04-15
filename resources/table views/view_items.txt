@@ -1,0 +1,19 @@
+CREATE VIEW view_items AS
+SELECT t0.* 
+,t1.Description as 'BrandDesc'
+,t2.Description as 'CategoryDesc'
+,t3.Description as 'CycleDesc'
+,t4.Description as 'PriceListDesc'
+,t7.Description as FamilyDesc
+,t8.Description as TypeDesc
+,t5.PDID
+,IFNULL(t5.Price,0) as 'CurrentPrice'
+,IFNULL((SELECT SUM(I0.Available) FROM md_inventory I0 WHERE I0.Product=t0.PID),0) as 'Inventory'
+FROM md_items t0
+LEFT JOIN ref_item_brand t1 ON t0.Brand = t1.BrandID
+LEFT JOIN ref_item_category t2 ON t0.Category = t2.P_CatID
+LEFT JOIN ref_item_cycle t3 ON t0.LifeCycle = t3.P_CycleID
+LEFT JOIN ref_item_family t7 ON t0.Family = t7.FamID
+LEFT JOIN ref_item_type t8 ON t0.ItemType = t8.TypeID
+LEFT JOIN stp_item_pricelist t4 ON t0.PriceList = t4.PLID
+LEFT JOIN stp_item_pricedetails t5 ON (t0.PID = t5.PID AND t0.PriceList = t5.PLID)

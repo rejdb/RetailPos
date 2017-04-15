@@ -1,0 +1,6 @@
+CREATE VIEW view_sales_customer AS
+SELECT T0.*
+, T1.CustPoints
+, T1.CustCredits
+FROM trx_sales_customer T0
+LEFT JOIN md_customer T1 ON T0.CardNo = T1.CardNo

@@ -1,0 +1,15 @@
+CREATE VIEW report_sales_detailed AS
+SELECT *,
+IF(a.PriceAfVat < 1000, "<1000",
+IF(a.PriceAfVat>1000 and a.PriceAfVat<=2499, "1,000 - 2,499",
+IF(a.PriceAfVat>2499 and a.PriceAfVat<=4999, "2,499 - 4,999",
+IF(a.PriceAfVat>4999 and a.PriceAfVat<=7499, "5,000 - 7,499",
+IF(a.PriceAfVat>7499 and a.PriceAfVat<=9999, "7,500 - 9,999",
+IF(a.PriceAfVat>9999 and a.PriceAfVat<=14999, "10,000 - 14,999",
+IF(a.PriceAfVat>14999 and a.PriceAfVat<=19999, "15,000 - 19,999",
+IF(a.PriceAfVat>19999 and a.PriceAfVat<=24999, "20,000 - 24,999",
+"25,000 and Above")))))))) as PriceBand
+, (a.TotalAfDiscount * (a.CashPayment/a.NetTotal)) as Cash_Payment
+, (a.TotalAfDiscount * (a.CardPayment/a.NetTotal)) as NonCash_Payment
+FROM (SELECT *,'invoice' as Module FROM `report_sales` UNION ALL
+SELECT *,'return' FROM `report_return`) AS a

@@ -1,0 +1,36 @@
+CREATE PROCEDURE Report_SRM(IN `DateFrom` DATE, IN `DateTo` DATE)
+(SELECT a.Branch, a.Product, a.Warehouse, a.BranchCode, a.BranchDesc, a.CategoryDesc, a.ChannelDesc
+, a.CityDesc, a.TypeDesc, a.GroupDesc, a.BarCode, a.ProductDesc, a.SKU
+, a.BrandDesc, a.ItemCategory, a.CycleDesc, a.FamilyDesc, a.ItemTypeDesc, a.WhsName
+, SUM(a.Beginning) as 'Beginning', SUM(a.GRPO) as 'GRPO'
+, SUM(a.Receiving) as 'Receiving', SUM(a.TransferIn) as 'TransferIn'
+, SUM(a.TransferOut) as 'TransferOut', SUM(a.Sales) as 'Sales', SUM(a.Postpaid) as 'Postpaid'
+, SUM(a.SalesReturn) as 'SalesReturn', SUM(a.PullOut) as 'PullOut', SUM(a.Ending) as 'Ending'
+FROM (
+SELECT t0.Branch, t0.Product, t0.Warehouse, t0.BranchCode, t0.BranchDesc, t0.CategoryDesc
+, t0.ChannelDesc, t0.CityDesc, t0.TypeDesc, t0.GroupDesc, t0.BarCode, t0.ProductDesc, t0.SKU
+, t0.BrandDesc, t0.ItemCategory, t0.CycleDesc, t0.FamilyDesc, t0.ItemTypeDesc, t0.WhsName
+, SumInOut as 'Beginning', 0 as 'GRPO', 0 as 'Sales', 0 as 'Postpaid', 0 as 'SalesReturn'
+, 0 as 'Receiving', 0 as 'TransferIn', 0 as 'TransferOut', 0 as 'PullOut', SumInOut as 'Ending'
+FROM view_smr t0 WHERE t0.Date < DateFrom
+
+UNION ALL
+
+SELECT t0.Branch, t0.Product, t0.Warehouse, t0.BranchCode, t0.BranchDesc, t0.CategoryDesc
+, t0.ChannelDesc, t0.CityDesc, t0.TypeDesc, t0.GroupDesc, t0.BarCode, t0.ProductDesc, t0.SKU
+, t0.BrandDesc, t0.ItemCategory, t0.CycleDesc, t0.FamilyDesc, t0.ItemTypeDesc, t0.WhsName
+, 0 as 'Beginning'
+, IF(t0.Module='/purchase',SumInOut,0) as 'GRPO'
+, IF(t0.Module='/sales' and t0.TransType='/invoice',SumInOut,0) as 'Sales'
+, IF(t0.Module='/sales' and t0.TransType='/postpaid',SumInOut,0) as 'Postpaid'
+, IF(t0.Module='/sales' and t0.TransType='/return',SumInOut,0) as 'Returns'
+, IF(t0.Module='/stocks' and t0.TransType='/receiving',SumInOut,0) as 'Receiving'
+, IF(t0.Module='/stocks' and t0.TransType='/transfer',MoveIn,0) as 'TransferIn'
+, IF(t0.Module='/stocks' and t0.TransType='/transfer',MoveOut*-1,0) as 'TransferOut'
+, IF(t0.Module='/stocks' and t0.TransType='/pullout',SumInOut,0) as 'PullOut'
+, SumInOut as 'Ending'
+FROM view_smr t0 WHERE t0.Date BETWEEN DateFrom and DateTo) as a
+GROUP BY a.Branch
+, a.Product, a.Warehouse, a.BranchCode, a.BranchDesc, a.CategoryDesc, a.ChannelDesc
+, a.CityDesc, a.TypeDesc, a.GroupDesc, a.BarCode, a.ProductDesc, a.SKU
+, a.BrandDesc, a.ItemCategory, a.CycleDesc, a.FamilyDesc, a.ItemTypeDesc, a.WhsName);

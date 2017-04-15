@@ -1,0 +1,991 @@
+.register {
+  /***************************
+	* Register Items form
+	****************************/
+  /***************************
+	* Register Items
+	****************************/
+  /***************************
+	* Register Right Bar
+	****************************/
+  /***************************
+	* Register Summary Right Bar
+	****************************/
+}
+.register .register-box {
+  background-color: #FFFFFF;
+  border-width: 1px;
+  border-color: #e8ebf1;
+  border-style: solid;
+  border-radius: 6px;
+  background-color: #ffffff;
+  margin-top: 5px;
+  /*box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);*/
+}
+.register .paper-cut:after {
+  content: " ";
+  display: block;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 36px;
+  background: -webkit-linear-gradient(#FFFFFF 0%, transparent 0%), -webkit-linear-gradient(135deg, #e8ebf1 33.33%, transparent 33.33%) 0 0%, #e8ebf1 -webkit-linear-gradient(45deg, #e8ebf1 33.33%, #FFFFFF 33.33%) 0 0%;
+  background: -o-linear-gradient(#FFFFFF 0%, transparent 0%), -o-linear-gradient(135deg, #e8ebf1 33.33%, transparent 33.33%) 0 0%, #e8ebf1 -o-linear-gradient(45deg, #e8ebf1 33.33%, #FFFFFF 33.33%) 0 0%;
+  background: -moz-linear-gradient(#FFFFFF 0%, transparent 0%), -moz-linear-gradient(135deg, #e8ebf1 33.33%, transparent 33.33%) 0 0%, #e8ebf1 -moz-linear-gradient(45deg, #e8ebf1 33.33%, #FFFFFF 33.33%) 0 0%;
+  background-repeat: repeat-x;
+  background-size: 0px 100%, 14px 27px, 14px 27px;
+}
+.register .register-items-form .item-form {
+  text-align: center;
+  padding: 18px 18px 0px 18px;
+}
+.register .register-items-form .item-form .input-group {
+  width: 100%;
+}
+.register .register-items-form .item-form .input-group .selectize-input {
+  text-align: left;
+  height: 22px !important;
+  border: 0px solid #D7DCE5;
+}
+.register .register-items-form .item-form .input-group .selectize-input.focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.register .register-items-form .item-form .input-group .selectize-dropdown.single.add-item-input {
+  top: 38px !important;
+  border-left: 1px solid #D7DCE5 !important;
+  border-right: 1px solid #D7DCE5 !important;
+  margin-left: 0 !important;
+}
+.register .register-items-form .item-form .input-group .add-item-input,
+.register .register-items-form .item-form .input-group .selectize-input input,
+.register .register-items-form .item-form .input-group #item {
+  width: 100%;
+  height: 42px;
+  background-color: #FFF;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 300;
+  display: block;
+  float: left;
+  border: 1px solid #D7DCE5;
+  padding-left: 10px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  -webkit-appearance: none;
+}
+.register .register-items-form .item-form .input-group .add-item-input:focus,
+.register .register-items-form .item-form .input-group .selectize-input input:focus,
+.register .register-items-form .item-form .input-group #item:focus {
+  border-color: #D7DCE5 !important;
+}
+.register .register-items-form .item-form .input-group .add-item-input.items-count,
+.register .register-items-form .item-form .input-group .selectize-input input.items-count,
+.register .register-items-form .item-form .input-group #item.items-count {
+  border: 1px solid #D7DCE5 !important;
+}
+.register .register-items-form .item-form .input-group .input-group-addon {
+  width: 38px;
+  height: 22px !important;
+  background-color: #489ee7;
+  opacity: 1;
+  border: 0px solid #D7DCE5;
+  -moz-border-radius: 3px 0px 0px 3px;
+  -webkit-border-radius: 3px 0px 0px 3px;
+  border-radius: 3px 0px 0px 3px;
+  padding: 1px !important;
+}
+.register .register-items-form .item-form .input-group .input-group-addon > a {
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 8px 15px 10px 15px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon i {
+  color: #FFF;
+  margin-right: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode {
+  /*min-width: 150px;
+						position: relative;
+						padding-top: 15px;*/
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode .group-heading {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  line-height: 10px;
+  font-size: 10px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.sale-mode,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.receive-mode {
+  background-color: #F2FFED ;
+  border: 1px solid #85EF60;
+  border-right-width: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  padding: 1px !important;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.sale-mode > a,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.receive-mode > a {
+  text-decoration: none;
+  color: #6FD64B;
+  font-size: 18px;
+  font-weight: 300;
+  padding: 8px 10px 10px 10px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.sale-mode > a i,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.receive-mode > a i {
+  color: #6FD64B;
+  margin-right: 5px;
+  line-height: 18px;
+  font-size: 16px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.sale-mode:hover,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.receive-mode:hover {
+  background-color: #e0ffd4;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.sale-mode,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.purchase_order-mode {
+  background-color: #F2FFED ;
+  border: 1px solid #85EF60;
+  border-right-width: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  padding: 1px !important;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.sale-mode > a,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.purchase_order-mode > a {
+  text-decoration: none;
+  color: #6FD64B;
+  font-size: 18px;
+  font-weight: 300;
+  padding: 8px 10px 10px 10px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.sale-mode > a i,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.purchase_order-mode > a i {
+  color: #6FD64B;
+  margin-right: 5px;
+  line-height: 18px;
+  font-size: 16px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.sale-mode:hover,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.purchase_order-mode:hover {
+  background-color: #e0ffd4;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.return-mode {
+  background-color: #FFF0DD;
+  border: 1px solid #FFCD90;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.return-mode > a {
+  text-decoration: none;
+  color: #FEAE4E;
+  font-size: 18px;
+  font-weight: 300;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.return-mode > a i {
+  color: #FEAE4E;
+  margin-right: 5px;
+  line-height: 18px;
+  font-size: 16px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.return-mode > a i:before {
+  content: "\e632";
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.return-mode:hover {
+  background-color: #ffe5c3;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.store_account_payment-mode,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.transfer-mode {
+  background-color: #F9FBFC;
+  border: 1px solid #D7DCE5;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.store_account_payment-mode > a,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.transfer-mode > a {
+  color: #000;
+  margin-right: 5px;
+  line-height: 18px;
+  font-size: 16px;
+  background-color: transparent;
+  font-weight: 300;
+  text-decoration: none;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.store_account_payment-mode > a i,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.transfer-mode > a i {
+  color: #000;
+  margin-right: 5px;
+  line-height: 18px;
+  font-size: 16px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.store_account_payment-mode > a i:before,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.transfer-mode > a i:before {
+  content: "\e602";
+}
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.store_account_payment-mode:hover,
+.register .register-items-form .item-form .input-group .input-group-addon.register-mode.transfer-mode:hover {
+  background-color: #f2f6f9;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.grid-buttons {
+  /*width: 254px;*/
+  height: 104px;
+  background-color: #489ee7;
+  border: 1px solid #489ee7;
+  -moz-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0px 3px 3px 0px;
+  border-radius: 0px 3px 3px 0px;
+  padding: 1px !important;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.grid-buttons a {
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 300;
+  text-decoration: none;
+  padding: 8px 10px 10px 10px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.grid-buttons a i {
+  margin-right: 5px;
+  line-height: 18px;
+  font-size: 14px;
+}
+.register .register-items-form .item-form .input-group .input-group-addon.grid-buttons:hover {
+  background-color: #3192e4;
+}
+.register .register-items .register-items-holder {
+  padding-top: 5px;
+}
+.register .register-items .register-items-holder tr.register-item-details:hover,
+.register .register-items .register-items-holder tr.register-item-details:hover + tr {
+  background-color: #f5f7f9;
+}
+.register .register-items .register-items-holder td.selected,
+.register .register-items .register-items-holder tr:hover td {
+  background-color: transparent;
+}
+.register .register-items .register-items-holder .register-item-content {
+  min-height: 52px;
+  border-bottom: 1px dotted #D7DCE5;
+  padding-top: 10px;
+}
+.register .register-items .register-items-holder .register-item-content .register-item-bottom:hover {
+  background-color: #f5f7f9;
+}
+.register .register-items .register-items-holder .register-item-content .register-item-bottom td {
+  border-top-width: 0px;
+}
+.register .register-items .register-items-holder .register-item-content .delete-item {
+  color: #FF7474;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 5px;
+}
+.register .register-items .register-items-holder .register-item-content .register-item-name {
+  color: #438AF7;
+  font-size: 16px;
+  font-weight: 300;
+}
+.register .register-items .register-items-holder .register-item-content .register-item-name.count-items {
+  font-size: 14px;
+  margin-left: 20px;
+}
+.register .register-items .register-items-holder .register-item-content .register-item-extra-details {
+  padding-left: 5px;
+  color: #000;
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+.register .register-items .register-items-holder .register-item-content .register-item-extra-details dt {
+  color: #000000;
+  text-align: left;
+  width: 130px;
+  line-height: 20px;
+  min-width: 50px !important;
+}
+.register .register-items .register-items-holder .register-item-content .register-item-extra-details dd {
+  margin-left: 0px;
+  line-height: 20px;
+}
+.register .register-items .register-items-holder .register-item-content .register-item-extra-details a {
+  color: #000;
+}
+.register .register-right {
+  /* Customer badge when added */
+}
+.register .register-right .sale-buttons {
+  min-height: 78px;
+  text-align: center;
+  padding: 20px 10px;
+  border-bottom: 1px solid #E9ECF2;
+}
+.register .register-right .sale-buttons #cancel_sale_form {
+  display: inline-block;
+}
+.register .register-right .sale-buttons .btn {
+  margin-right: 5px;
+  margin-top: 5px;
+  /*margin-bottom: 5px;*/
+}
+.register .register-right .sale-buttons .btn-more,
+.register .register-right .sale-buttons .btn-default {
+  min-width: 58px;
+  height: 35px;
+  background-color: #F9FBFC;
+  border: 1px solid #D7DCE5;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.register .register-right .sale-buttons .btn-more i,
+.register .register-right .sale-buttons .btn-default i {
+  line-height: 12px;
+  font-size: 22px;
+  color: #9398a0;
+}
+.register .register-right .sale-buttons .btn-group.open .dropdown-toggle.btn-suspended {
+  background-color: #ffe5c3;
+  border: 1px solid #ffc276;
+}
+.register .register-right .sale-buttons .btn-suspended {
+  height: 35px;
+  background-color: #FFF0DD;
+  border: 1px solid #FFCD90;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #FEAE4E;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.register .register-right .sale-buttons .btn-suspended:hover {
+  background-color: #ffdaaa;
+}
+.register .register-right .sale-buttons .btn-cancel {
+  height: 35px;
+  background-color: #FFEAEA;
+  border: 1px solid #FFA8A8;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #FF7474;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.register .register-right .sale-buttons .btn-cancel:hover,
+.register .register-right .sale-buttons .btn-cancel:focus {
+  background-color: #ffb7b7;
+}
+.register .register-right .sale-buttons .btn-group.open .dropdown-toggle {
+  box-shadow: none !important;
+  background-color: #f2f6f9;
+}
+.register .register-right .customer-badge {
+  padding: 7px 30px;
+  border-bottom: 1px solid #E9ECF2;
+  min-height: 80px;
+  background-color: #FFFFFF;
+}
+.register .register-right .customer-badge.location {
+  height: 60px;
+}
+.register .register-right .customer-badge .avatar {
+  float: left;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+}
+.register .register-right .customer-badge .avatar img {
+  width: 100%;
+  border-radius: 50%;
+}
+.register .register-right .customer-badge .details {
+  padding: 0px;
+  padding-left: 72px;
+  text-align: left;
+  padding-top: 10px;
+  position: relative;
+}
+.register .register-right .customer-badge .details .name {
+  font-weight: 400;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+  text-transform: capitalize;
+}
+.register .register-right .customer-badge .details .name .balance,
+.register .register-right .customer-badge .details .name .points {
+  font-size: 12px;
+}
+.register .register-right .customer-badge .details .name:hover {
+  color: #489ee7;
+}
+.register .register-right .customer-badge .details .email {
+  color: #67676C;
+  font-size: 10px;
+  font-weight: 400;
+}
+.register .register-right .customer-badge .details .btn-edit {
+  width: 47px;
+  height: 36px;
+  background-color: #F9FBFC;
+  border: 1px solid #e8ebf1;
+  border-right-width: 0px;
+  border-top-width: 0px;
+  color: #489ee7;
+  font-size: 18px;
+  font-weight: 500;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -7px;
+  margin-right: -30px;
+}
+.register .register-right .customer-badge.suggestions {
+  border-left: 0px solid #d7dce5;
+  border-right: 0	px solid #E9ECF2;
+  height: 60px !important;
+  padding: 7px 15px !important;
+}
+.register .register-right .customer-badge.suggestions .avatar {
+  width: 35px;
+  height: auto;
+}
+.register .register-right .customer-badge.suggestions:hover,
+.register .register-right .customer-badge.suggestions.active,
+.register .register-right .customer-badge.suggestions:focus {
+  background-color: #f3f4f8;
+}
+.register .register-right .customer-badge.suggestions .details {
+  padding-top: 5px;
+  text-align: left;
+  padding-left: 40px;
+  line-height: 14px;
+}
+.register .register-right .customer-badge.suggestions .details .name {
+  color: #8cc2f0;
+}
+.register .register-right .customer-action-buttons a,
+.register .register-right .customer-action-buttons label {
+  width: 49%;
+  height: 50px;
+  display: inline-block;
+  color: #67676C;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
+  line-height: 30px;
+}
+.register .register-right .customer-action-buttons a:first-child,
+.register .register-right .customer-action-buttons label:first-child {
+  border-right: 1px solid #E9ECF2;
+}
+.register .register-right .customer-action-buttons a:first-child i,
+.register .register-right .customer-action-buttons label:first-child i {
+  color: #ddd;
+  font-size: 18px;
+  font-weight: 500;
+}
+.register .register-right .customer-action-buttons a i,
+.register .register-right .customer-action-buttons label i {
+  color: #FF7474;
+  font-size: 18px;
+  font-weight: 500;
+}
+.register .register-right .customer-action-buttons a.email-checked i,
+.register .register-right .customer-action-buttons label.email-checked i {
+  color: #489ee7;
+}
+.register .register-right .customer-action-buttons a.email-checked i:before,
+.register .register-right .customer-action-buttons label.email-checked i:before {
+  content: "\f120";
+}
+.register .register-right .customer-action-buttons a.success i,
+.register .register-right .customer-action-buttons label.success i {
+  color: #489ee7;
+}
+.register .register-right .customer-action-buttons label {
+  width: 100%;
+}
+.register .register-right .customer-form {
+  text-align: center;
+  padding: 20px;
+}
+.register .register-right .customer-form .input-group {
+  width: 100%;
+}
+.register .register-right .customer-form .input-group .selectize-input,
+.register .register-right .customer-form .input-group #customer,
+.register .register-right .customer-form .input-group #supplier,
+.register .register-right .customer-form .input-group #location {
+  text-align: left;
+  height: 40px !important;
+  -webkit-appearance: none;
+  border: 0px solid #D7DCE5;
+}
+.register .register-right .customer-form .input-group .selectize-input.focus,
+.register .register-right .customer-form .input-group #customer.focus,
+.register .register-right .customer-form .input-group #supplier.focus,
+.register .register-right .customer-form .input-group #location.focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.register .register-right .customer-form .input-group .selectize-dropdown.single.add-customer-input,
+.register .register-right .customer-form .input-group #customer,
+.register .register-right .customer-form .input-group #supplier,
+.register .register-right .customer-form .input-group #location {
+  top: 38px !important;
+  border-left: 1px solid #D7DCE5 !important;
+  margin-left: 0 !important;
+}
+.register .register-right .customer-form .input-group .add-customer-input,
+.register .register-right .customer-form .input-group .selectize-input input,
+.register .register-right .customer-form .input-group #customer,
+.register .register-right .customer-form .input-group #supplier,
+.register .register-right .customer-form .input-group #location {
+  width: 100%;
+  background-color: #FFF;
+  -moz-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0px 3px 3px 0px;
+  border-radius: 0px 3px 3px 0px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 300;
+  display: block;
+  float: left;
+  border: 1px solid #D7DCE5;
+  border-left-width: 0px !important;
+}
+.register .register-right .customer-form .input-group .add-customer-input:focus,
+.register .register-right .customer-form .input-group .selectize-input input:focus,
+.register .register-right .customer-form .input-group #customer:focus,
+.register .register-right .customer-form .input-group #supplier:focus,
+.register .register-right .customer-form .input-group #location:focus {
+  border-color: #D7DCE5 !important;
+}
+.register .register-right .customer-form .input-group .input-group-addon {
+  width: 38px !important;
+  height: 22px !important;
+  background-color: #489ee7 !important;
+  opacity: 1;
+  padding: 1px !important;
+  border: 0px solid #D7DCE5;
+  -moz-border-radius: 3px 0px 0px 3px;
+  -webkit-border-radius: 3px 0px 0px 3px;
+  border-radius: 3px 0px 0px 3px;
+}
+.register .register-right .customer-form .input-group .input-group-addon i {
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 22px;
+  padding: 5px 15px 7px 15px;
+}
+.register .register-summary {
+  margin-top: 5px;
+}
+.register .register-summary .value {
+  float: right;
+}
+.register .register-summary .list-group-item {
+  line-height: 26px;
+  border-width: 0px;
+  padding: 1px 15px;
+}
+.register .register-summary .list-group-item .remove {
+  color: #FF7474;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 5px;
+}
+.register .register-summary .item-tier,
+.register .register-summary .select-sales-person {
+  color: #67676C;
+  font-size: 16px;
+  font-weight: 300;
+  display: block;
+  padding: 5px 15px;
+  padding-bottom: 10px;
+  text-decoration: none;
+}
+.register .register-summary .item-tier span,
+.register .register-summary .select-sales-person span {
+  float: right;
+  color: #489ee7;
+  font-weight: 400;
+}
+.register .register-summary .item-tiers,
+.register .register-summary .select-sales-persons {
+  display: none;
+  border-radius: 0px;
+}
+.register .register-summary .item-tiers a,
+.register .register-summary .select-sales-persons a {
+  background-color: #F9FBFC;
+}
+.register .register-summary .item-tiers a:hover,
+.register .register-summary .select-sales-persons a:hover {
+  color: #489ee7;
+}
+.register .register-summary .item-tiers .list-group-item,
+.register .register-summary .select-sales-persons .list-group-item {
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-color: #E9ECF2;
+}
+.register .register-summary .item-tiers .list-group-item:first-child,
+.register .register-summary .select-sales-persons .list-group-item:first-child,
+.register .register-summary .item-tiers .list-group-item:last-child,
+.register .register-summary .select-sales-persons .list-group-item:last-child {
+  border-radius: 0px;
+}
+@media (max-width: 768px) {
+  .register .register-summary .global-discount-group .key {
+    width: 40% !important;
+  }
+}
+.register .register-summary .global-discount-group {
+  padding: 5px 15px;
+  padding-top: 0px;
+}
+.register .register-summary .global-discount-group .key {
+  max-width: 60%;
+  display: inline-block;
+}
+.register .register-summary .global-discount-group li {
+  line-height: 26px;
+  color: #67676C;
+  font-size: 16px;
+  font-weight: 300;
+}
+.register .register-summary .global-discount-group li .value {
+  color: #000;
+  font-size: 16px;
+  font-weight: 300;
+}
+.register .register-summary .sub-total {
+  height: 39px;
+  background-color: #f1ffec;
+  color: #67676C;
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 0px;
+  padding: 0px 15px;
+  margin-top: 0px;
+  line-height: 39px;
+}
+.register .register-summary .sub-total .value {
+  font-weight: 400;
+}
+.register .register-summary .amount-block {
+  height: 70px;
+  border-top: 1px dashed #D0D3D8;
+  border-bottom: 1px dashed #D0D3D8;
+}
+.register .register-summary .amount-block .total {
+  padding: 10px;
+  padding-top: 5px;
+  display: inline-block;
+  width: 49%;
+  height: 68px;
+}
+.register .register-summary .amount-block .total:nth-child(1) {
+  border-right: 1px dashed #D0D3D8;
+}
+.register .register-summary .amount-block .total .side-heading {
+  padding-left: 5px;
+  color: #67676C;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 26px;
+}
+.register .register-summary .amount-block .total .amount {
+  text-align: center;
+  color: #6FD64B;
+  font-size: 22px;
+  font-weight: 400;
+}
+.register .register-summary .amount-block .total.amount-due .amount {
+  color: #ff9e28;
+}
+.register .register-summary .payments {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed #D0D3D8;
+}
+.register .register-summary .payments .remove {
+  padding-right: 5px;
+}
+.register .register-summary .payments .key {
+  color: #67676C;
+  font-size: 14px;
+  font-weight: 300;
+}
+.register .register-summary .payments .value {
+  color: #000;
+  font-size: 14px;
+  font-weight: 300;
+}
+.register .register-summary .add-payment {
+  padding: 15px;
+  padding-top: 5px;
+}
+.register .register-summary .add-payment .btn-pay {
+  height: 35px;
+  background-color: #F9FBFC;
+  border: 1px solid #D7DCE5;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #000;
+  font-size: 12px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  line-height: 22px;
+}
+.register .register-summary .add-payment .side-heading {
+  padding-left: 5px;
+  color: #67676C;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 26px;
+}
+.register .register-summary .add-payment .select-payment.active {
+  background-color: #88B7FF;
+  color: #FFFFFF;
+  box-shadow: none;
+  border-color: #88B7FF;
+}
+.register .register-summary .add-payment-form {
+  padding: 20px;
+}
+.register .register-summary .add-payment-form.input-group {
+  width: 100%;
+}
+.register .register-summary .add-payment-form.input-group .add-input {
+  width: 100%;
+  background-color: #FFF;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 300;
+  display: block;
+  float: left;
+  border: 1px solid #D7DCE5;
+  border-right-width: 0px !important;
+  box-shadow: none;
+  height: 39px;
+}
+.register .register-summary .add-payment-form.input-group .add-input:focus,
+.register .register-summary .add-payment-form.input-group .add-input:active {
+  border-color: #D7DCE5 !important;
+}
+.register .register-summary .add-payment-form.input-group .input-group-addon {
+  width: 38px !important;
+  height: 38px !important;
+  background-color: #88B7FF;
+  opacity: 1;
+  border: 0px solid #D7DCE5;
+  -moz-border-radius: 0px 3px 3px 0px;
+  -webkit-border-radius: 0px 3px 3px 0px;
+  border-radius: 0px 3px 3px 0px;
+  padding: 1px !important;
+}
+.register .register-summary .add-payment-form.input-group .input-group-addon > a {
+  color: #FFFFFF;
+  text-decoration: none;
+  line-height: 22px;
+  padding: 8px 20px 10px 20px;
+}
+.register .register-summary .add-payment-form.input-group .input-group-addon i {
+  color: #FFF;
+  margin-right: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.register .register-summary .finish-sale {
+  padding: 20px;
+  border-top: 1px dashed #D0D3D8;
+}
+.register .register-summary .finish-sale .btn {
+  height: 39px;
+  background-color: #6FD64B;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border-color: #6FD64B;
+  box-shadow: none;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 300;
+}
+.register .register-summary .comment-block {
+  padding: 10px;
+}
+.register .register-summary .comment-block .side-heading {
+  padding-left: 5px;
+  color: #67676C;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+#comment {
+    resize: none;
+}
+.register-grid {
+  /*background-color: darken(@page-color,10%);*/
+  margin-top: -20px;
+  padding: 15px;
+}
+.register-grid .register-holder {
+  border-width: 1px;
+  border-color: #e8ebf1;
+  border-style: solid;
+  border-radius: 3px;
+  height: 120px;
+  background-color: #ffffff;
+  padding: 0px !important;
+  overflow: hidden;
+  text-align: center !important;
+  background-color: black;
+  cursor: pointer;
+}
+.register-grid .register-holder img {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0px;
+  left: 0;
+}
+.register-grid .register-holder:hover img {
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  z-index: 1999;
+}
+.register-grid .register-holder p {
+  position: relative;
+  color: white;
+  width: 100% !important;
+  text-align: center;
+  margin-top: 30px;
+}
+.register-grid .register-holder.categories-holder,
+.register-grid .register-holder.tags-holder,
+.register-grid .register-holder.no-image {
+  background-color: #FFFFFF;
+  text-align: center !important;
+}
+.register-grid .register-holder.categories-holder p,
+.register-grid .register-holder.tags-holder p,
+.register-grid .register-holder.no-image p {
+  color: #67676C;
+  display: table;
+  vertical-align: middle;
+  text-align: center !important;
+  height: 100px;
+  width: 100%;
+}
+.register-grid .register-holder.categories-holder:hover,
+.register-grid .register-holder.tags-holder:hover,
+.register-grid .register-holder.no-image:hover {
+  background-color: #f8f8f8;
+}
+.register-grid .register-holder.back-to-categories {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+.register-grid .register-holder.categories-holder p {
+  margin-top: 30px !important;
+}
+.register-items-header {
+  min-height: 52px;
+  line-height: 52px;
+  background-color: #F9FBFC;
+  border: 1px solid #E9ECF2;
+  border-bottom: 1px solid #E9ECF2;
+  color: #67676C;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+}
+.register-items-header th {
+  text-align: center;
+}
+
+.register input[type=checkbox], 
+.register input[type=radio] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin-left: 18px;
+}
+
+.register input[type="checkbox"] + label, 
+.register input[type="radio"] + label {
+    font-weight: 300 !important;
+    color: #aaaaaa;
+    font-size: 12px;
+    letter-spacing: 0.25px;
+    line-height: 20px;
+    margin-top: 0px;
+}
+
+.register h4 {
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+.flatGreenc {
+    color: #6fd64b !important;
+}
+
+@media screen {
+    #printSection {
+        display: none;
+    }
+}
+@media print {
+    body * {
+        visibility:hidden;
+    }
+    #printSection, #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+    }
+    
+    .noPrint {
+        visibility: none;
+    }
+}

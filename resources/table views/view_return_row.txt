@@ -1,0 +1,15 @@
+CREATE VIEW view_return_row AS
+SELECT T0.*
+, T1.BarCode
+, T1.ProductDesc
+, T1.SKU
+, T1.TypeDesc
+, T1.BrandDesc
+, T1.CategoryDesc
+, T1.CycleDesc
+, T1.FamilyDesc
+, T1.IsSerialized
+, T2.WhsName
+FROM trx_return_row T0
+INNER JOIN view_items T1 ON T0.ProductID = T1.PID
+INNER JOIN md_warehouses T2 ON T0.Warehouse = T2.WhsCode

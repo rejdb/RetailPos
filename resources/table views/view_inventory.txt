@@ -1,0 +1,32 @@
+CREATE VIEW view_inventory AS
+SELECT t0.*
+,t1.*
+,t2.BarCode
+,t2.ProductDesc
+,t2.SKU
+,t2.Brand
+,t2.Category as 'ItemCategory'
+,t2.LifeCycle
+,t2.IsSerialized
+,t2.OrderLevel
+,t2.StdCost
+,t2.PriceList
+,t2.PriceListDesc
+,t2.IsActive as 'IsItemActive'
+,t2.TypeDesc as ItemTypeDesc
+,t2.BrandDesc
+,t2.CategoryDesc as 'ItemCategoryDesc'
+,t2.CycleDesc
+,t2.FamilyDesc
+,t2.PDID
+,t2.CurrentPrice
+,t3.WhsName
+,(t2.StdCost*(1+(t1.SalesTax/100))) as 'CostVatInc'
+,(t2.CurrentPrice*(1+(t1.SalesTax/100))) as 'PriceVatInc'
+,t0.InStocks*(t2.StdCost*(1+(t1.SalesTax/100))) as 'TotalCostVatInc'
+,t0.InStocks*(t2.CurrentPrice*(1+(t1.SalesTax/100))) as 'TotalPriceVatInc'
+
+FROM md_inventory t0 
+INNER JOIN view_branches t1 ON t0.Branch = t1.BranchID
+INNER JOIN view_items t2 ON t0.Product = t2.PID
+INNER JOIN md_warehouses t3 ON t0.Warehouse = t3.WhsCode

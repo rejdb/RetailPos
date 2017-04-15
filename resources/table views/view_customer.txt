@@ -1,0 +1,15 @@
+CREATE VIEW view_customer AS
+SELECT t0.*
+, t1.BranchCode
+, t1.Description as BranchDesc
+, t1.CategoryDesc
+, t1.ChannelDesc
+, t1.CityDesc
+, t1.GroupDesc
+, t1.TypeDesc
+, t2.City as Cust_City
+, t3.Province as Cust_Provice
+FROM md_customer t0
+LEFT JOIN view_branches t1 ON t0.Branch = t1.BranchID
+LEFT JOIN ref_branch_city t2 ON t0.CustCity = t2.CityID
+LEFT JOIN ref_province t3 ON t0.CustProvince = t3.ProvinceID

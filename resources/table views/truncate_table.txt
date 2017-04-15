@@ -1,0 +1,65 @@
+TRUNCATE TABLE md_bom;
+TRUNCATE TABLE md_campaign;
+TRUNCATE TABLE md_customer;
+TRUNCATE TABLE md_inventory;
+TRUNCATE TABLE md_inventory_serials;
+TRUNCATE TABLE md_items;
+TRUNCATE TABLE md_supplier;
+TRUNCATE TABLE md_user;
+TRUNCATE TABLE md_warehouses;
+TRUNCATE TABLE ref_branch_target;
+TRUNCATE TABLE ref_points;
+TRUNCATE TABLE ref_terminal;
+TRUNCATE TABLE ref_user_branch;
+TRUNCATE TABLE ref_user_target;
+TRUNCATE TABLE stp_bom_item;
+TRUNCATE TABLE stp_campaign_branch;
+TRUNCATE TABLE stp_campaign_item;
+TRUNCATE TABLE stp_item_pricedetails;
+TRUNCATE TABLE stp_item_pricelist;
+TRUNCATE TABLE trx_pullout;
+TRUNCATE TABLE trx_pullout_row;
+TRUNCATE TABLE trx_purchase;
+TRUNCATE TABLE trx_purchase_detail;
+TRUNCATE TABLE trx_purchase_row;
+TRUNCATE TABLE trx_receiving;
+TRUNCATE TABLE trx_receiving_detail;
+TRUNCATE TABLE trx_receiving_row;
+TRUNCATE TABLE trx_return;
+TRUNCATE TABLE trx_return_row;
+TRUNCATE TABLE trx_sales;
+TRUNCATE TABLE trx_sales_customer;
+TRUNCATE TABLE trx_sales_payments;
+TRUNCATE TABLE trx_sales_row;
+TRUNCATE TABLE trx_sales_postpaid;
+TRUNCATE TABLE trx_transfer;
+TRUNCATE TABLE trx_transfer_row;
+TRUNCATE TABLE trx_stocks_movement;
+
+--
+--Initial Manager User
+--
+INSERT INTO `md_user` (`UID`, `DisplayName`, `LastName`, `FirstName`, `Email`, `ContactNo`, `Password`, `IsActive`, `Roles`, `Avatar`, `CreateDate`, `LastLogin`) VALUES (NULL, 'Manager', 'Techbox', 'Admin', 'manager', '09173160737', 'd8578edf8458ce06fbc5bb76a58c5ca4', '1', '1', 'tbx.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+--
+--Initial Customer
+--
+INSERT INTO `md_customer` (`CustID`, `CardNo`, `Branch`, `CustFirstName`, `CustLastName`, `CustEmail`, `ContactNo`, `Address`, `CustCity`, `CustProvince`, `CustPoints`, `CustCredits`, `CreateDate`, `UpdateDate`, `IsActive`, `Avatar`) VALUES (NULL, '000000000000', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '0', 'reggie.jpg');
+
+--
+--Initial Item
+--
+INSERT INTO `md_items` (`PID`, `BarCode`, `ProductDesc`, `SKU`, `Brand`, `Category`, `LifeCycle`, `Family`, `IsSerialized`, `OrderLevel`, `StdCost`, `PriceList`, `IsActive`, `CreateDate`, `UpdateDate`) VALUES (NULL, '00000000', 'Sample Item', 'Sample', '1', '1', '1', '1', '0', '100', '0.01', '0', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+--
+--Initial Supplier
+--
+INSERT INTO `md_supplier` (`SuppID`, `CoyName`, `ContactPerson`, `ContactNo`, `Email`, `ShipTo`, `BillTo`, `IsActive`, `CreateDate`, `UpdateDate`) VALUES (NULL, 'Sample Supplier', 'No Contact', '000000000', 'NoEmail', 'Unknown', 'Unknown', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+--
+--Initial Warehouse
+--
+INSERT INTO `md_warehouses` (`WhsCode`, `WhsName`, `FreeWhs`, `IsActive`, `CreateDate`, `UpdateDate`) VALUES (NULL, 'Good Stocks', '1', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+
+

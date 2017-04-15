@@ -1,0 +1,13 @@
+CREATE VIEW view_sales_payments AS
+SELECT T0.*
+, (Select I0.RefNo From trx_sales I0 Where I0.TransID = T0.TransID) as InvoiceRef
+,`T1`.`PaymentName` AS `PaymentName`
+, (Select I0.BankName FROM ref_terminal I0 Where I0.BankID = T0.Terminal) as BankName
+, (Select I0.BankName FROM ref_terminal I0 Where I0.BankID = T0.IssuingBank) as IssuingBankName
+,`T3`.`InstDesc` AS `InstDesc` 
+,`T4`.BranchCode
+,`T4`.Description AS BranchDesc
+FROM trx_sales_payments T0
+INNER JOIN view_branches T4 ON T0.Branch = T4.BranchID
+INNER JOIN ref_payment_type T1 ON T0.PaymentType = T1.PaymentId
+LEFT JOIN ref_installment T3 ON T0.Installment = T3.InsId

@@ -1,0 +1,18 @@
+CREATE VIEW view_branches AS
+SELECT t0.*
+, t1.Category as 'CategoryDesc'
+, t2.Channel as 'ChannelDesc'
+, t3.City as 'CityDesc'
+, t4.Description as 'GroupDesc'
+, t5.TypeDesc
+, t6.Start
+, t6.Current
+, t6.End
+, (SELECT I0.DisplayName FROM md_user I0 WHERE I0.UID = t0.Manager) as 'AreaManager'
+FROM md_branches t0
+LEFT JOIN ref_branch_category t1 ON t0.Category = t1.CatID
+LEFT JOIN ref_branch_channel t2 ON t0.Channel = t2.ChannelID
+LEFT JOIN ref_branch_city t3 ON t0.City = t3.CityID
+LEFT JOIN ref_branch_group t4 ON t0.Groups = t4.GroupID
+LEFT JOIN ref_branch_type t5 ON t0.Type = t5.TypeID
+LEFT JOIN ref_branch_series t6 ON t0.BranchID = t6.Branch

@@ -1,0 +1,20 @@
+CREATE VIEW report_cash_register AS
+SELECT T0.TransDate
+, T0.Branch
+, T0.BranchCode
+, T0.BranchDesc
+, T0.IsDeposited
+, T0.DepositSlip
+, T0.PaymentType
+, T0.PaymentName
+, SUM(T0.Amount) as 'Amount'
+FROM view_sales_payments T0
+GROUP BY T0.TransDate
+, T0.Branch
+, T0.BranchCode
+, T0.BranchDesc
+, T0.IsDeposited
+, T0.DepositSlip
+, T0.PaymentType
+, T0.PaymentName
+HAVING (SUM(T0.Amount)!=0)

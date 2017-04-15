@@ -1,0 +1,13 @@
+CREATE VIEW view_sales_postpaid AS
+SELECT t0.* 
+, t1.BranchCode
+, t1.Description as BranchDesc
+, t1.CategoryDesc
+, t1.ChannelDesc
+, t1.CityDesc
+, t1.GroupDesc
+, t1.TypeDesc
+, IF(t0.Status=0,"For Activation",IF(t0.Status=1,"Activated","Cancelled")) as StatusDesc
+, (SELECT I0.DisplayName FROM md_user I0 WHERE I0.UID = t0.CreatedBy) as SoldBy
+FROM trx_sales_postpaid t0
+INNER JOIN view_branches t1 ON t0.Branch = t1.BranchID

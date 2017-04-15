@@ -1,0 +1,60 @@
+CREATE VIEW view_inventory_serials AS
+select `t0`.`InvSerID` AS `InvSerID`
+,`t0`.`Product` AS `Product`
+,`t0`.`Warehouse` AS `Warehouse`
+,`t0`.`Branch` AS `Branch`
+,`t0`.`IsSold` AS `IsSold`
+,`t0`.`Serial` AS `Serial`
+,`t0`.`InDate` AS `InDate`
+, DATEDIFF(NOW(),t0.InDate) as Ageing
+,`t1`.`BranchID` AS `BranchID`
+,`t1`.`BranchCode` AS `BranchCode`
+,`t1`.`Description` AS `Description`
+,`t1`.`BranchEmail` AS `BranchEmail`
+,`t1`.`Type` AS `Type`
+,`t1`.`Category` AS `Category`
+,`t1`.`Groups` AS `Groups`
+,`t1`.`Channel` AS `Channel`
+,`t1`.`City` AS `City`
+,`t1`.`Address` AS `Address`
+,`t1`.`Manager` AS `Manager`
+,`t1`.`IsTaxInclude` AS `IsTaxInclude`
+,`t1`.`SalesTax` AS `SalesTax`
+,`t1`.`DefaultReturnPolicy` AS `DefaultReturnPolicy`
+,`t1`.`IsBackdateAllowed` AS `IsBackdateAllowed`
+,`t1`.`IsActive` AS `IsActive`
+,`t1`.`Avatar` AS `Avatar`
+,`t1`.`CreateDate` AS `CreateDate`
+,`t1`.`UpdateDate` AS `UpdateDate`
+,`t1`.`CategoryDesc` AS `CategoryDesc`
+,`t1`.`ChannelDesc` AS `ChannelDesc`
+,`t1`.`CityDesc` AS `CityDesc`
+,`t1`.`GroupDesc` AS `GroupDesc`
+,`t1`.`TypeDesc` AS `TypeDesc`
+,`t2`.`BarCode` AS `BarCode`
+,`t2`.`ProductDesc` AS `ProductDesc`
+,`t2`.`SKU` AS `SKU`
+,`t2`.`ItemType`
+,`t2`.`Brand` AS `Brand`
+,`t2`.`Category` AS `ItemCategory`
+,`t2`.`LifeCycle` AS `LifeCycle`
+,`t2`.`Family` AS `Family`
+,`t2`.`IsSerialized` AS `IsSerialized`
+,`t2`.`OrderLevel` AS `OrderLevel`
+,`t2`.`StdCost` AS `StdCost`
+,`t2`.`PriceList` AS `PriceList`
+,`t2`.`PriceListDesc` AS `PriceListDesc`
+,`t2`.`IsActive` AS `IsItemActive`
+,`t2`.`TypeDesc` AS `ItemTypeDesc`
+,`t2`.`BrandDesc` AS `BrandDesc`
+,`t2`.`CategoryDesc` AS `ItemCategoryDesc`
+,`t2`.`CycleDesc` AS `CycleDesc`
+,`t2`.`FamilyDesc` AS `FamilyDesc`
+,`t2`.`PDID` AS `PDID`
+,`t2`.`CurrentPrice` AS `CurrentPrice`
+,`t3`.`WhsName` AS `WhsName` 
+
+from `md_inventory_serials` `t0` 
+inner join `view_branches` `t1` on `t0`.`Branch` = `t1`.`BranchID`
+inner join `view_items` `t2` on `t0`.`Product` = `t2`.`PID`
+inner join `md_warehouses` `t3` on `t0`.`Warehouse` = `t3`.`WhsCode`

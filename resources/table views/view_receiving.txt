@@ -1,0 +1,17 @@
+CREATE VIEW view_receiving AS
+SELECT T0.*
+,T1.BranchCode
+,T1.Description
+,T1.BranchEmail
+,T1.Address
+,T1.CategoryDesc
+,T1.GroupDesc
+,T1.TypeDesc
+,T1.ChannelDesc
+,T1.CityDesc
+,T1.IsTaxInclude
+,T1.Avatar
+,T2.DisplayName
+FROM trx_receiving T0 
+INNER JOIN view_branches T1 ON T0.Branch = T1.BranchID
+INNER JOIN md_user T2 ON T0.CreatedBy = T2.UID

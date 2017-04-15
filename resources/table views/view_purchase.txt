@@ -1,0 +1,22 @@
+CREATE VIEW view_purchase AS
+SELECT T0.*
+,T1.BranchCode
+,T1.Description
+,T1.BranchEmail
+,T1.Address
+,T1.CategoryDesc
+,T1.GroupDesc
+,T1.TypeDesc
+,T1.ChannelDesc
+,T1.CityDesc
+,T1.IsTaxInclude
+,T1.Avatar
+,T2.CoyName
+,T2.ContactPerson
+,T2.Email AS 'SupplierEmail'
+,T2.BillTo
+,T3.DisplayName
+FROM trx_purchase T0 
+INNER JOIN view_branches T1 ON T0.ShipToBranch = T1.BranchID
+INNER JOIN md_supplier T2 ON T0.Supplier = T2.SuppID
+INNER JOIN md_user T3 ON T0.CreatedBy = T3.UID
