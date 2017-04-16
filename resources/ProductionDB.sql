@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS `md_branches`;
 CREATE TABLE `md_branches` (
   `BranchID` int(11) NOT NULL,
   `BranchCode` varchar(15) NOT NULL,
-  `Description` varchar(50) NOT NULL,
+  `Description` varchar(100) NOT NULL,
   `BranchEmail` varchar(50) NOT NULL,
   `Type` int(11) NOT NULL DEFAULT '1',
   `Category` int(11) NOT NULL DEFAULT '1',
@@ -95,148 +95,6 @@ CREATE TABLE `md_branches` (
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `md_branches`
---
-
-INSERT INTO `md_branches` (`BranchID`, `BranchCode`, `Description`, `BranchEmail`, `Type`, `Category`, `Groups`, `Channel`, `City`, `Address`, `BranchSize`, `Expiry`, `Manager`, `IsTaxInclude`, `SalesTax`, `DefaultReturnPolicy`, `IsBackdateAllowed`, `IsActive`, `Avatar`, `CreateDate`, `UpdateDate`) VALUES
-(1, 'MAIN', 'HEAD OFFICE', '1', 2, 1, 2, 2, 768, 'BLDG. 2291 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-03-27 23:15:30'),
-(2, '4M04', 'ALPHALAND SOUTHGATE', '2', 2, 1, 4, 2, 768, '3F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-03-27 23:14:35'),
-(3, '4M14', 'GATEWAY CUBAO', '3', 2, 2, 4, 2, 1059, 'No. 00106K Level 1 Gateway Mall Araneta Ave. Cubao', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-03-27 23:14:28'),
-(4, '4M15', 'HARRISON PLAZA', '4', 2, 2, 4, 2, 805, '2ND FLOOR EAST PATIO HARIZON PLAZA MABINI ST. CORNER ADRIATICO ST. BARANGAY 720 ZONE 078 MALATE MANILA', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(5, '4M13', 'RIVERBANKS CENTER', '5', 2, 1, 5, 2, 828, 'Besides Chowking', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(6, '4M18', 'ROBINSONS OTIS', '6', 2, 2, 3, 2, 805, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(7, '4L12', 'SM CITY NOVALICHES', '7', 2, 2, 5, 2, 1059, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(8, '4L03', 'SM CITY PAMPANGA', '8', 2, 2, 4, 1, 1118, 'L102A-B Cyberzone SM City Pampanga San Jose City of San Fernando', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(9, '4L01', 'SM CITY STA MESA', '9', 2, 2, 4, 2, 1059, '3F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(10, '4L02', 'SM CITY STA ROSA', '10', 2, 2, 4, 7, 1182, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 1, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-03-28 07:21:02'),
-(11, '4M17', 'STA LUCIA EAST', '11', 2, 2, 4, 2, 275, 'LG', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(12, '4L04', 'STARMALL SJDM', '12', 2, 2, 4, 1, 1132, 'GF', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(13, '4L11', 'STARMALL SHAW', '13', 2, 2, 5, 2, 799, 'GF', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(14, '4M11', 'TUTUBAN CENTER MALL', '14', 2, 1, 5, 2, 805, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(15, '4M16', 'VICTORY MALL - CALOOCAN', '15', 2, 2, 5, 2, 294, '3F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(16, '4M19', 'VICTORY MALL - PASAY', '16', 2, 2, 5, 2, 991, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(17, 'SMPL', 'TRAINING STORE', '17', 2, 2, 5, 2, 768, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(18, '4L13', 'SM CITY MUNTINLUPA', '18', 2, 2, 3, 2, 886, '2F SM Supercenter', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(19, '4M20', 'ROBINSONS DASMARINAS', '19', 2, 2, 3, 7, 384, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(20, 'EXHIBIT01', 'SM CITY OLONGAPO', '20', 2, 2, 1, 6, 926, '3F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(21, '4L14', 'SM CITY BALIWAG', '21', 2, 2, 1, 1, 130, 'GF', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(22, '4L16', 'NORTHSTAR MALL ILAGAN', '22', 2, 2, 1, 6, 531, 'GF', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(23, '4M21', 'ROBINSONS FORUM', '23', 2, 1, 3, 2, 799, 'UG level Robinsons Forum Boni cor. Pioneer  sts. Mandaluyong City', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(24, '4L17', 'MAGIC MALL URDANETA', '24', 2, 2, 1, 6, 1386, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-03-27 23:15:55'),
-(25, '4L18', 'NEPO MALL DAGUPAN', '25', 2, 2, 1, 6, 373, '3F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(26, '4L19', 'STERN MALL CANDON', '26', 2, 2, 1, 6, 307, 'GF', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(27, 'MAIN2', 'HEAD OFFICE 2', '27', 2, 2, 2, 2, 768, 'BLDG. 2291 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(28, 'BLTZ01', 'CHANNEL SALES', '28', 2, 2, 2, 2, 768, 'BLDG. 2291 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(29, '4M22', 'SAVEMORE TANAY', '29', 2, 1, 3, 2, 1311, 'GF', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(30, '4L20', 'ROBINSONS LAOAG', '30', 2, 2, 1, 6, 646, 'GF', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(31, 'OS01', 'STORE 0', '31', 1, 1, 2, 2, 768, 'BLDG. 2291 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(32, '4L21', 'XENTRO MALL SANTIAGO', '32', 2, 2, 1, 6, 1185, 'GF', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(33, '4L22', 'MALL OF THE VALLEY', '33', 2, 2, 1, 6, 1371, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(34, '4M23', 'PACIFIC MALL LUCENA', '34', 2, 1, 1, 7, 712, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(35, '4M24', 'PAVILLION MALL', '35', 2, 2, 1, 7, 200, '2F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(36, '4L23', 'SM CITY TARLAC', '36', 2, 2, 1, 1, 1325, 'SM TARLAC MACARTHUR HIGHWAY BRGY. SAN ROQUE', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(37, '4L24', 'XENTRO MALL CALAPAN', '37', 2, 1, 1, 7, 282, 'SECOND floor CS 6 AREA', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(38, 'TS01', 'TECHBOX MEGA SALE', '38', 2, 2, 2, 2, 768, 'BLDG. 2299 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(39, '4M27', 'BAGUIO CENTERMALL', '39', 2, 1, 1, 1, 104, '3rd FLOOR ABANAO SQUARE ', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-03-27 23:15:01'),
-(40, '4M28', 'E MALL NAGA ', '40', 2, 2, 1, 7, 893, '2ND FLOOR  KIOSK 7 ', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(41, '4M29', 'GAISANO MALL SAN JOSE', '41', 2, 1, 1, 7, 1129, 'GROUND FLOOR ', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-03-27 23:15:10'),
-(42, '4N01', 'NOKIA - STERN MALL COMPLEX', '42', 2, 2, 1, 6, 307, 'GROUND FLOOR ', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(43, '4N02', 'NOKIA - ROBINSON LAOAG', '43', 2, 2, 1, 6, 1148, 'GROUND FLOOR ', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(44, '4L25', 'SM LIGHT MALL', '44', 1, 2, 4, 2, 799, 'SM LITE EDSA cor. Madison St. BRGY. Barangka Ilaya', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(45, 'TS02', 'NOKIA CLEARANCE SALE', '45', 2, 2, 2, 2, 768, 'BLDG. 2299 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(46, '4L26', 'LEE PLAZA MALL DIPOLOG', '46', 2, 2, 1, 9, 420, '2ND FLOOR LEE PLAZA MALL. DIPOLOG CITY', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(47, '4L27', 'WALTERMART GAPAN', '47', 2, 2, 1, 1, 463, '2nd Floor', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(48, 'LEN01', 'LENOVO WAREHOUSE', '48', 2, 2, 2, 2, 768, 'BLDG. 2299 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(49, '4L29', 'SM CITY SAN MATEO', '49', 1, 2, 4, 2, 1145, '2ND FLOOR', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(50, 'TS03', 'TECHBOX MEGA SALE 2', '50', 2, 2, 2, 2, 768, 'BLDG. 2299 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(51, '4L28', 'ROBINSONS BUTUAN', '51', 1, 2, 1, 4, 254, '3RD FLOOR', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(52, 'TS04', 'LAZADA', '52', 2, 2, 2, 2, 768, 'BLDG. 2299 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(53, '4L30', 'GAISANO SURIGAO', '53', 2, 2, 1, 4, 1266, '2nd floor Gaisano Capital Surigao', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(54, '4M31', 'TEQUBE ARCADIA', '54', 1, 1, 4, 7, 1182, 'Greenfields Corporate Ctr. Paseo Sta Rosa Laguna', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(55, '4M16-2', 'VICTORY MALL CALOOCAN', '55', 2, 1, 5, 2, 294, '3F', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(56, '4L31', 'SM SEASIDE CEBU', '56', 1, 2, 1, 8, 343, '3F Cyberzone', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(57, 'TS05', 'TECHBOX - LAZADA ONLINE', '57', 2, 2, 2, 2, 768, 'BLDG. 2299 DON CHINO ROCES AVE. EXT.', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(58, '5Z0L4A', 'ISETTAN CINERAMA COMPLEX', '58', 2, 2, 2, 3, 805, '3rd Flr  Isetann Cinerama Complex CM Recto Ave Brgy 308 zone 30 Quiapo Manila', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(59, '5Z0L70', 'ROBINSONS PLACE LAS PINAS', '59', 1, 2, 2, 3, 654, '2F Robinsons Place Las Pinas', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(60, '5Z0W62', 'AYALA HARBOR POINT SUBIC', '60', 1, 1, 2, 6, 926, '2F Space 2074', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-03-27 23:14:46'),
-(61, '8KC015', 'KC12- RIVERBANKS', '62', 2, 1, 2, 2, 828, 'Riverbanks Mall Bonifacio Ave Barangka Marikina ', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(62, '8KC003', 'STARMALL ALABANG', '63', 2, 1, 2, 2, 886, '3F Metropolis Alabang South Superhighway', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(63, '8KC007', '168 MALL', '64', 2, 1, 2, 3, 805, '168 Shopping Mall Binondo Manila', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(64, '8KC012', 'KC513- PUREGOLD TANZA CAVITE', '66', 1, 1, 2, 2, 341, 'Puregold Daang Amaya', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(65, '5Z0W8', 'SM CITY FAIRVIEW', '69', 1, 1, 2, 3, 1059, '3F SM CITY FAIRVIEW CYBERZONE 32 QUIRINO HIGHWAY COR. REGALADO AVENUE', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(66, '5WE404', 'MARKET MARKET', '71', 2, 1, 2, 3, 1292, '4F Market Market Shopping Mall', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(67, '5Z0L69', 'ROBINSONS ANTIPOLO', '72', 1, 2, 2, 2, 63, 'GF Robinons Place Sumulong Highway cor Circumferencial RD ', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(68, '5Z0W65', 'SM BF PARANAQUE', '74', 1, 1, 2, 2, 987, '3F SM City BF Dr A Santos Ave Bgy BF Homes Paranaque City', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(69, '7KP005', 'SM CITY SAN LAZARO', '75', 1, 1, 2, 3, 805, '3F SM San Lazaro Felix Huertas A.H Lacson St. Sta Cruz Manila', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(70, '7KP007', 'SM CITY DASMARINAS', '76', 1, 1, 2, 2, 341, '2F SM City Dasmarinas', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(71, '7KP004', 'SM CITY SOUTHMALL', '77', 1, 1, 2, 2, 654, '2F West Wing Cyberzone Area Alabang-Zapote', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(72, 'MAIN3', 'OPEN COMMUNICATIONS - WAREHOUSE', '78', 1, 1, 2, 3, 992, 'Ugong Pasig City', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(73, '5Z0W45', 'SM CITY BICUTAN', '80', 1, 1, 2, 2, 987, '2F SM Bicutan Dona Soledad Avenue Paranaque', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(74, '5Z0W47', 'SM CITY SUCAT', '81', 1, 1, 2, 2, 987, '3F SM Supercenter Sucat Dr. A. Santos Ave. San Dionisio', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(75, '5Z0W63', 'GLORIETTA', '82', 1, 1, 2, 3, 768, '3F 3-048 Clorietta 2', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-03-27 23:15:15'),
-(76, '5Z0WC29', 'SM CITY NORTH EDSA', '83', 1, 1, 2, 3, 1059, '4F SM City North Edsa', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(77, '5Z0W67', 'ROBINSONS TOWN MALL MALABON', '85', 1, 1, 2, 2, 772, '2F Robinson Town Mall ', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(78, '5Z0W64', 'ROBINSONS ROXAS', '86', 1, 1, 2, 8, 1081, '3F Robinson Place Sumapang Matanda Mac Arthur Highway Malolos city Bulacan', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(79, '7KP011', 'ROBINSONS MALOLOS', '87', 1, 1, 2, 5, 787, '3F Robinson Place Sumapang Matanda Mac Arthur Highway Malolos city Bulacan', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(80, '5Z0W16', 'SM CITY CEBU ', '88', 1, 1, 2, 8, 343, '2F SM City Cebu Bldg. C. North Reclamation Area Cebu City', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(81, '5Z0W25', 'SM CITY ILOILO', '89', 1, 1, 2, 8, 534, '3F SM City Iloilo Benigno Aquino Avenue Mandurriao', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(82, '5Z0W61', 'SM CITY CALAMBA ', '90', 1, 1, 2, 7, 279, '2F Cyberzone Area', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(83, '7KP016', 'SM CENTER LAS PINAS', '91', 1, 1, 2, 2, 654, 'GF SM Center Las Pinas Alabang Zapote Rd Pamplona Dos Las Pinas City', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(84, '5Z0WC30', 'WC30 - SM SOUTH MALL', '92', 1, 1, 2, 2, 654, '2F West Wing Cyberzone Area Alabang-Zapote', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(85, '5Z0WC15', 'SM CITY BACOOR', '93', 1, 1, 2, 2, 341, '3F SM Bacoor', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29'),
-(86, '5Z0WC59', 'SM MEGAMALL', '94', 1, 1, 2, 3, 799, '4F. SM Megamall Bldg. B. Julia Vargas', '0.00', '2017-03-31', 1, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:08:29', '2017-02-28 13:08:29');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `md_branchesz`
---
-
-DROP TABLE IF EXISTS `md_branchesz`;
-CREATE TABLE `md_branchesz` (
-  `BranchID` int(11) NOT NULL,
-  `BranchCode` varchar(15) NOT NULL,
-  `Description` varchar(50) NOT NULL,
-  `BranchEmail` varchar(50) NOT NULL,
-  `Type` int(11) NOT NULL DEFAULT '1',
-  `Category` int(11) NOT NULL DEFAULT '1',
-  `Groups` int(11) NOT NULL DEFAULT '1',
-  `Channel` int(11) NOT NULL,
-  `City` int(11) NOT NULL,
-  `Address` varchar(150) NOT NULL,
-  `BranchSize` decimal(18,2) NOT NULL,
-  `Expiry` date NOT NULL,
-  `Manager` int(11) NOT NULL,
-  `IsTaxInclude` tinyint(1) NOT NULL DEFAULT '1',
-  `SalesTax` int(11) NOT NULL DEFAULT '12',
-  `DefaultReturnPolicy` int(11) NOT NULL DEFAULT '7',
-  `IsBackdateAllowed` tinyint(1) NOT NULL DEFAULT '0',
-  `IsActive` tinyint(1) NOT NULL DEFAULT '1',
-  `Avatar` varchar(20) NOT NULL DEFAULT 'tbx.png',
-  `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `UpdateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `md_branchesz`
---
-
-INSERT INTO `md_branchesz` (`BranchID`, `BranchCode`, `Description`, `BranchEmail`, `Type`, `Category`, `Groups`, `Channel`, `City`, `Address`, `BranchSize`, `Expiry`, `Manager`, `IsTaxInclude`, `SalesTax`, `DefaultReturnPolicy`, `IsBackdateAllowed`, `IsActive`, `Avatar`, `CreateDate`, `UpdateDate`) VALUES
-(2, 'MAIN', 'Head Office', 'ho@tbx.ph', 1, 1, 1, 2, 992, 'Pasig City', '10.00', '2018-03-23', 2, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:26:40'),
-(3, 'MAIN2', 'Head Office Warehouse', 'ho@tbx.ph', 1, 1, 1, 2, 992, 'Pasig City', '10.00', '2018-05-23', 12, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:36:51'),
-(4, 'main4', 'main store 4', 'mm@mm', 2, 2, 4, 3, 6, 'jsdf', '0.00', '2017-03-23', 13, 1, 12, 7, 0, 1, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 23:39:08'),
-(5, '1234', 'sdfsdf', 'sdf@sdf', 2, 2, 2, 3, 7, 'sdfsdf', '0.00', '2017-03-23', 6, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:20:54'),
-(6, '2esdf', 'sdfsd3sd', 'df3s@sdf', 2, 2, 3, 3, 7, 'sdfsd', '0.00', '2017-03-23', 12, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:20:54'),
-(7, 'sdf', 'sdf3sd', 'd@sd', 2, 2, 4, 1, 8, 'sdf', '0.00', '2017-03-23', 7, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:20:54'),
-(8, '4M14', 'SM Pasig', 'dd@ff', 2, 2, 3, 3, 8, 'df3s', '0.00', '2017-03-23', 5, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:20:54'),
-(9, '4M05', 'SM Harizon Mall', 'df@dd', 2, 2, 4, 3, 7, 'sd3wdsf', '0.00', '2017-03-23', 8, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:20:54'),
-(10, '4M04', 'Alphaland South Gate Mall', 'testing@email.com', 2, 2, 3, 1, 768, 'Alphaland Mall Makati City', '11.00', '2017-03-31', 2, 1, 12, 10, 1, 1, 'tbx.png', '2017-02-28 13:06:57', '2017-03-25 09:45:19'),
-(11, 'sdk33', 'sdfk', 'sdd@kd', 2, 2, 2, 2, 4, 'dks', '0.00', '2017-03-23', 6, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:20:54'),
-(12, 'rejz', 'reggie store', 'rej@gmail.com', 2, 1, 2, 2, 768, 'Pasong Tamo', '0.00', '2017-03-23', 2, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:20:54'),
-(13, 'test4', 'lsdkrjje', 'sdfk@lsd', 2, 2, 3, 3, 6, 'sdfk', '0.00', '2017-03-23', 13, 1, 12, 7, 0, 0, 'tbx.png', '2017-02-28 13:06:57', '2017-03-23 14:36:29'),
-(14, '392l', 'testing 101', 'testing@tbx.ph', 1, 1, 3, 1, 7, 'Anywhere', '12.00', '2018-03-31', 11, 1, 12, 7, 0, 1, 'tbx.png', '2017-03-23 14:49:16', '2017-03-23 14:49:16');
 
 -- --------------------------------------------------------
 
@@ -331,8 +189,8 @@ CREATE TABLE `md_inventory_serials` (
 DROP TABLE IF EXISTS `md_items`;
 CREATE TABLE `md_items` (
   `PID` int(11) NOT NULL,
-  `BarCode` varchar(15) NOT NULL,
-  `ProductDesc` varchar(50) NOT NULL,
+  `BarCode` varchar(20) NOT NULL,
+  `ProductDesc` varchar(100) NOT NULL,
   `SKU` varchar(50) NOT NULL,
   `ItemType` int(11) NOT NULL,
   `Brand` int(11) NOT NULL,
@@ -2766,11 +2624,11 @@ SELECT t0.*
 , t6.End
 , (SELECT I0.DisplayName FROM md_user I0 WHERE I0.UID = t0.Manager) as 'AreaManager'
 FROM md_branches t0
-INNER JOIN ref_branch_category t1 ON t0.Category = t1.CatID
-INNER JOIN ref_branch_channel t2 ON t0.Channel = t2.ChannelID
-INNER JOIN ref_branch_city t3 ON t0.City = t3.CityID
-INNER JOIN ref_branch_group t4 ON t0.Groups = t4.GroupID
-INNER JOIN ref_branch_type t5 ON t0.Type = t5.TypeID
+LEFT JOIN ref_branch_category t1 ON t0.Category = t1.CatID
+LEFT JOIN ref_branch_channel t2 ON t0.Channel = t2.ChannelID
+LEFT JOIN ref_branch_city t3 ON t0.City = t3.CityID
+LEFT JOIN ref_branch_group t4 ON t0.Groups = t4.GroupID
+LEFT JOIN ref_branch_type t5 ON t0.Type = t5.TypeID
 LEFT JOIN ref_branch_series t6 ON t0.BranchID = t6.Branch;
 
 -- --------------------------------------------------------
@@ -3549,16 +3407,6 @@ ALTER TABLE `md_bom`
 --
 ALTER TABLE `md_branches`
   ADD PRIMARY KEY (`BranchID`),
-  ADD UNIQUE KEY `BranchUnique` (`Description`),
-  ADD UNIQUE KEY `UniqueCode` (`BranchCode`),
-  ADD KEY `BranchIndex` (`Type`,`Category`,`Groups`,`Channel`,`City`,`Manager`);
-
---
--- Indexes for table `md_branchesz`
---
-ALTER TABLE `md_branchesz`
-  ADD PRIMARY KEY (`BranchID`),
-  ADD UNIQUE KEY `BranchUnique` (`Description`),
   ADD UNIQUE KEY `UniqueCode` (`BranchCode`),
   ADD KEY `BranchIndex` (`Type`,`Category`,`Groups`,`Channel`,`City`,`Manager`);
 
@@ -3596,8 +3444,7 @@ ALTER TABLE `md_inventory_serials`
 --
 ALTER TABLE `md_items`
   ADD PRIMARY KEY (`PID`),
-  ADD UNIQUE KEY `BarCode` (`BarCode`),
-  ADD UNIQUE KEY `ProductDesc` (`ProductDesc`);
+  ADD UNIQUE KEY `BarCode` (`BarCode`);
 
 --
 -- Indexes for table `md_supplier`
@@ -3912,11 +3759,6 @@ ALTER TABLE `md_bom`
 --
 ALTER TABLE `md_branches`
   MODIFY `BranchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
---
--- AUTO_INCREMENT for table `md_branchesz`
---
-ALTER TABLE `md_branchesz`
-  MODIFY `BranchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `md_campaign`
 --

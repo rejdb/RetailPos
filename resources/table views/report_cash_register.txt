@@ -17,4 +17,4 @@ GROUP BY T0.TransDate
 , T0.DepositSlip
 , T0.PaymentType
 , T0.PaymentName
-HAVING (SUM(T0.Amount)!=0)
+HAVING (SUM(T0.Amount)!=0);

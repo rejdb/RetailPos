@@ -16,4 +16,4 @@ LEFT JOIN ref_item_cycle t3 ON t0.LifeCycle = t3.P_CycleID
 LEFT JOIN ref_item_family t7 ON t0.Family = t7.FamID
 LEFT JOIN ref_item_type t8 ON t0.ItemType = t8.TypeID
 LEFT JOIN stp_item_pricelist t4 ON t0.PriceList = t4.PLID
-LEFT JOIN stp_item_pricedetails t5 ON (t0.PID = t5.PID AND t0.PriceList = t5.PLID)
+LEFT JOIN stp_item_pricedetails t5 ON (t0.PID = t5.PID AND t0.PriceList = t5.PLID);

@@ -15,4 +15,4 @@ LEFT JOIN ref_branch_channel t2 ON t0.Channel = t2.ChannelID
 LEFT JOIN ref_branch_city t3 ON t0.City = t3.CityID
 LEFT JOIN ref_branch_group t4 ON t0.Groups = t4.GroupID
 LEFT JOIN ref_branch_type t5 ON t0.Type = t5.TypeID
-LEFT JOIN ref_branch_series t6 ON t0.BranchID = t6.Branch
+LEFT JOIN ref_branch_series t6 ON t0.BranchID = t6.Branch;
