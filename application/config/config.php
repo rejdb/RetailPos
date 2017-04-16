@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://tipos.angular.js:81';
-$config['base_url'] = '/app';
+$config['base_url'] = '/';
 
 // $config['base_url'] = 'http://tipos.angular.js';
 
