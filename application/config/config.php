@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://tipos.angular.js:81';
-$config['base_url'] = 'https://techbox-dev.herokuapp.com/';
+$config['base_url'] = 'https://techbox-dev.herokuapp.com';
 
 // $config['base_url'] = 'http://tipos.angular.js';
 
@@ -55,7 +55,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'QUERY_STRING';
+$config['uri_protocol']	= 'index.php?/locations/get';
 
 /*
 |--------------------------------------------------------------------------
