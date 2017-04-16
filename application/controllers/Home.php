@@ -8,7 +8,7 @@ class Home extends CI_Controller {
     }
 
     public function index() { 
-        $this->load->view('/templates/html');   
+        $this->load->view('templates/html');   
 //        echo 'testing';
     }
 //    public function base() { $this->load->view('/templates/html'); }
