@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://tipos.angular.js:81';
-$config['base_url'] = 'https://techbox-dev.herokuapp.com';
+$config['base_url'] = 'https://techbox-dev.herokuapp.com/';
 
 // $config['base_url'] = 'http://tipos.angular.js';
 
