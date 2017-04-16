@@ -1,5 +1,5 @@
 <?php
-class Setup extends MY_Controller {
+class Setup extends CI_Controller {
     function __construct() {
         parent::__construct();
     }
