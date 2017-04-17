@@ -35,9 +35,9 @@ function purchaseCtrl($scope, Auth, spinner, $filter, $timeout, curl, $statePara
     }
     
     Inventory.getWarehouse(function(whs) { $scope.WhsList = whs; });
-    BrnFact.getActive(1,function(brn) {$scope.branches = brn;});
+    BrnFact.getActive(1,function(brn) {$scope.branches = brn; $scope.brnLoader = false;});
     Supplier.all(function(supp) {$scope.suppliers = supp;});
-    ItemFact.activeProducts(1, function(itm) { $scope.productLists = itm});
+    ItemFact.activeProducts(1, function(itm) { $scope.productLists = itm; $scope.itemLoader = false;});
     
     $scope.updateValue = function() {
         $scope.purchase.header.Total = 0;

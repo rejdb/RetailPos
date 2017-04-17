@@ -25,6 +25,13 @@
         <div class="register-box register-items-form">
             <div class="item-form form-group">
                 <div class="input-group">
+                    <div class="inputspinner" ng-init="itemLoader=true" ng-show="itemLoader">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
                     <span class="input-group-addon"><i class="fa fa-plus-circle fa-5x"></i></span>
                     <div class="padded-row">
                         <div angucomplete-ie8 id="ex6" 
@@ -179,6 +186,13 @@
             </div> 
             <div class="customer-form" ng-hide="ShowBranchSelect">
                 <div class="input-group" >
+                    <div class="inputspinner" ng-init="brnLoader=true" ng-show="brnLoader">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
                     <span class="input-group-addon">
                         <a class="none" title="Ship to Branch"><i class="ion-paper-airplane"></i></a> </span>
                     <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
