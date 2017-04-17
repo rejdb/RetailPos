@@ -64,18 +64,13 @@ function purchaseCtrl($scope, Auth, spinner, $filter, $timeout, curl, $statePara
     //Search Products
     $scope.GetProduct = function(selected) {
         var SearchProduct = selected.originalObject.BarCode;
-//        if($scope.SearchProduct == undefined || $scope.SearchProduct.length == 0) {
-//            $('#GetProduct').parent().parent().parent().addClass('has-error');
-//            return false;
-//        }
-        
-        spinner.show();
+
+        $scope.itemLoader = true;
         ItemFact.search({
             IsActive: 1,
             BarCode: SearchProduct
         }, function(rsp){
-            spinner.hide();
-//            $scope.SearchProduct = '';
+            $scope.itemLoader = false;
             
             if(!rsp.status) {
                 spinner.notif(rsp, 1500);
@@ -112,8 +107,6 @@ function purchaseCtrl($scope, Auth, spinner, $filter, $timeout, curl, $statePara
     }
     
     $scope.GetShipToBranch = function(selected) {
-//        var id = $scope.purchase.header.ShipToBranch;
-//        var selected = $filter('filter')($scope.branches, {BranchID:id}, true);
         $scope.ShowBranchSelect = true;
         $scope.purchase.header.ShipToBranch = selected.originalObject.BranchID;
         $scope.DeliveryStore = selected.originalObject.Description;
@@ -122,9 +115,6 @@ function purchaseCtrl($scope, Auth, spinner, $filter, $timeout, curl, $statePara
     }
     
     $scope.GetSupplier = function(selected) {
-        console.log(selected);
-//        var id = $scope.purchase.header.Supplier;
-//        var selected = $filter('filter')($scope.suppliers, {SuppID:id}, true);
         $scope.ShowSupplier = true;
         $scope.purchase.header.Supplier = selected.originalObject.SuppID;
         $scope.SuppName = selected.originalObject.CoyName;
@@ -456,15 +446,12 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
             console.log(rsp);
             spinner.hide();
             result = rsp.status;
-//            result = false;
             if(rsp.status) {
                 transact.smr(smr);
             }else{
                 spinner.notif(rsp.message, 1000);
             }
         });
-        
-//        console.log(smr);
         return result;
         
     }
@@ -472,9 +459,6 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
     $scope.countSerial = function(b, data) {
         var r = data.length;
         var q = b.Quantity;
-        
-        console.log(r);
-        console.log(q);
         if(r>q) {
             return 'Received exceeds purchase Quantity! Contact HO if it really exceed.';
         }
@@ -502,7 +486,7 @@ function purchaseReceivedReceiptCtrl($scope, $stateParams, curl, Auth, transact)
                         });
                     });
                 }
-            }); console.log($scope.purchase);
+            });
         });
         
     }

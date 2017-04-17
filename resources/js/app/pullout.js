@@ -17,7 +17,6 @@ function pulloutCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory,
     $scope.ShowBranchSelect = true;
     
     var usr = Auth.currentUser();
-    console.log(usr);
     $scope.register = {
         BranchName: usr.Branch.Description,
         CreatedBy: usr.DisplayName,
@@ -35,8 +34,8 @@ function pulloutCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory,
         rows: []
     }
     
-    BrnFact.getActive(1,function(brn) {$scope.branches = brn;});
-    Inventory.getActiveWhs(1,function(whs) {$scope.WhsList = whs;});
+    BrnFact.getActive(1,function(brn) {$scope.branches = brn; $scope.brnLoader = false;});
+    Inventory.getActiveWhs(1,function(whs) {$scope.WhsList = whs; $scope.itemLoader = false;});
     
     $scope.resetBranch = function(hdr){
         hdr.Branch = 0;
@@ -99,12 +98,11 @@ function pulloutCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory,
         }
         
         
-        spinner.show()
+        $scope.itemLoader = true;
         curl.post('/Inventories/SearchInventory', data, function(rsp) {
-            console.log(rsp);
             $scope.SearchProduct = '';
             
-            spinner.hide();
+            $scope.itemLoader = false;
             if(!rsp.status) {
                 spinner.notif(rsp.message, 1000);
                 return false;
@@ -265,6 +263,7 @@ function pulloutHistoryCtrl($scope, transact, Auth, spinner, curl,
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Status: -1,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),

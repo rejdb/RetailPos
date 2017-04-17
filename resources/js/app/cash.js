@@ -10,6 +10,7 @@ function cashHistoryCtrl($scope, transact, Auth, spinner, curl,
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         IsDeposited: 0,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),
@@ -110,7 +111,8 @@ function cardHistoryCtrl($scope, transact, Auth, spinner, curl,
     var usr = Auth.currentUser();
     
     $scope.advance = {
-        IsDeposited: 0,
+        AllBranch: (usr.Roles!=4) ? true:false,
+        // IsDeposited: 0,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),
         DateTo: $filter('date')(new Date(), 'MM/dd/yyyy')

@@ -16,6 +16,7 @@ function postpaidCtrl($scope, transact, Auth, spinner, curl, $timeout,
     $scope.ValidateICC = false;
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Status: -1,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),

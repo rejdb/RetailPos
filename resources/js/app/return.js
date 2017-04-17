@@ -169,7 +169,6 @@ function returnCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, 
                 $scope.register.header.NetTotal += index.GTotal * -1;
                 $scope.register.header.AmountDue += index.AmountDue * -1;
                 $scope.register.header.Payment += index.AmountDue * -1;
-//                $scope.register.header.ShortOver += index.AmountDue * -1;
                 $scope.register.header.Discount += ((index.Quantity*index.PriceAfVat) * (index.Discount/100)) * -1;
             });
         },100);
@@ -276,6 +275,7 @@ function returnHistoryCtrl($scope, transact, Auth, spinner, curl,
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),
         DateTo: $filter('date')(new Date(), 'MM/dd/yyyy')

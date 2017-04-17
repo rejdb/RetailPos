@@ -57,8 +57,8 @@ function transferCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory
         }
     }
     
-    Inventory.getActiveWhs(1,function(whs) {$scope.WhsList = whs;});
-    BrnFact.getActive(1,function(brn) {$scope.branches = brn;});
+    Inventory.getActiveWhs(1,function(whs) {$scope.WhsList = whs; $scope.itemLoader = false;});
+    BrnFact.getActive(1,function(brn) {$scope.branches = brn; $scope.brnLoader = false;});
     
     $scope.resetBranch = function(hdr){
         hdr.Branch = 0;
@@ -158,12 +158,11 @@ function transferCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory
         }
         
         
-        spinner.show()
+        $scope.itemLoader = true;
         curl.post('/Inventories/SearchInventory', data, function(rsp) {
-            console.log(rsp);
             $scope.SearchProduct = '';
+            $scope.itemLoader = false;
             
-            spinner.hide();
             if(!rsp.status) {
                 spinner.notif(rsp.message, 1500);
                 return false;
@@ -333,6 +332,7 @@ function transferHistoryCtrl($scope, transact, Auth, spinner, curl,
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Status: -1,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),

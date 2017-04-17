@@ -60,10 +60,10 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
         payments: []
     };
     
-    Inventory.getActiveWhs(1,function(whs) {$scope.WhsList = whs;});
+    Inventory.getActiveWhs(1,function(whs) {$scope.WhsList = whs; $scope.itemLoader = false;});
     BrnFact.getActive(1,function(brn) {$scope.branches = brn;});
-    UserFact.getBrnUser(usr.Branch.BranchID, function(fl) {$scope.frontliners = fl;});
-    Customer.active(1,function(cust) {$scope.customers = cust; });
+    UserFact.getBrnUser(usr.Branch.BranchID, function(fl) {$scope.frontliners = fl; $scope.flLoader=false;});
+    Customer.active(1,function(cust) {$scope.customers = cust; $scope.custLoader = false;});
     transact.installment(1, function(r) {$scope.installments = r; });
     transact.terminal(1, function(r) {$scope.terminals = r; });
     
@@ -216,11 +216,11 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
         }
         
         
-        spinner.show()
+        $scope.itemLoader = true;
         curl.post('/Inventories/SearchInventory', data, function(rsp) {
             $scope.SearchProduct = '';
             
-            spinner.hide();
+            $scope.itemLoader = false;
             if(!rsp.status) {
                 spinner.notif(rsp.message, 1000);
                 return false;
@@ -626,6 +626,7 @@ function salesHistoryCtrl($scope, transact, Auth, spinner, curl,
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),
         DateTo: $filter('date')(new Date(), 'MM/dd/yyyy')

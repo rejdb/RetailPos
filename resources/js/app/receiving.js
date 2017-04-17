@@ -27,7 +27,7 @@ function receivingCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventor
         rows: []
     }
     
-    ItemFact.activeProducts(1, function(itm) { $scope.productLists = itm;});
+    ItemFact.activeProducts(1, function(itm) { $scope.productLists = itm; $scope.itemLoader = false;});
     Inventory.getWarehouse(function(whs) {$scope.WhsList = whs;});
     BrnFact.getActive(1,function(brn) {$scope.branches = brn;});
     
@@ -46,12 +46,12 @@ function receivingCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventor
     $scope.GetProduct = function(selected) {
         var SearchProduct = selected.originalObject.BarCode;
         
-        spinner.show();
+        $scope.itemLoader = true;
         ItemFact.search({
             IsActive: 1,
             BarCode: SearchProduct
         }, function(rsp){
-            spinner.hide();
+            $scope.itemLoader = false;
             
             if(!rsp.status) {
                 spinner.notif(rsp.message, 1500);
@@ -195,6 +195,7 @@ if (!$('#page-wrapper').hasClass('nav-small')) {$('#page-wrapper').addClass('nav
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),
         DateTo: $filter('date')(new Date(), 'MM/dd/yyyy')

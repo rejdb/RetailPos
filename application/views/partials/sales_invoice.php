@@ -25,6 +25,13 @@
         <div class="register-box register-items-form">
             <div class="item-form form-group">
                 <div class="input-group">
+                    <div class="inputspinner" ng-init="itemLoader=true" ng-show="itemLoader">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
                     <span class="input-group-addon">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             {{register.SelectedInst}}
@@ -183,6 +190,13 @@
             </div>
             <div class="customer-form" ng-hide="ShowFLSelect">
                 <div class="input-group" >
+                    <div class="inputspinner" ng-init="flLoader=true" ng-show="flLoader">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
                     <span class="input-group-addon">
                         <a class="none" title="FrontLiner"><i class="ion-android-contacts"></i></a> </span>
                     <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
@@ -220,6 +234,13 @@
             </div>
             <div class="customer-form" ng-hide="CustSelected">
                 <div class="input-group contacts large-padded-row">
+                    <div class="inputspinner" ng-init="custLoader=true" ng-show="custLoader">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
                     <span class="input-group-addon">
                         <a data-toggle="modal" data-target="#NewCustomer" class="none" title="New Customer" id="new-customer" tabindex="-1"><i class="ion-person-add"></i></a> </span>
                     <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>

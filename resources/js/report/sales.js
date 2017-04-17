@@ -14,6 +14,7 @@ function salesSummaryCtrl($scope, transact, Auth, spinner, curl,
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),
         DateTo: $filter('date')(new Date(), 'MM/dd/yyyy')
@@ -33,15 +34,6 @@ function salesSummaryCtrl($scope, transact, Auth, spinner, curl,
 		$scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
 		$scope.currentPage = 1;
 	}, true);
-    
-//    var params = (usr.Roles!=4) ? 'TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"' : 'TransDate = "' + $filter('date')(new Date(), 'yyyy-MM-dd') + '" and Branch =' +usr.Branch.BranchID;
-//    transact.history(params, 'report_sales_summary', function(rsp) {
-//        $scope.pList = rsp;
-//        console.log(rsp);
-//        
-//        $scope.totalItems = $scope.pList.length;
-//        $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
-//    });
     
     BrnFact.getActive(1,function(brn) { $scope.branches = brn; });
     
@@ -109,6 +101,7 @@ function salesDetailedCtrl($scope, transact, Auth, spinner, curl, $timeout,
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),
         DateTo: $filter('date')(new Date(), 'MM/dd/yyyy')

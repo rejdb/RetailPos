@@ -14,6 +14,7 @@ function inventoryCtrl ($scope, curl, transact, Auth, spinner, ItemFact, Invento
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Branch: usr.Branch.BranchID,
     }
     
@@ -99,21 +100,14 @@ function inventoryCtrl ($scope, curl, transact, Auth, spinner, ItemFact, Invento
         spinner.show();
         transact.history(params, 'view_inventory', function(rsp) {
             $scope.pList=rsp;
-//            transact.history('TransferType=0 and Status=2 and InvTo =' + usr.Branch.BranchID, 'view_transfer', function(li) {
-                spinner.hide();
-                $scope.collapse = true;
-//                spinner.notif(rsp.message, 1500, rsp.status);
+            spinner.hide();
+            $scope.collapse = true;
+            if($scope.pList.length==0) {
+                spinner.notif('No Record Found!', 1000);
+            }
 
-//                if(li.length) {
-//                    angular.extend($scope.pList, li); }
-              
-                if($scope.pList.length==0) {
-                    spinner.notif('No Record Found!', 1000);
-                }
-
-                $scope.totalItems = $scope.pList.length;
-                $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
-//            });
+            $scope.totalItems = $scope.pList.length;
+            $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
         });
     }
     
@@ -136,6 +130,7 @@ function inventorySerialCtrl ($scope, curl, transact, Auth, spinner, ItemFact, I
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Branch: usr.Branch.BranchID,
     }
     
@@ -206,21 +201,14 @@ function inventorySerialCtrl ($scope, curl, transact, Auth, spinner, ItemFact, I
         spinner.show();
         transact.history(params, 'view_inventory_serials', function(rsp) {
             $scope.pList=rsp;
-//            transact.history('TransferType=0 and Status=2 and InvTo =' + usr.Branch.BranchID, 'view_transfer', function(li) {
-                spinner.hide();
-                $scope.collapse = true;
-//                spinner.notif(rsp.message, 1500, rsp.status);
+            spinner.hide();
+            $scope.collapse = true;
+            if($scope.pList.length==0) {
+                spinner.notif('No Record Found!', 1000);
+            }
 
-//                if(li.length) {
-//                    angular.extend($scope.pList, li); }
-              
-                if($scope.pList.length==0) {
-                    spinner.notif('No Record Found!', 1000);
-                }
-
-                $scope.totalItems = $scope.pList.length;
-                $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
-//            });
+            $scope.totalItems = $scope.pList.length;
+            $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
         });
     }
     
@@ -243,6 +231,7 @@ function inventoryTrackingCtrl ($scope, curl, transact, Auth, spinner, ItemFact,
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Branch: usr.Branch.BranchID,
         Type: true
     }
