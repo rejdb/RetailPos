@@ -179,7 +179,7 @@
                 <div class="input-group has-success">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     <input type="text" disabled="false" class="form-control text-center podate" readonly id="PoTransDate" ng-model="purchase.header.TransDate" />
-                    <span class="input-group-addon">Del.</span>
+                    <span class="input-group-addon">ETA</span>
                     <input type="text" class="form-control text-center podate" readonly id="PoTransDate" ng-model="purchase.header.DeliveryDate" />
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>

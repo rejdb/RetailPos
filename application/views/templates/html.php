@@ -52,7 +52,7 @@
         <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
     </head>
     
-    <body>
+    <body oncontextmenu="return false">
         <div id="theme-wrapper">
             <?php require 'header.php'; ?>
             <div id="page-wrapper" class="container">
