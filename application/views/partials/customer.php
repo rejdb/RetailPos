@@ -66,7 +66,8 @@
                                            e-ng-maxlength="50" edit-disabled="cs.IsActive==1"
                                            onaftersave="updateField(cs.CustID, 'CustFirstName', $data)">
                                             {{cs.CustFirstName || 'First Name'}}
-                                        </a> <a editable-text="cs.CustLastName" buttons="no" e-ng-maxlength="50"
+                                        </a> <a editable-text="cs.CustLastName" buttons="no" 
+                                            e-ng-maxlength="50" edit-disabled="cs.IsActive==1"
                                            onaftersave="updateField(cs.CustID, 'CustLastName', $data)">
                                             {{cs.CustLastName || 'Surname'}}
                                         </a>
