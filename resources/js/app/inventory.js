@@ -102,6 +102,7 @@ function inventoryCtrl ($scope, curl, transact, Auth, spinner, ItemFact, Invento
             $scope.pList=rsp;
             spinner.hide();
             $scope.collapse = true;
+            
             if($scope.pList.length==0) {
                 spinner.notif('No Record Found!', 1000);
             }
@@ -124,8 +125,6 @@ function inventorySerialCtrl ($scope, curl, transact, Auth, spinner, ItemFact, I
     $scope.pList = [];
     $scope.currentPage = 1;
     $scope.pageSize = 10; // items per page
-    
-    
     
     var usr = Auth.currentUser();
     
@@ -178,7 +177,6 @@ function inventorySerialCtrl ($scope, curl, transact, Auth, spinner, ItemFact, I
     var params = (usr.Roles!=4) ? 'IsSold!=1' : 'IsSold!=1 and Branch =' +usr.Branch.BranchID;
     transact.history(params, 'view_inventory_serials', function(rsp) {
         $scope.pList = rsp;
-        console.log(rsp);
         
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
@@ -203,6 +201,7 @@ function inventorySerialCtrl ($scope, curl, transact, Auth, spinner, ItemFact, I
             $scope.pList=rsp;
             spinner.hide();
             $scope.collapse = true;
+
             if($scope.pList.length==0) {
                 spinner.notif('No Record Found!', 1000);
             }
@@ -273,16 +272,6 @@ function inventoryTrackingCtrl ($scope, curl, transact, Auth, spinner, ItemFact,
         InDate: 'In Date'
     }
     
-    
-    
-//    var params = (usr.Roles!=4) ? 'IsSold!=1' : 'Branch =' +usr.Branch.BranchID;
-//    transact.history(params, 'view_smr', function(rsp) {
-//        $scope.pList = rsp;
-//        console.log(rsp);
-//        
-//        $scope.totalItems = $scope.pList.length;
-//        $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
-//    });
     $scope.Available = 0;
     var GetTotal = function() {
         $scope.Available = 0;
@@ -317,8 +306,6 @@ function inventoryTrackingCtrl ($scope, curl, transact, Auth, spinner, ItemFact,
             $scope.pList=rsp;
             spinner.hide();
             $scope.collapse = true;
-            
-            console.log(rsp);
 
             if($scope.pList.length==0) {
                 spinner.notif('No Record Found!', 1000);
@@ -345,10 +332,7 @@ function inventoryMovementCtrl ($scope, curl, transact, Auth, spinner, ItemFact,
     $scope.currentPage = 1;
     $scope.pageSize = 10; // items per page
     
-    
-    
-    var usr = Auth.currentUser();
-    
+    var usr = Auth.currentUser(); 
     $scope.advance = {
         Branch: usr.Branch.BranchID,
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),
@@ -400,24 +384,21 @@ function inventoryMovementCtrl ($scope, curl, transact, Auth, spinner, ItemFact,
     }
     
     Inventory.getWarehouse(function(whs) {$scope.WhsList = whs;});
-//    BrnFact.getActive(1,function(brn) {$scope.branches = brn;});
     
     $scope.AdvanceFilter = function(f) {
         $scope.pList = [];
         
-//        var branch = (f.AllBranch) ? '':' and Branch =' + ((usr.Roles !=4) ? parseInt(f.Branch) :parseInt(usr.Branch.BranchID));
         var params = {
             DateFrom: $filter('date')(new Date(f.DateFrom), 'yyyy-MM-dd'),
             DateTo: $filter('date')(new Date(f.DateTo), 'yyyy-MM-dd')
         }
         
-        spinner.show(); console.log(params);
+        spinner.show();
         curl.post('/inventories/smr', params, function(r) {
             spinner.hide();
             $scope.collapse = true;
             
             $scope.pList=r;
-            console.log(r);
             $scope.totalItems = $scope.pList.length;
             $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
         });
