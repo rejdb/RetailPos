@@ -67,7 +67,11 @@
                                            onaftersave="updateField(cs.CustID, 'CustFirstName', $data)">
                                             {{cs.CustFirstName || 'First Name'}}
                                         </a> <a editable-text="cs.CustLastName" buttons="no" 
+<<<<<<< HEAD
                                            e-ng-maxlength="50" edit-disabled="cs.IsActive==1"
+=======
+                                            e-ng-maxlength="50" edit-disabled="cs.IsActive==1"
+>>>>>>> ef5d699c0a7650c1c1b118623017cb7f18d52fee
                                            onaftersave="updateField(cs.CustID, 'CustLastName', $data)">
                                             {{cs.CustLastName || 'Surname'}}
                                         </a>
