@@ -136,7 +136,7 @@
                                 <td ng-hide="(userProfile.Roles==4)">
                                     <div class="popover-wrapper">
                                         <a buttons="no" editable-number="cs.CustPoints" e-ng-maxlength="10"
-                                           edit-disabled="(userProfile.Roles==4)"
+                                           edit-disabled="(userProfile.Roles!=1)"
                                            onaftersave="updateField(cs.CustID, 'CustPoints', $data-0, true)">
                                             {{cs.CustPoints | peso:2}}
                                         </a>
@@ -145,7 +145,7 @@
                                 <td ng-hide="(userProfile.Roles==4)">
                                     <div class="popover-wrapper">
                                         <a editable-number="cs.CustCredits" buttons="no" e-ng-maxlength="10"
-                                           edit-disabled="(userProfile.Roles==4)"
+                                           edit-disabled="(userProfile.Roles!=1)"
                                            onaftersave="updateField(cs.CustID, 'CustCredits', $data-0, true)">
                                             {{ cs.CustCredits | peso:2}}
                                         </a>
