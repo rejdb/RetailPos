@@ -61,6 +61,11 @@ class Item extends MY_Model {
         $this->db->insert($table, $data);
         return 'Reference has been successfully added!';
     }
+
+    function update_reference($table, $data, $id) {
+        $this->db->update($table, $data, $id);
+        return 'Reference has been updated successfully!';
+    }
     
     function insert_item_to_pricelist($table, $data) {
         $this->db->insert($table, $data);

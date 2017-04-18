@@ -212,7 +212,7 @@ app.factory('UserFact', ['curl', function(curl) {
             var postData = '{"UID":' + id + ',"type": {"' + field + '":"' + data + '"}}';
         }
         
-//        callback(postData);
+        //callback(postData);
         curl.post('/users/update', postData, function(rsp) {
             callback(rsp);
         });
@@ -271,6 +271,11 @@ app.factory('ItemFact', ['curl', function(curl) {
     itm.addReference = function(type, data, callback) {
         var post = {table:type, data: {Description: data}};
         curl.post('/items/addReference', post, function(rsp) { callback(rsp); }); }
+
+    //add item to table reference
+    itm.updateReference = function(id, table, data, callback) {
+        var post = {table:table, id:id, data: {Description: data}};
+        curl.post('/items/updateReference', post, function(rsp) { callback(rsp); }); }
     
     //add new product to the database
     itm.addNewProductDB = function(postData, callback) {

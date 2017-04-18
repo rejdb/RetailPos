@@ -10,7 +10,7 @@ function productCtrl($scope, curl, ItemFact,
     $scope.lnk = [];
     $scope.toggle = false;
     $scope.currentPage = 1;
-    $scope.pageSize = 1000;
+    $scope.pageSize = 10;
     var tabSelected = 1;
     
     $scope.product = {
@@ -90,6 +90,14 @@ function productCtrl($scope, curl, ItemFact,
             });
         });
     }
+
+    $scope.updateItemReference = function(id, reference, data) {
+        ItemFact.updateReference(id, reference, data, function(rsp) {
+            ItemFact.tableReference(function(rsp) {
+                $scope.lnk = rsp;
+            });
+        });
+    }
     
     //Update current SRP
     $scope.updateSRP = function(id, field, data) {
@@ -128,7 +136,7 @@ function productCtrl($scope, curl, ItemFact,
             product: $scope.product,
             price: $scope.pricelist.Price
         }
-        console.log(postData);
+        
         ItemFact.addNewProductDB(postData, function(rsp) {
             console.log(rsp);
             $scope.notify = true;
@@ -183,3 +191,15 @@ function productCtrl($scope, curl, ItemFact,
 }
 
 app.controller('productCtrl', productCtrl);
+
+$(document).ready(function() {
+    $('#timeline-grid').gridalicious({
+		gutter: 10,
+		width: 300,
+		animate: true,
+		animationOptions: {
+			speed: 150,
+			duration: 500
+		},
+	});
+});

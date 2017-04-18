@@ -17,14 +17,164 @@
                             class="btn btn-info pull-right" style="margin-left:5px">
                         <i class="fa fa-external-link fa-lg"></i> CSV
                     </button>
-                    <a href="" class="btn btn-primary pull-right" permission="[1,5]"
+                    <a href="" class="btn btn-primary pull-right" style="margin-left:5px" permission="[1,5]"
                        data-toggle="modal" data-target="#addNewItemData">
                         <i class="fa fa-plus-circle fa-lg"></i> Add Item
                     </a>
+                    <button class="btn" ng-init="collapse=true" permission="[1]" ng-click="collapse = !collapse"
+                            ng-class="{'btn-default': !collapse, 'btn-primary': collapse}">
+                        <i class="fa fa-pencil fa-lg"></i> References</button>
                 </div>
             </div>
         </div>
 	</div>
+</div>
+
+<div id="timeline-grid" collapse="collapse">
+    <div class="item main-box">
+        <header class="main-box-header clearfix">
+            <div class="pull-left"><h2>Brands</h2></div>
+            <span class="pull-right" permission="[1]">
+                <a editable-text="Brnd" buttons="no" e-placeholder="Add New Brand" e-required="required" e-maxlength="30"
+                    onaftersave="addItemReference('ref_item_brand', $data)">Add Brand</a>
+            </span>
+        </header>
+        <div class="main-box-body clearfix" style="padding:0px 20px;">
+            <div class="input-group pull-right clearfix" style="width:50%; margin-bottom:10px;">
+                <span class="input-group-btn"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></span>
+                <input type="text" placeholder="Search..." class="form-control" ng-model="brnFind" />
+            </div>
+            <ul style="margin-bottom:20px">
+                <li ng-repeat="t in lnk.brands | filter:brnFind | DataFilter:(brnCurrentPage-1) * 10 | limitTo:10">
+                    <td><a editable-text="t.Description" style="font-size:10px;"
+                            onbeforesave="updateItemReference({BrandID: t.BrandID}, 'ref_item_brand', $data)">{{t.Description}}</a></td>
+                </li>
+            </ul>
+            <div class="pull-right">
+                <pagination total-items="lnk.brands.length" max-size="3" ng-model="brnCurrentPage" items-per-page="10"></pagination>
+            </div>
+        </div>
+    </div>
+    <div class="item main-box">
+        <header class="main-box-header clearfix">
+            <div class="pull-left"><h2>NetSuite Brands</h2></div>
+            <span class="pull-right" permission="[1]">
+                <a editable-text="NSBrand" buttons="no" e-placeholder="Add New NS Brand" e-required="required" e-maxlength="30"
+                    onaftersave="addItemReference('ref_item_family', $data)">Add NS Brand</a>
+            </span>
+        </header>
+        <div class="main-box-body clearfix" style="padding:0px 20px;">
+            <div class="input-group pull-right clearfix" style="width:50%; margin-bottom:10px;">
+                <span class="input-group-btn"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></span>
+                <input type="text" placeholder="Search..." class="form-control" ng-model="brnNSFind" />
+            </div>
+            <ul style="margin-bottom:20px">
+                <li ng-repeat="t in lnk.families | filter:brnNSFind | DataFilter:(famCurrentPage-1) * 10 | limitTo:10">
+                    <a editable-text="t.Description" style="font-size:10px;"
+                            onbeforesave="updateItemReference({FamID: t.FamID}, 'ref_item_family', $data)">{{t.Description}}</a>
+                </li>
+            </ul>
+            <div class="pull-right">
+                <pagination total-items="lnk.families.length" max-size="3" ng-model="famCurrentPage" items-per-page="10"></pagination>
+            </div>
+        </div>
+    </div>
+    <div class="item main-box">
+        <header class="main-box-header clearfix">
+            <div class="pull-left"><h2>Pricelists</h2></div>
+            <span class="pull-right" permission="[1]">
+                <a buttons="no" editable-text="PrList" buttons="no" e-placeholder="Add New Price List Name" e-required="required" e-maxlength="50"
+                    onaftersave="addItemReference('stp_item_pricelist', $data)">Add Pricelist</a>
+            </span>
+        </header>
+        <div class="main-box-body clearfix" style="padding:0px 20px;">
+            <div class="input-group pull-right clearfix" style="width:50%; margin-bottom:10px;">
+                <span class="input-group-btn"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></span>
+                <input type="text" placeholder="Search..." class="form-control" ng-model="priceFind" />
+            </div>
+            <ul style="margin-bottom:20px">
+                <li ng-repeat="t in lnk.pricelists | filter:priceFind | DataFilter:(priceCurrentPage-1) * 10 | limitTo:10">
+                    <a editable-text="t.Description" style="font-size:10px;"
+                            onbeforesave="updateItemReference({PLID: t.PLID}, 'ref_item_family', $data)">{{t.Description}}</a>
+                </li>
+            </ul>
+            <div class="pull-right">
+                <pagination total-items="lnk.pricelists.length" max-size="3" ng-model="priceCurrentPage" items-per-page="10"></pagination>
+            </div>
+        </div>
+    </div>
+    <div class="item main-box">
+        <header class="main-box-header clearfix">
+            <div class="pull-left"><h2>Life Cycle</h2></div>
+            <span class="pull-right" permission="[1]">
+                <a editable-text="LCycle" buttons="no" e-placeholder="Add New Life Cycle" e-required="required" e-maxlength="30"
+                    onaftersave="addItemReference('ref_item_cycle', $data)">Add Life Cycle</a>
+            </span>
+        </header>
+        <div class="main-box-body clearfix" style="padding:0px 20px;">
+            <div class="input-group pull-right clearfix" style="width:50%; margin-bottom:10px;">
+                <span class="input-group-btn"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></span>
+                <input type="text" placeholder="Search..." class="form-control" ng-model="cycleFind" />
+            </div>
+            <ul style="margin-bottom:20px">
+                <li ng-repeat="t in lnk.cycles | filter:cycleFind | DataFilter:(cycleCurrentPage-1) * 10 | limitTo:10">
+                    <a editable-text="t.Description" style="font-size:10px;"
+                            onbeforesave="updateItemReference({P_CycleID: t.P_CycleID}, 'ref_item_cycle', $data)">{{t.Description}}</a>
+                </li>
+            </ul>
+            <div class="pull-right">
+                <pagination total-items="lnk.cycles.length" max-size="3" ng-model="cycleCurrentPage" items-per-page="10"></pagination>
+            </div>
+        </div>
+    </div>
+    <div class="item main-box">
+        <header class="main-box-header clearfix">
+            <div class="pull-left"><h2>Category</h2></div>
+            <span class="pull-right" permission="[1]">
+                <a editable-text="Cat" buttons="no" e-placeholder="Add New Category" e-required="required" e-maxlength="30"
+                    onaftersave="addItemReference('ref_item_category', $data)">Add Category</a>
+            </span>
+        </header>
+        <div class="main-box-body clearfix" style="padding:0px 20px;">
+            <div class="input-group pull-right clearfix" style="width:50%; margin-bottom:10px;">
+                <span class="input-group-btn"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></span>
+                <input type="text" placeholder="Search..." class="form-control" ng-model="catFind" />
+            </div>
+            <ul style="margin-bottom:20px">
+                <li ng-repeat="t in lnk.categories | filter:catFind | DataFilter:(catCurrentPage-1) * 10 | limitTo:10">
+                    <a editable-text="t.Description" style="font-size:10px;"
+                            onbeforesave="updateItemReference({P_CatID: t.P_CatID}, 'ref_item_category', $data)">{{t.Description}}</a>
+                </li>
+            </ul>
+            <div class="pull-right">
+                <pagination total-items="lnk.categories.length" max-size="3" ng-model="catCurrentPage" items-per-page="10"></pagination>
+            </div>
+        </div>
+    </div>
+    <div class="item main-box">
+        <header class="main-box-header clearfix">
+            <div class="pull-left"><h2>Item Types</h2></div>
+            <span class="pull-right" permission="[1]">
+                <a editable-text="ItemType" buttons="no" e-placeholder="Add New Item Type" e-required="required" e-maxlength="30"
+                    onaftersave="addItemReference('ref_item_type', $data)">Add Type</a>
+            </span>
+        </header>
+        <div class="main-box-body clearfix" style="padding:0px 20px;">
+            <div class="input-group pull-right clearfix" style="width:50%; margin-bottom:10px;">
+                <span class="input-group-btn"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></span>
+                <input type="text" placeholder="Search..." class="form-control" ng-model="typeFind" />
+            </div>
+            <ul style="margin-bottom:20px">
+                <li ng-repeat="t in lnk.types | filter:typeFind | DataFilter:(typeCurrentPage-1) * 10 | limitTo:10">
+                    <a editable-text="t.Description" style="font-size:10px;"
+                            onbeforesave="updateItemReference({TypeID: t.TypeID}, 'ref_item_type', $data)">{{t.Description}}</a>
+                </li>
+            </ul>
+            <div class="pull-right">
+                <pagination total-items="lnk.types.length" max-size="3" ng-model="typeCurrentPage" items-per-page="10"></pagination>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -43,35 +193,9 @@
                     </select>
                     <span class="pull-left"><input type="text" class="form-control" ng-model="find" placeholder="Search..." /></span>
                 </div>
-                <div ng-show="toggle" class="pull-right">
-                    <div class="popover-wrapper" permission="[1]">
-                        [<a editable-text="Cat" e-placeholder="Add New Category" e-required="required" e-maxlength="30"
-                            onaftersave="addItemReference('ref_item_category', $data)">Add Category</a>]
-                    </div>
-                    <div class="popover-wrapper" permission="[1]">
-                        [<a editable-text="Brnd" e-placeholder="Add New Brand" e-required="required" e-maxlength="30"
-                            onaftersave="addItemReference('ref_item_brand', $data)">Add Brand</a>]
-                    </div>
-                    <div class="popover-wrapper" permission="[1]">
-                        [<a editable-text="LCycle" e-placeholder="Add New Life Cycle" e-required="required" e-maxlength="30"
-                            onaftersave="addItemReference('ref_item_cycle', $data)">Add Life Cycle</a>]
-                    </div>
-                    <div class="popover-wrapper" permission="[1]">
-                        [<a editable-text="NSBrand" e-placeholder="Add New NS Brand" e-required="required" e-maxlength="30"
-                            onaftersave="addItemReference('ref_item_family', $data)">Add NS Brand</a>]
-                    </div>
-                    <div class="popover-wrapper" permission="[1]">
-                        [<a editable-text="ItemType" e-placeholder="Add New Item Type" e-required="required" e-maxlength="30"
-                            onaftersave="addItemReference('ref_item_type', $data)">Add Type</a>]
-                    </div>
-                    <div class="popover-wrapper" permission="[1]">
-                        [<a buttons="no" editable-text="PrList" e-placeholder="Add New Price List Name" e-required="required" e-maxlength="50"
-                            onaftersave="addItemReference('stp_item_pricelist', $data)">Add Pricelist</a>]
-                    </div>
-                </div>
-                <button class="btn btn-primary pull-right" permission="[1,5]"
+                <button class="btn btn-success pull-right" permission="[1,5]"
                         style="margin-right:5px;" ng-model="toggle" btn-checkbox>
-                    <i class="fa fa-pencil"></i>
+                    <i class="fa" ng-class="{'fa-arrow-left':!toggle, 'fa-arrow-right':toggle}"></i> {{(toggle) ? "Hide":"Show More"}}
                 </button>
             </header>
             <div class="main-box-body clearfix">
@@ -89,7 +213,7 @@
 								<th ng-cloak ng-show="toggle" class="text-center"><span>Life Cycle</span></th>
 								<th ng-cloak ng-show="toggle" class="text-center"><span>NS Brand</span></th>
 								<th ng-cloak ng-hide="toggle" class="text-center"><span>Price List</span></th>
-                                <th class="text-center"><span>Inventory</span></th>
+                                <!--<th class="text-center"><span>Inventory</span></th>-->
                                 <th ng-cloak ng-show="toggle" class="text-center"><span>Serialized?</span></th>
                                 <th class="text-center"><span>Status</span></th>
 							</tr>
@@ -195,7 +319,7 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td class="text-center">{{item.Inventory | number:0}}</td>
+                                <!--<td class="text-center">{{item.Inventory | number:0}}</td>-->
                                 <td ng-cloak ng-show="toggle" class="text-center">
                                     <div class="popover-wrapper">
                                         <a editable-checkbox="item.IsSerialized" buttons="no" 
@@ -222,7 +346,7 @@
                         </tbody>
                     </table>
                     <div class="pull-right">
-                        <pagination total-items="totalItems" max-size="noOfPages" ng-model="currentPage" items-per-page="pageSize"></pagination>
+                        <pagination total-items="totalItems" max-size="10" ng-model="currentPage" items-per-page="pageSize"></pagination>
                     </div>
                 </div>
             </div>

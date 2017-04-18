@@ -2584,7 +2584,7 @@ CREATE TABLE `trx_sales_postpaid` (
   `SimNo` varchar(12) NOT NULL,
   `DepositSlip` varchar(20) DEFAULT NULL,
   `DepositAmount` decimal(18,2) DEFAULT NULL,
-  `Status` int(11) NOT NULL DEFAULT '1',
+  `Status` int(11) NOT NULL DEFAULT '0',
   `Comments` varchar(100) DEFAULT NULL,
   `CreatedBy` int(11) NOT NULL,
   `CreateDate` date NOT NULL,

@@ -57,6 +57,16 @@ class Items extends REST_Controller {
         }
         $this->response(array('message'=>$message));
     }
+
+    //update entry to Items reference table
+    function updateReference_post() {
+        $table = $this->post('table');
+        $data = $this->post('data');
+        $id = $this->post('id');
+        
+        $message = $this->item->update_reference($table, $data, $id);
+        $this->response(array('message'=>$message));
+    }
     
     //Add new product to the database
     function addNewProduct_post() {
