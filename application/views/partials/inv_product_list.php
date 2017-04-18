@@ -240,10 +240,11 @@
                                            >{{item.ProductDesc}}</a>
                                     </div><br/>
                                     <div class="popover-wrapper user-subhead">
+                                        <a editable-text="bcode" edit-disabled="true">[{{item.BarCode}}] -</a>
                                         <a buttons="no" editable-text="item.SKU" e-required="required" e-maxlength="50"
                                            edit-disabled="userProfile.Roles!=1"
                                            onaftersave="updateItem(item.PID, 'SKU', $data)"
-                                           >[{{item.BarCode}}] - {{item.SKU}}</a>
+                                           >{{item.SKU}}</a>
                                     </div>
 								</td>
                                 <td ng-cloak ng-hide="toggle" class="text-center">
