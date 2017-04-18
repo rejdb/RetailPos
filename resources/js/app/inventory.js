@@ -34,10 +34,11 @@ function inventoryCtrl ($scope, curl, transact, Auth, spinner, ItemFact, Invento
 		$scope.currentPage = 1;
 	}, true);
     
+    spinner.show();
     var params = (usr.Roles!=4) ? 'Available!=0' : 'Available!=0 and Branch =' +usr.Branch.BranchID;
     transact.history(params, 'view_inventory', function(rsp) {
         $scope.pList = rsp;
-        console.log(rsp);
+        spinner.hide();
         
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
@@ -173,21 +174,17 @@ function inventorySerialCtrl ($scope, curl, transact, Auth, spinner, ItemFact, I
     }
     
     
-    
+    spinner.show();
     var params = (usr.Roles!=4) ? 'IsSold!=1' : 'IsSold!=1 and Branch =' +usr.Branch.BranchID;
     transact.history(params, 'view_inventory_serials', function(rsp) {
         $scope.pList = rsp;
-        
+        spinner.hide();
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
     });
     
-    Inventory.getWarehouse(function(whs) {
-        $scope.WhsList = whs;
-        BrnFact.getActive(1,function(brn) {
-            $scope.branches = brn;
-        });
-    });
+    Inventory.getWarehouse(function(whs) {$scope.WhsList = whs;});
+    BrnFact.getActive(1,function(brn) {$scope.branches = brn;});
     
     $scope.AdvanceFilter = function(f) {
         $scope.pList = [];

@@ -180,8 +180,9 @@ function receivingReceiptCtrl($scope, $stateParams, curl, Auth, transact) {
         $scope.config = rsp;
     });
     
+    spinner.show();
     curl.get('/transactions/ReceivingReceipt/' + $stateParams.TransID, function(rsp) {
-        console.log(rsp);
+        spinner.hide();
         $scope.register = rsp;
     });
 }
@@ -217,9 +218,10 @@ if (!$('#page-wrapper').hasClass('nav-small')) {$('#page-wrapper').addClass('nav
 		$scope.currentPage = 1;
 	}, true);
     
+    spinner.show();
     var params = (usr.Roles!=4) ? 'TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"' : 'Branch =' +usr.Branch.BranchID;
     transact.history(params, 'view_receiving', function(rsp) {
-        $scope.pList = rsp;
+        $scope.pList = rsp; spinner.hide();
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
     });

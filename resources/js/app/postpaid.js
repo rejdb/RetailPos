@@ -38,8 +38,10 @@ function postpaidCtrl($scope, transact, Auth, spinner, curl, $timeout,
 		$scope.currentPage = 1;
 	}, true);
     
+    spinner.show();
     var params = (usr.Roles!=4) ? '(DepositSlip is Null or DepositSlip="") and Status!=2' : 'Status!=2 and (DepositSlip is Null or DepositSlip="") and Branch =' +usr.Branch.BranchID;
     transact.history(params, 'view_sales_postpaid', function(rsp) {
+        spinner.hide();
         $scope.pList = rsp;
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);

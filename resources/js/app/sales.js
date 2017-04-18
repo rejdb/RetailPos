@@ -602,12 +602,12 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
                 sk=0;
             }
         }
-//        if (x != s.length)
-//        {
-//            var y = s.length; 
-//            str += 'and '; 
-//            for (var i=x+1; i<y; i++) str += dg[n[i]] +' ';
-//        }
+    //    if (x != s.length)
+    //    {
+    //        var y = s.length; 
+    //        str += 'and '; 
+    //        for (var i=x+1; i<y; i++) str += dg[n[i]] +' ';
+    //    }
         return str.replace(/\s+/g,' ');
     }
     
@@ -617,6 +617,7 @@ function salesHistoryCtrl($scope, transact, Auth, spinner, curl,
                         Inventory, filterFilter, $filter, BrnFact) {
     console.log('Initializing Sales History Module');
     
+    spinner.show();
     $scope.WhsList = [];
     $scope.branches = [];
     $scope.pList = [];
@@ -649,8 +650,8 @@ function salesHistoryCtrl($scope, transact, Auth, spinner, curl,
     
     var params = (usr.Roles!=4) ? 'TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"' : 'TransDate = "' + $filter('date')(new Date(), 'yyyy-MM-dd') + '" and Branch =' +usr.Branch.BranchID;
     transact.history(params, 'view_sales', function(rsp) {
+        spinner.hide();
         $scope.pList = rsp;
-        console.log(rsp);
         
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);

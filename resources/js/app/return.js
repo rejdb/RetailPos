@@ -296,10 +296,11 @@ function returnHistoryCtrl($scope, transact, Auth, spinner, curl,
 		$scope.currentPage = 1;
 	}, true);
     
+    spinner.show();
     var params = (usr.Roles!=4) ? 'TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"' : 'TransDate = "' + $filter('date')(new Date(), 'yyyy-MM-dd') + '" and Branch =' +usr.Branch.BranchID;
     transact.history(params, 'view_return', function(rsp) {
         $scope.pList = rsp;
-        console.log(rsp);
+        spinner.hide();
         
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);

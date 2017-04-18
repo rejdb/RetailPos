@@ -279,12 +279,8 @@ function transferReceiptCtrl($scope, $stateParams, curl, Auth, $state,
     });
     
     var usr = Auth.currentUser();
-    Inventory.getWarehouse(function(whs) {
-        $scope.WhsList = whs;
-        BrnFact.getActive(1,function(brn) {
-            $scope.branches = brn;
-        });
-    });
+    Inventory.getWarehouse(function(whs) {$scope.WhsList = whs;});
+    BrnFact.getActive(1,function(brn) {$scope.branches = brn;});
     
     $scope.Filler = function(id, type) {
         var selected = [];
@@ -296,9 +292,10 @@ function transferReceiptCtrl($scope, $stateParams, curl, Auth, $state,
         return (type==1) ? selected[0].WhsName : selected[0].Description;
     }
     
+    spinner.show();
     curl.get('/transactions/TransferReceipt/' + $stateParams.TransID, function(rsp) {
-        console.log(rsp);
         $scope.register = rsp;
+        spinner.hide();
     });
     
     var params = (usr.Roles!=4) ? 'Status in (1,2,3) and TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"' : 'Status in (1,2,3) and Branch =' +usr.Branch.BranchID;
@@ -307,7 +304,6 @@ function transferReceiptCtrl($scope, $stateParams, curl, Auth, $state,
         transact.ChangeTransferStatus(TransID, status, store, usr.UID, params, usr, function(r) {
             spinner.hide();
             if(r.status) {
-                console.log(r);
                 spinner.notif(r.message, 1500, r.status);
                 $state.reload();
             }else{
@@ -355,9 +351,10 @@ function transferHistoryCtrl($scope, transact, Auth, spinner, curl,
 		$scope.currentPage = 1;
 	}, true);
     
+    spinner.show();
     var params = (usr.Roles!=4) ? 'Status in (1,2,3) and TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"' : 'Status in (1,2,3) and Branch =' +usr.Branch.BranchID;
     transact.history(params, 'view_transfer', function(rsp) {
-        $scope.pList = rsp;
+        $scope.pList = rsp; spinner.hide();
         transact.history('TransferType=0 and Status=2 and InvTo =' + usr.Branch.BranchID, 'view_transfer', function(li) {
             if(li.length) {
                 angular.extend($scope.pList, li); }

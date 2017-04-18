@@ -227,8 +227,9 @@ function pulloutReceiptCtrl($scope, $stateParams, curl, Auth, $state,
         return (type==1) ? selected[0].WhsName : selected[0].Description;
     }
     
+    spinner.show();
     curl.get('/transactions/PulloutReceipt/' + $stateParams.TransID, function(rsp) {
-        console.log(rsp);
+        spinner.hide();
         $scope.register = rsp;
     });
     
