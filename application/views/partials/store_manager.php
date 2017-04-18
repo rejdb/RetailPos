@@ -4,11 +4,11 @@
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
                 <li><span>Employee</span></li>
-                <li class="active"><span>Store Manager</span></li>
+                <li class="active"><span>Area Manager</span></li>
             </ol>
 
             <div class="clearfix">
-                <h1 class="pull-left">Store Managers <small>manage store managers</small></h1>
+                <h1 class="pull-left">Area Managers <small>manage store managers</small></h1>
                 
                 <div class="pull-right top-page-ui">
                     <a data-toggle="modal" data-target="#myStoreManager"
