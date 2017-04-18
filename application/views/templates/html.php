@@ -75,7 +75,7 @@
                             <div class="alert text-center"
                                  ng-class="{'alert-success success':successfully, 'alert-danger success':!successfully}">
                                 <span class="fa fa-times pull-right" ng-click="notify=false"></span>
-                                <small ng-bind="alert_message"></small>
+                                <small>{{alert_message}}</small>
                             </div>
                         </span>
                         <div class="row">

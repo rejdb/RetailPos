@@ -37,7 +37,7 @@ function purchaseCtrl($scope, Auth, spinner, $filter, $timeout, curl, $statePara
     Inventory.getWarehouse(function(whs) { $scope.WhsList = whs; });
     BrnFact.getActive(1,function(brn) {$scope.branches = brn; $scope.brnLoader = false;});
     Supplier.all(function(supp) {$scope.suppliers = supp;});
-    ItemFact.activeProducts(1, function(itm) { $scope.productLists = itm; $scope.itemLoader = false;});
+    // ItemFact.activeProducts(1, function(itm) { $scope.productLists = itm; $scope.itemLoader = false;});
     
     $scope.updateValue = function() {
         $scope.purchase.header.Total = 0;
@@ -62,8 +62,11 @@ function purchaseCtrl($scope, Auth, spinner, $filter, $timeout, curl, $statePara
     }
     
     //Search Products
-    $scope.GetProduct = function(selected) {
-        var SearchProduct = selected.originalObject.BarCode;
+    $scope.GetProduct = function() {
+        var SearchProduct = $scope.SearchProduct;
+        if(SearchProduct==undefined || SearchProduct.length==0) {
+            return false; //spinner.notif("Please Scan Itemcode!", 1000);
+        }
 
         $scope.itemLoader = true;
         ItemFact.search({
@@ -71,10 +74,11 @@ function purchaseCtrl($scope, Auth, spinner, $filter, $timeout, curl, $statePara
             BarCode: SearchProduct
         }, function(rsp){
             $scope.itemLoader = false;
-            
             if(!rsp.status) {
-                spinner.notif(rsp, 1500);
+                $scope.SearchProduct = null;
+                spinner.notif(rsp.message, 1500);
             }else{
+                $scope.SearchProduct = null;
                 var data = rsp.data[0];
                 $scope.purchase.header.Quantity += 1;
                 $scope.purchase.header.Total += parseFloat(data.StdCost);

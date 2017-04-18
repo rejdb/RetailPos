@@ -24,8 +24,8 @@
         
         <div class="register-box register-items-form">
             <div class="item-form form-group">
-                <div class="input-group">
-                    <div class="inputspinner" ng-init="itemLoader=true" ng-show="itemLoader">
+                <div class="input-group contact register-input-group">
+                    <div class="inputspinner" ng-init="itemLoader=false" ng-show="itemLoader">
                         <div class="rect1"></div>
                         <div class="rect2"></div>
                         <div class="rect3"></div>
@@ -33,30 +33,35 @@
                         <div class="rect5"></div>
                     </div>
                     <span class="input-group-addon"><i class="fa fa-plus-circle fa-5x"></i></span>
-                    <div class="padded-row">
+                    <form ng-submit="GetProduct()">
+                        <input type="text" id="GetProduct" ng-model="SearchProduct"
+                               class="form-control add-item-input" autocomplete="off"
+                               placeholder="Scan Item Code">
+                    </form>
+                    <!--<div class="padded-row">
                         <div angucomplete-ie8 id="ex6" 
-                             placeholder="Type Product Code, Name, or Model..." 
-                             pause="1000" selected-object="GetProduct" 
-                             local-data="productLists" 
-                             search-fields="BarCode,CustLastName,SKU" 
-                             title-field="ProductDesc" 
-                             description-field="BarCode"
-                             image-field="Avatar"
-                             minlength="1" 
-                             input-class="form-control add-item-input"
-                             match-class="highlight"
-                             clear-selected="true"
-                             auto-match="true">
+                            placeholder="Type Product Code, Name, or Model..." 
+                            pause="1000" selected-object="GetProduct" 
+                            local-data="productLists" 
+                            search-fields="BarCode,CustLastName,SKU" 
+                            title-field="ProductDesc" 
+                            description-field="BarCode"
+                            image-field="Avatar"
+                            minlength="1" 
+                            input-class="form-control add-item-input"
+                            match-class="highlight"
+                            clear-selected="true"
+                            auto-match="true">
                         </div>
-                    </div>
+                    </div>-->
                     <span class="input-group-addon register-mode purchase_order-mode dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             Purchase Order
                             <span class="sr-only">Toggle Dropdown</span>
-                         </a>
-                         <ul class="dropdown-menu sales-dropdown" role="menu" style="cursor:pointer;">
+                        </a>
+                        <ul class="dropdown-menu sales-dropdown" role="menu" style="cursor:pointer;">
                             <li><a href="/purchase/history">TRANSACTION HISTORY</a></li>
-                         </ul>
+                        </ul>
                     </span>
                     <span class="input-group-addon grid-buttons">
                         <a ng-click="GetProduct()"><i class="fa fa-search fa-lg"></i></a>
