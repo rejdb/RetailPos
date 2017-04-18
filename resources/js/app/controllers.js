@@ -36,7 +36,7 @@ function mainCtrl($scope, spinner, curl, ItemFact) {
                 var i = r.data[0];
                 spinner.notif('Barcode: ' + i.BarCode +
                               '; Description: ' + i.ProductDesc + 
-                              '; Current Price: ' + i.CurrentPrice, 5000, true);
+                              '; Current Price: ' + Math.round(i.CurrentPrice * 1.12,2), 5000, true);
             }else{
                 spinner.notif(r.message, 1000);
             }
