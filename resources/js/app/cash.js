@@ -32,10 +32,11 @@ function cashHistoryCtrl($scope, transact, Auth, spinner, curl,
 		$scope.currentPage = 1;
 	}, true);
     
+    spinner.show();
     var params = (usr.Roles!=4) ? 'IsDeposited="0"' : 'IsDeposited = "0" and Branch =' +usr.Branch.BranchID;
     transact.history(params, 'report_cash_register', function(rsp) {
         $scope.pList = rsp;
-        console.log(rsp);
+        spinner.hide();
         
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
@@ -133,10 +134,11 @@ function cardHistoryCtrl($scope, transact, Auth, spinner, curl,
 		$scope.currentPage = 1;
 	}, true);
     
+    spinner.show();
     var params = (usr.Roles!=4) ? 'PaymentType!="1" and TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"' : 'PaymentType != "1" and Branch =' +usr.Branch.BranchID + ' and TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"';
     transact.history(params, 'view_sales_payments', function(rsp) {
         $scope.pList = rsp;
-        console.log(rsp);
+        spinner.hide();
         
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
