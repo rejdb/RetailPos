@@ -65,7 +65,7 @@ function productCtrl($scope, curl, ItemFact,
     
     //Load All products
     ItemFact.products(function(rsp) {
-        $scope.items = rsp;
+        $scope.items = rsp; $scope.itemLoader=false;
         $scope.totalItems = $scope.items.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
     });

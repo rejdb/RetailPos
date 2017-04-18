@@ -218,7 +218,18 @@
                                 <th class="text-center"><span>Status</span></th>
 							</tr>
 						</thead>
-                        <tbody>
+                        <tbody class="register">
+                            <tr ng-init="itemLoader=true" ng-show="itemLoader">
+                                <td colspan="6">
+                                    <div class="inputspinner">
+                                        <div class="rect1"></div>
+                                        <div class="rect2"></div>
+                                        <div class="rect3"></div>
+                                        <div class="rect4"></div>
+                                        <div class="rect5"></div>
+                                    </div>
+                                </td>
+                            </tr>
                             <tr ng-repeat="item in filtered = items | orderBy:'+ProductDesc' | filter:find | DataFilter:(currentPage-1) * pageSize | limitTo:pageSize">
                                 <td>
 <!--									<img src="/resources/img/avatar/products/default_product.jpeg" alt=""/>-->
