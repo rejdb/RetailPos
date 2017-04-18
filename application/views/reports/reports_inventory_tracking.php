@@ -84,6 +84,7 @@
 							<tr>
 								<th ng-show="(advance.Type)"><span>Branch</span></th>
 								<th><span>Product</span></th>
+                                <th><span>Date</span></th>
 								<th><span>Warehouse</span></th>
 								<th><span>Reference No.</span></th>
 								<th><span>Module</span></th>
@@ -106,6 +107,7 @@
                                         </small>
                                     </div>
                                 </td>
+                                <td>{{b.Date}}</td>
                                 <td>{{b.WhsName | uppercase}}</td>
                                 <td><a href="#{{b.Module + b.TransType}}/receipt/{{b.TransID}}">{{b.RefNo | uppercase}}</a></td>
                                 <td>{{b.Module + b.TransType}}</td>
