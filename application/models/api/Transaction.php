@@ -1053,8 +1053,7 @@ class Transaction extends MY_Model {
     }
     
     function updatePostpaid($postpaid) {
-        $Activated = isset($data['type']['Status']);
-        $arr = (array)$data['type'];
+        $Activated = isset($postpaid['type']['Status']);
         
         if($Activated) {
             $d = array('ActivationDate'=>date('Y-m-d'));

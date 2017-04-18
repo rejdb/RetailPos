@@ -138,16 +138,14 @@ function postpaidCtrl($scope, transact, Auth, spinner, curl, $timeout,
         }else{var postData = '{"PostpaidID":' + id + ',"type": {"' + field + '":"' + data + '"}}';}
         
         curl.post('/transactions/updatePostpaid', postData, function(rsp) { 
-            spinner.notif(rps.message, 1000, rsp.status);
+            spinner.notif(rsp.message, 1000, rsp.status);
         }); 
     }
     
     $scope.CancelPostpaid = function(row) {
         var cnf = window.confirm("Are you sure you want to cancel this transaction?");
         if(cnf) {
-            console.log(row);
             curl.post('/transactions/cancelPostpaid', row, function(rsp) {
-                console.log(rsp);
                 row.Status = '2';
             });
         }
