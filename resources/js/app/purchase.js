@@ -427,6 +427,7 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
             Serial: tag.text
         }
         
+        console.log(tag);
         var row = po.rows[index];
         var smr = [{
             TransID: po.header.TransID,
@@ -447,7 +448,6 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
         var result;
         curl.ajax('/inventories/InsertRemoveSerial', 
                   {datas: datas, type: type}, function(rsp) {
-            console.log(rsp);
             spinner.hide();
             result = rsp.status;
             if(rsp.status) {
