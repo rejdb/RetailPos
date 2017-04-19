@@ -65,8 +65,8 @@
 							<tr>
 								<th><span>Item Code</span></th>
 								<th><span>Description</span></th>
-								<th class="text-center"><span>Order QTY</span></th>
 								<th class="text-center"><span>DP</span></th>
+								<th class="text-center"><span>Order QTY</span></th>
 								<th class="text-center"><span>Amoount</span></th>
 							</tr>
 						</thead>
