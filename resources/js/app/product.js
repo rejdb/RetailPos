@@ -202,4 +202,6 @@ $(document).ready(function() {
 			duration: 500
 		},
 	});
+
+    $('.select').select2({width:"100%"});
 });

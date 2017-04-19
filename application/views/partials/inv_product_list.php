@@ -366,7 +366,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="addNewItemData" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="addNewItemData" data-backdrop="static" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="wizard-container mywizard">
             <div class="card wizard-card ct-wizard-red" id="wizardProfile">
@@ -417,7 +417,7 @@
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="ItemBrand">Brand</label>
-                                            <select class="form-control"
+                                            <select class="form-control select"
                                                     cast-to-integer="true"
                                                     ng-model="product.Brand"
                                                     required="required">
@@ -428,12 +428,34 @@
                                     <div class="form-group col-sm-6">
                                         <label for="ItemCategory" class="col-sm-12 control-label">Category</label><br/>
                                         <div class="col-sm-12 text-center">
-                                            <div class="btn-group">
-                                                <label class="btn btn-primary" ng-repeat="c in lnk.categories"
-                                                       btn-radio="{{c.P_CatID}}" ng-model="product.Category">
-                                                    {{c.Description}}
-                                                </label>
-                                            </div>
+                                            <select class="form-control select"
+                                                    cast-to-integer="true"
+                                                    ng-model="product.Category"
+                                                    required="required">
+                                                <option ng-repeat="b in lnk.categories | orderBy:'+Description'" value="{{b.P_CatID}}">{{b.Description}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="ItemCategory" class="col-sm-12 control-label">Item Type</label><br/>
+                                        <div class="col-sm-12 text-center">
+                                            <select class="form-control select"
+                                                    cast-to-integer="true"
+                                                    ng-model="product.ItemType"
+                                                    required="required">
+                                                <option ng-repeat="b in lnk.types | orderBy:'+Description'" value="{{b.TypeID}}">{{b.Description}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="ItemCategory" class="col-sm-12 control-label">NS Brand</label><br/>
+                                        <div class="col-sm-12 text-center">
+                                            <select class="form-control select"
+                                                    cast-to-integer="true"
+                                                    ng-model="product.Family"
+                                                    required="required">
+                                                <option ng-repeat="b in lnk.families | orderBy:'+Description'" value="{{b.FamID}}">{{b.Description}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-6">
