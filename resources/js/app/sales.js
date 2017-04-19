@@ -18,7 +18,7 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
     $scope.ShowBranchSelect = true;
     $scope.ShowFLSelect = true;
     var usr = Auth.currentUser();
-    
+    console.log(usr);
     $scope.register = {
         BranchName: usr.Branch.Description,
         CreatedBy: usr.DisplayName,
