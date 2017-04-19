@@ -21,7 +21,7 @@
                        data-toggle="modal" data-target="#addNewItemData">
                         <i class="fa fa-plus-circle fa-lg"></i> Add Item
                     </a>
-                    <button class="btn" ng-init="collapse=true" permission="[1]" ng-click="collapse = !collapse"
+                    <button class="btn" ng-init="collapse=true" permission="[1,5]" ng-click="collapse = !collapse"
                             ng-class="{'btn-default': !collapse, 'btn-primary': collapse}">
                         <i class="fa fa-pencil fa-lg"></i> References</button>
                 </div>
