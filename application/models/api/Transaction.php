@@ -705,7 +705,7 @@ class Transaction extends MY_Model {
                                     'DiscValue' => $val['DiscValue'],
                                     'Subsidy' => $val['Subsidy'],
                                     'OutputTax' => $val['OutputVat'],
-                                    'TaxAmount' => $val['PriceAfVat'] - $val['Price'],
+                                    'TaxAmount' => $val['TotalAfVat'] - $val['TotalAfSub'],
                                     'Cost' => $val['StdCost'],
                                     'Price' => $val['Price'],
                                     'PriceAfSub' => $val['PriceAfSub'],

@@ -177,6 +177,7 @@ function inventorySerialCtrl ($scope, curl, transact, Auth, spinner, ItemFact, I
     spinner.show();
     var params = (usr.Roles!=4) ? 'IsSold!=1' : 'IsSold!=1 and Branch =' +usr.Branch.BranchID;
     transact.history(params, 'view_inventory_serials', function(rsp) {
+        console.log(rsp);
         $scope.pList = rsp;
         spinner.hide();
         $scope.totalItems = $scope.pList.length;
@@ -195,6 +196,7 @@ function inventorySerialCtrl ($scope, curl, transact, Auth, spinner, ItemFact, I
         
         spinner.show();
         transact.history(params, 'view_inventory_serials', function(rsp) {
+            console.log(rsp);
             $scope.pList=rsp;
             spinner.hide();
             $scope.collapse = true;

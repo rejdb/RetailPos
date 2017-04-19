@@ -69,12 +69,8 @@
 			
 			<div class="main-box-body clearfix">
 				<div id="invoice-companies" class="row">
-<!--                    <div class="invoice-box hidden-sm"></div>-->
-                    <div class="col-sm-4 col-xs-12 invoice-box">
-                        <div class="invoice-icon col-xs-1 hidden-sm">
-							<i class="ion-clipboard"></i>
-						</div>
-						<div class="invoice-dates col-xs-10">
+                    <div class="col-sm-4 col-xs-4 invoice-box">
+						<div class="invoice-dates col-xs-12">
 							<div class="invoice-number clearfix">
 								<strong>Ref No.</strong>
 								<span class="pull-right">{{register.header.TransferNo}}</span>
@@ -95,21 +91,15 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-6 invoice-box">
-						<div class="invoice-icon hidden-sm">
-							<i class="fa fa-home"></i> Branch
-						</div>
+					<div class="col-sm-4 col-xs-4 invoice-box">
                         <div class="invoice-company">
 							<h4>{{register.header.Description}}</h4>
 							<p>{{register.header.Address}}</p>
                             <p>{{register.header.BranchEmail}}</p>
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-6 invoice-box">
-						<div class="invoice-icon col-xs-1 hidden-sm">
-							<i class="ion-code-working"></i>
-						</div>
-						<div class="invoice-date col-xs-10 clearfix">
+					<div class="col-sm-4 col-xs-4 invoice-box">
+						<div class="invoice-date col-xs-12 clearfix">
                             <div class="invoice-number clearfix" ng-hide="(register.header.TransferType==0 && register.header.Status!=3)">
 								<strong>From: </strong>
 								<span class="pull-right">{{Filler(register.header.InvFrom, register.header.TransferType)}}</span>
@@ -131,10 +121,10 @@
                     </div><br/>
 <!--                </div>-->
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th class="text-center"><span>Item Code</span></th>
+								<th><span>Item Code</span></th>
 								<th><span>Description</span></th>
 								<th><span>Warehouse</span></th>
 								<th class="text-center"><span>Quantity</span></th>
@@ -145,13 +135,18 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="row in register.rows">
-								<td class="text-center">{{row.BarCode}}</td>
+								<td><small>{{row.BarCode}}</small></td>
 								<td>{{row.ProductDesc}}</td>
 								<td>{{row.WhsName}}</td>
 								<td class="text-center">{{row.Quantity}}</td>
 								<td class="text-center">{{row.Cost | peso:2}}</td>
 								<td class="text-center">{{row.Total | peso:2}}</td>
                                 <td>{{row.Serial}}</td>
+							</tr>
+							<tr>
+								<td colspan=3 class="text-right"><b>Total Quantity</b></td>
+								<td class="text-center">{{register.header.Quantity | number:0}}</td>
+								<td colspan=3 class="text-center">&nbsp;</td>
 							</tr>
 						</tbody>
 					</table>

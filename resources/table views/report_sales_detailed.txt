@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS `report_sales_detailed`;
 CREATE VIEW report_sales_detailed AS
 SELECT *,
 IF(a.PriceAfVat < 1000, "<1000",

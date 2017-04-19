@@ -174,7 +174,7 @@ function receivingCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventor
     console.log("Receiving module has been initialized!");
 }
 
-function receivingReceiptCtrl($scope, $stateParams, curl, Auth, transact) {
+function receivingReceiptCtrl($scope, $stateParams, curl, Auth, transact, spinner) {
     if (!$('#page-wrapper').hasClass('nav-small')) {$('#page-wrapper').addClass('nav-small');}
     Auth.config(function(rsp) {
         $scope.config = rsp;

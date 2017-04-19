@@ -138,7 +138,7 @@
                 </table>
             </div>
         </div>
-<!--        <pre>{{register | json}}</pre>-->
+        <!--<pre>{{register | json}}</pre>-->
     </div>
     
     <div class="col-sm-4 clearfix">
@@ -180,7 +180,7 @@
                 </div>
                 <div class="details">
                     <a class="name">{{register.BranchName}}</a>
-                    <div class="email">Sold By: {{register.CreatedBy}}</div>
+                    <div class="email">Code: {{register.BranchCode}}</div>
                     <a ng-click="resetBranch(register.header)" permission="[1,2,5,6]"
                        class="btn btn-edit btn-primary pull-right" 
                        title="Change Delivery Address">
@@ -452,12 +452,19 @@
                     <div class="tab-content">
                         <div class="row">                     
                             <div class="col-sm-10 col-sm-offset-1">
-                                <div class="form-group col-sm-12">
-                                    <label for="forFullName">Name <small>(required)</small></label>
-                                    <input type="text" class="form-control" required="required" 
-                                           id="forFullName" ng-maxlength=50
-                                           ng-model="register.customer.Fullname" 
-                                           placeholder="Reggie Dabu" />
+                                <div class="form-group col-sm-6">
+                                    <label for="forFirstName">First Name <small>(required)</small></label>
+                                    <input type="text" class="form-control text-uppercase" required="required" 
+                                           id="forFirstName" ng-maxlength=25
+                                           ng-model="register.CustFirstName" 
+                                           placeholder="Reggie" />
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="forLastName">Last Name <small>(required)</small></label>
+                                    <input type="text" class="form-control text-uppercase" required="required" 
+                                           id="forLastName" ng-maxlength=25
+                                           ng-model="register.CustLastName" 
+                                           placeholder="Dabu" />
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="form-group">
@@ -516,10 +523,11 @@
                 <form ng-submit="SubmitRegister(register)" novalidate="novalidate" name="SForm">
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-addon">SI/OR</span>
+                            <span class="input-group-addon" style="background:#4d5db5;color:#fff"><b>{{register.BranchCode}}-SI</b></span>
                             <input type="number" maxlength="10" ng-maxlength="10" required
                                    placeholder="Ref. No." ng-model="register.header.RefNo"
                                    class="add-input form-control"/>
+                            <span ng-show="userProfile.Roles!=4" class="input-group-addon" style="background:#5d0303;color:#fff"><b>{{register.CurrentSI}}</b></span>
                         </div>
                     </div>
                     <Button class="btn btn-success btn-large btn-block" 

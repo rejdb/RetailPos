@@ -43,11 +43,11 @@
 			<div class="main-box-body clearfix">
 				<div id="invoice-companies" class="row">
 <!--                    <div class="invoice-box hidden-sm"></div>-->
-                    <div class="col-sm-4 col-xs-12 invoice-box">
-                        <div class="invoice-icon col-xs-1 hidden-sm">
+                    <div class="col-sm-4 col-xs-4 invoice-box">
+                        <div class="invoice-icon col-sm-1 hidden-xs">
 							<i class="ion-clipboard"></i>
 						</div>
-						<div class="invoice-dates col-xs-10">
+						<div class="invoice-dates col-sm-10 col-xs-12">
 							<div class="invoice-number clearfix">
 								<strong>Ref No.</strong>
 								<span class="pull-right">{{register.header.RefNo}}</span>
@@ -58,8 +58,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-6 invoice-box">
-						<div class="invoice-icon hidden-sm">
+					<div class="col-sm-4 col-xs-4 invoice-box">
+						<div class="invoice-icon hidden-xs">
 							<i class="fa fa-home"></i> Branch
 						</div>
                         <div class="invoice-company">
@@ -68,8 +68,8 @@
                             <p>{{register.header.BranchEmail}}</p>
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-6 invoice-box">
-						<div class="invoice-icon hidden-sm">
+					<div class="col-sm-4 col-xs-4 invoice-box">
+						<div class="invoice-icon hidden-xs">
 							<i class="fa fa-user"></i>Customer
 						</div>
 						<div class="invoice-date">
@@ -84,10 +84,10 @@
 					</div>
 				</div>
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th class="text-center"><span>Item Code</span></th>
+								<th><span>Item Code</span></th>
 								<th><span>Description</span></th>
                                 <th class="text-center"><span>Unit price</span></th>
 								<th class="text-center"><span>Quantity</span></th>
@@ -97,12 +97,17 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="row in register.rows | orderBy:'+ProductDesc'">
-								<td class="text-center">{{row.BarCode}}</td>
+								<td><small>{{row.BarCode}}</small></td>
 								<td>{{row.ProductDesc}}</td>
                                 <td class="text-center">{{row.PriceAfSub | peso:2}}</td>
 								<td class="text-center">{{row.Quantity * -1}}</td>
 								<td class="text-center">{{row.TotalAfSub * -1 | peso:2}}</td>
                                 <td>{{row.Serial}}</td>
+							</tr>
+							<tr>
+								<td colspan=3 class="text-right"><b>Total Quantity</b></td>
+								<td class="text-center">{{register.header.Quantity * -1 | number:0}}</td>
+								<td colspan=3 class="text-center">&nbsp;</td>
 							</tr>
 						</tbody>
 					</table>

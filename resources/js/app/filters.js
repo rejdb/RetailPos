@@ -50,7 +50,7 @@ app.filter('purchaseStatus', function($filter) {
 app.filter('transferStatus', function($filter) {
     return function(input) {
          switch(input) {
-            case 1: return 'Pending';
+            case 1: return 'For Approval';
             case 2: return 'Approved';
             case 3: return 'Received';
             case 4: return 'Canceled';
@@ -61,7 +61,7 @@ app.filter('transferStatus', function($filter) {
 app.filter('pulloutStatus', function($filter) {
     return function(input) {
          switch(input) {
-            case 1: return 'Pending';
+            case 1: return 'For Approval';
             case 2: return 'Approved';
             case 3: return 'Confirmed';
             case 4: return 'Canceled';

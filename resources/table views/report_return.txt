@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS `report_return`;
 CREATE VIEW report_return AS
 SELECT T0.TransID
 , T0.RefNo
@@ -47,6 +48,9 @@ SELECT T0.TransID
 , T0.NetTotal
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
+, 'Cash' as PaymentType
+, '' as BankTerminal
+, '' as Terms
 FROM view_return T0
 INNER JOIN view_return_row T1 ON T0.TransID = T1.TransID
 INNER JOIN view_sales_customer T2 ON T0.TransID = T2.TransID

@@ -67,7 +67,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-2 col-sm-2 col-sm-offset-1"><span class="hidden-xs">Amount In Words:</span></div>
-                    <div class="col-xs-5 col-sm-5 text-left">{{toWords(register.header.NetTotal)}}</div>
+                    <div class="col-xs-5 col-sm-5 text-left">{{toWords(register.header.NetTotal) | uppercase}}</div>
                     <div class="col-xs-2 col-sm-2"><span class="hidden-xs">Signature:</span></div>
                     <div class="col-xs-2 col-sm-2"></div>
                 </div>
@@ -89,7 +89,20 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-8">
                                 <b><i>Return No.</i></b> {{register.header.TransID}} <br/>
-                                <b><i>Remarks:</i></b> {{register.header.Comments}}
+                                <b><i>Remarks:</i></b> {{register.header.Comments}} <br/>
+                                <b><i>Payment Details:</i></b><br/>
+                                <div class="row" style="margin-left:10px">
+                                    <div class="col-xs-3">Payment Type</div>
+                                    <div class="col-xs-3">Amount</div>
+                                    <div class="col-xs-2">Ref.</div>
+                                    <div class="col-xs-4">Installment</div>
+                                </div>
+                                <div class="row" ng-repeat="payment in register.payments" style="margin-left:10px">
+                                    <div class="col-xs-3">{{payment.PaymentName}}:</div>
+                                    <div class="col-xs-3">{{payment.Amount}}</div>
+                                    <div class="col-xs-2">{{payment.RefNumber}}</div>
+                                    <div class="col-xs-4">{{payment.InstDesc}}</div>
+                                </div>
                             </div>
                             <div class="col-xs-6 col-sm-4">
                                 <div class="row">

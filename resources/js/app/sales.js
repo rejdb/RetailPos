@@ -18,9 +18,11 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
     $scope.ShowBranchSelect = true;
     $scope.ShowFLSelect = true;
     var usr = Auth.currentUser();
-    console.log(usr);
+
     $scope.register = {
         BranchName: usr.Branch.Description,
+        BranchCode: usr.Branch.BranchCode,
+        CurrentSI: 0,
         CreatedBy: usr.DisplayName,
         Email: usr.Email,
         SelectedWhs: 'Good Stocks',
@@ -86,6 +88,7 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
     
     $scope.addTempCustomer = function() {
         $scope.register.customer.CardNo = '5291988198828';
+        $scope.register.customer.Fullname = $filter('uppercase')($scope.register.CustFirstName + ' ' + $scope.register.CustLastName);
         
         $scope.CustSelected = true;
         $('#NewCustomer').modal('hide');
@@ -126,6 +129,8 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
     $scope.GetBranch = function(selected) {
         UserFact.getBrnUser(parseInt(selected.originalObject.BranchID), function(fl) {$scope.frontliners = fl;});
         $scope.register.header.Branch = parseInt(selected.originalObject.BranchID);
+        $scope.register.CurrentSI = selected.originalObject.Current;
+        $scope.register.BranchCode = selected.originalObject.BranchCode;
         $scope.register.BranchName = selected.originalObject.Description;
         $scope.register.Backdating = parseInt(selected.originalObject.IsBackdateAllowed);
         $scope.register.SalesTax = parseInt(selected.originalObject.SalesTax);
@@ -178,6 +183,7 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
         $scope.register.header.TotalAfSub = 0;
         $scope.register.header.TotalAfVat = 0;
         $scope.register.header.NetTotal = 0;
+        $scope.register.header.AmountDue = 0;
         $scope.register.discount = 0;
         used_customer_points = 0;
         $scope.register.used_credits = 0; 
@@ -233,18 +239,18 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
                     cost: parseFloat(data.StdCost),
                     OutputVat: ($scope.register.IsTaxable==1) ? $scope.register.SalesTax : 0,
                     tax: ($scope.register.IsTaxable==1) ? (1+($scope.register.SalesTax/100)) : 1,
-                    subsidy: 0,
+                    subsidy: ($scope.register.Subsidy==0) ? 1: (1+($scope.register.Subsidy/100)),
                     Campaign: (campaign.status) ? campaign.name : data.PriceListDesc
                 }
                 
                 $scope.register.header.Quantity += 1;
-                $scope.register.header.SalesTax += (a.price * (a.OutputVat/100)) * a.free;
-                $scope.register.header.TotalBefSub += a.price * a.free;
-                $scope.register.header.TotalAfSub += a.price * a.free;
-                $scope.register.header.TotalAfVat += (a.price * a.tax) * a.free;
-                $scope.register.header.NetTotal += (a.price * a.tax) * a.free;
-                $scope.register.header.AmountDue += (a.price * a.tax) * a.free;
-                $scope.register.header.ShortOver += (a.price * a.tax) * a.free;
+                $scope.register.header.SalesTax += ((a.price * a.subsidy) * (a.OutputVat/100)) * a.free;
+                $scope.register.header.TotalBefSub += (a.price * a.subsidy) * a.free;
+                $scope.register.header.TotalAfSub += (a.price * a.subsidy) * a.free;
+                $scope.register.header.TotalAfVat += ((a.price * a.subsidy) * a.tax) * a.free;
+                $scope.register.header.NetTotal += ((a.price * a.subsidy) * a.tax) * a.free;
+                $scope.register.header.AmountDue += ((a.price * a.subsidy) * a.tax) * a.free;
+                $scope.register.header.ShortOver += ((a.price * a.subsidy) * a.tax) * a.free;
                 
                 if(data.IsSerialized == 1) {
                     imei.push(data.Serial.toLowerCase());
@@ -277,7 +283,6 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
                     Serials: data.Serial,
                     Campaign: a.Campaign
                 }; 
-                console.log(item);
                 $scope.register.rows.push(item);
                 $timeout(function() {updatePayment();},100);
             }
@@ -534,13 +539,9 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
     $scope.MyTax = 0;
     
     var usr = Auth.currentUser();
-    Inventory.getWarehouse(function(whs) {
-        $scope.WhsList = whs;
-        BrnFact.getActive(1,function(brn) {
-            $scope.branches = brn;
-        });
-    });
-    
+    // Inventory.getWarehouse(function(whs) {$scope.WhsList = whs;});
+    // BrnFact.getActive(1,function(brn) {$scope.branches = brn;});
+
     $scope.Filler = function(id, type) {
         var selected = [];
         if(type==1) {
@@ -552,6 +553,7 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
     }
     
     curl.get('/transactions/SalesReceipt/' + $stateParams.TransID, function(rsp) {
+        console.log(rsp);
         $scope.register = rsp;
     });
     
@@ -602,12 +604,12 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
                 sk=0;
             }
         }
-    //    if (x != s.length)
-    //    {
-    //        var y = s.length; 
-    //        str += 'and '; 
-    //        for (var i=x+1; i<y; i++) str += dg[n[i]] +' ';
-    //    }
+       if (x != s.length)
+       {
+           var y = s.length; 
+           str += 'and '; 
+           for (var i=x+1; i<y; i++) str += dg[n[i]] +' ';
+       }
         return str.replace(/\s+/g,' ');
     }
     
@@ -732,4 +734,5 @@ app.controller('salesHistoryCtrl', salesHistoryCtrl);
 $(document).ready(function() {
     $('.podate').datepicker();
     $('#PoBranch, #PoSupplier').select2();
+    // $('#SendSales').modal('show');
 });

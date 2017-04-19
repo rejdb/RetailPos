@@ -28,36 +28,32 @@
                 <header class="main-box-header clearfix">
                     <h2>Company Information</h2>
                 </header>
-                <div class="main-box-body clearfix">
-                    <div class="form-horizontal" role="form">
+                <div class="main-box-body">
+                    <div class="form-horizontal">
                         <div class="form-group">
-                            <label for="CompanyName" class="col-lg-2 control-label">Company Name</label>
-                            <div class="col-lg-10">
+                            <label class="col-lg-2 control-label">Company Name</label>
+                            <div class="col-lg-10 input-group">
                                 <input type="text" 
                                     class="form-control" 
                                     id="CompanyName" 
                                     ng-model="genSetup.CompanyName"
-                                    required="required">
+                                    required="required" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="CompanyAddress" class="col-lg-2 control-label">Company Address</label>
-                            <div class="col-lg-10">
+                            <label class="col-lg-2 control-label">Company Address</label>
+                            <div class="col-lg-10 input-group">
                                 <input type="text" 
                                     class="form-control" 
                                     id="CompanyAddress" 
                                     ng-model="genSetup.CompanyAddress"
-                                    required="required">
+                                    required="required" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="CompanyWebsite" class="col-lg-2 control-label">Website</label>
-                            <div class="col-lg-10">
-                                <input type="text" 
-                                    class="form-control" 
-                                    id="CompanyWebsite" 
-                                    ng-model="genSetup.Website"
-                                    required="required">
+                            <label class="col-lg-2 control-label">Website</label>
+                            <div class="col-lg-10  input-group">
+                                <input type="text" class="form-control" id="CompanyWebsite" ng-model="genSetup.Website" required="required" />
                             </div>
                         </div>
                     </div>

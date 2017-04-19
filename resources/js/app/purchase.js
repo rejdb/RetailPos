@@ -170,13 +170,15 @@ function purchaseCtrl($scope, Auth, spinner, $filter, $timeout, curl, $statePara
     console.log('Purhase Order Module has been initialized!');
 }
 
-function purchaseReceiptCtrl($scope, $stateParams, curl, Auth, transact) {
+function purchaseReceiptCtrl($scope, $stateParams, curl, Auth, transact, spinner) {
     Auth.config(function(rsp) {
         $scope.config = rsp;
     });
     
+    spinner.show();
     curl.get('/transactions/PurchaseReceipt/' + $stateParams.TransID, function(rsp) {
         $scope.purchase = rsp;
+        spinner.hide();
     });
 }
 
@@ -189,6 +191,7 @@ function purchaseHistoryCtrl($scope, transact, Auth, spinner, filterFilter, $fil
     var usr = Auth.currentUser();
     
     $scope.advance = {
+        AllBranch: (usr.Roles!=4) ? true:false,
         Type: -1,
         ShipToBranch: parseInt(usr.Branch.BranchID),
         DateFrom: $filter('date')(new Date(), 'MM/dd/yyyy'),
@@ -481,6 +484,7 @@ function purchaseReceivedReceiptCtrl($scope, $stateParams, curl, Auth, transact)
     if($stateParams.transid) {
         transact.receipt.purchase($stateParams.transid, function(rsp) {
             $scope.purchase = rsp;
+            console.log(rsp);
             angular.forEach(rsp.rows, function(ind) {
                 ind.Serials = [];
                 if(parseInt(ind.IsSerialized)==1) {

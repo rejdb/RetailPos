@@ -183,12 +183,10 @@ function salesDetailedCtrl($scope, transact, Auth, spinner, curl, $timeout,
         CycleDesc: 'Life Cycle',
         Campaign: 'Pricelist / Campaign',
         WhsName: 'Warehouse',
-        Quantity: 'Quantity'
-    }  
-    if(usr.Roles!=4) {
-        angular.extend($scope.exportFields, {
-            Cost: 'Cost',
-            Price: 'Price',
+        Quantity: 'Quantity'} 
+    if(usr.Roles!=4) {angular.extend($scope.exportFields, {Cost: 'Cost',});}
+    angular.extend($scope.exportFields, {
+        Price: 'Price',
             Subsidy: 'Installment Fee',
             PriceAfSub: 'Price After Installment',
             OutputTax: 'Output Tax',
@@ -202,6 +200,9 @@ function salesDetailedCtrl($scope, transact, Auth, spinner, curl, $timeout,
             TotalAfDiscount: 'Total After Discount',
             Cash_Payment: 'Cash Payment',
             NonCash_Payment: 'Non-Cash Payment',
+            PaymentType: 'Payment Type',
+            Terms: 'Installment Terms',
+            BankTerminal: 'Terminal',
             Serial: 'Serial',
             PriceBand: 'Price Band',
             CustomerName: 'Customer Name',
@@ -210,33 +211,7 @@ function salesDetailedCtrl($scope, transact, Auth, spinner, curl, $timeout,
             CustomerAddress: 'Customer Address',
             Cashier: 'Cashier',
             Module: 'Module'
-        });
-    }else{
-        angular.extend($scope.exportFields, {
-            Price: 'Price',
-            Subsidy: 'Installment Fee',
-            PriceAfSub: 'Price After Installment',
-            OutputTax: 'Output Tax',
-            TaxAmount: 'Sales Tax',
-            PriceAfVat: 'Price After Vat',
-            Discount: 'Discount (%)',
-            DiscValue: 'Discount Value',
-            Total: 'Total',
-            TotalAfSub: 'Total After Installment',
-            TotalAfVat: 'Total After Vat',
-            TotalAfDiscount: 'Total After Discount',
-            Cash_Payment: 'Cash Payment',
-            NonCash_Payment: 'Non-Cash Payment',
-            Serial: 'Serial',
-            PriceBand: 'Price Band',
-            CustomerName: 'Customer Name',
-            CustomerContactNo: 'Contact No.',
-            CustomerEmail: 'Customer Email.',
-            CustomerAddress: 'Customer Address',
-            Cashier: 'Cashier',
-            Module: 'Module'
-        });
-    }
+    });
     
     console.log('Sales Report Detailed Module has been initialized');
 }

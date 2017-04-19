@@ -41,8 +41,8 @@
 			<div class="main-box-body clearfix">
 				<div id="invoice-companies" class="row">
 <!--                    <div class="invoice-box hidden-sm"></div>-->
-					<div class="col-sm-4 col-xs-6 invoice-box">
-						<div class="invoice-icon hidden-sm">
+					<div class="col-sm-4 col-xs-4 invoice-box">
+						<div class="invoice-icon hidden-xs">
 							<i class="fa fa-home"></i> Supplier
 						</div>
 						<div class="invoice-company">
@@ -52,8 +52,8 @@
 							<p>{{purchase.header.SupplierEmail}}</p>
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-6 invoice-box">
-						<div class="invoice-icon hidden-sm">
+					<div class="col-sm-4 col-xs-4 invoice-box">
+						<div class="invoice-icon hidden-xs">
 							<i class="fa fa-truck"></i> Deliver To
 						</div>
 						<div class="invoice-date">
@@ -62,22 +62,22 @@
                             <p>{{purchase.header.BranchEmail}}</p>
 						</div>
 					</div>
-					<div class="col-sm-4 col-xs-12 invoice-box invoice-box-dates">
+					<div class="col-sm-4 col-xs-4 invoice-box invoice-box-dates">
 						<div class="invoice-dates">
 							<div class="invoice-number clearfix">
-								<strong>Purchase no.</strong>
+								<strong>P.O no.</strong>
 								<span class="pull-right">{{purchase.header.PONumber}}</span>
 							</div>
 							<div class="invoice-date clearfix">
-								<strong>PO date:</strong>
+								<strong>Date:</strong>
 								<span class="pull-right">{{purchase.header.TransDate | date:'MM/dd/yyyy'}}</span>
 							</div>
 							<div class="invoice-date invoice-due-date clearfix">
-								<strong>Delivery date:</strong>
+								<strong>Del. date:</strong>
 								<span class="pull-right">{{purchase.header.DeliveryDate | date:'MM/dd/yyyy'}}</span>
 							</div>
                             <div class="invoice-date invoice-due-date clearfix">
-								<strong>Trans No:</strong>
+								<strong>Ref:</strong>
 								<span class="pull-right">{{purchase.header.TransID}}</span>
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th class="text-center"><span>Item Code</span></th>
+								<th><span>Item Code</span></th>
 								<th><span>Description</span></th>
 								<th class="text-center"><span>Received <small>/Quantity</small></span></th>
 								<th class="text-center"><span>Unit price</span></th>
@@ -98,16 +98,21 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="row in purchase.rows">
-								<td class="text-center">{{row.BarCode}}</td>
+								<td><small>{{row.BarCode}}</small></td>
 								<td>{{row.ProductDesc}}</td>
 								<td class="text-center">{{row.ReceivedQty}} <small>/{{row.Quantity}}</small></td>
 								<td class="text-center">{{row.Cost | peso:2}}</td>
 								<td class="text-center">{{row.Total | peso:2}}</td>
 								<td class="text-center">
-                                    <ul>
+                                    <ul style="list-style: none;">
                                         <li ng-repeat="serial in row.Serials">{{serial}}</li>
                                     </ul>
                                 </td>
+							</tr>
+							<tr>
+								<td colspan=2 class="text-right"><b>Total Quantity</b></td>
+								<td class="text-center">{{purchase.header.ReceivedQty | number:0}} <small>/{{purchase.header.Quantity}}</small></td>
+								<td colspan=3 class="text-center">&nbsp;</td>
 							</tr>
 						</tbody>
 					</table>

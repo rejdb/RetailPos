@@ -3249,9 +3249,13 @@ SELECT T0.TransID
 , T0.NetTotal
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
+, '' as PaymentType
+, '' as BankTerminal
+, '' as Terms
 FROM view_return T0
 INNER JOIN view_return_row T1 ON T0.TransID = T1.TransID
 INNER JOIN view_sales_customer T2 ON T0.TransID = T2.TransID;
+
 -- --------------------------------------------------------
 
 --
@@ -3307,6 +3311,10 @@ SELECT T0.TransID
 , T0.NetTotal
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
+, IFNULL((SELECT I0.PaymentName FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 order by PaymentName ASC limit 0,1),'Cash') as PaymentType
+, IFNULL((SELECT (BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'') as BankTerminal
+, IFNULL((SELECT MAX(InstDesc) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'') as Terms
+
 FROM view_sales T0
 INNER JOIN view_sales_row T1 ON T0.TransID = T1.TransID
 INNER JOIN view_sales_customer T2 ON T0.TransID = T2.TransID;
