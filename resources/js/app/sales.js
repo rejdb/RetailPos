@@ -553,7 +553,6 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
     }
     
     curl.get('/transactions/SalesReceipt/' + $stateParams.TransID, function(rsp) {
-        console.log(rsp);
         $scope.register = rsp;
     });
     

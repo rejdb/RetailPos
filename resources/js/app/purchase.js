@@ -214,9 +214,10 @@ function purchaseHistoryCtrl($scope, transact, Auth, spinner, filterFilter, $fil
 		$scope.currentPage = 1;
 	}, true);
     
+    spinner.show();
     var params = (usr.Roles!=4) ? 'Status<2' : 'Status<2 and ShipToBranch =' +usr.Branch.BranchID;
     transact.history(params, 'view_purchase', function(rsp) {
-        console.log(rsp);
+        spinner.hide();
         $scope.pList = rsp;
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
@@ -269,7 +270,6 @@ function purchaseHistoryCtrl($scope, transact, Auth, spinner, filterFilter, $fil
     }
     
     $scope.ClosedPurchase = function(p, indx) {
-        console.log(p);
         var cls = (parseInt(p.ReceivedQty)!=0) ? 'closed' : 'cancel';
         var sts = (parseInt(p.ReceivedQty)!=0) ? 2 : 3;
         
@@ -430,7 +430,6 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
             Serial: tag.text
         }
         
-        console.log(tag);
         var row = po.rows[index];
         var smr = [{
             TransID: po.header.TransID,
@@ -484,7 +483,6 @@ function purchaseReceivedReceiptCtrl($scope, $stateParams, curl, Auth, transact)
     if($stateParams.transid) {
         transact.receipt.purchase($stateParams.transid, function(rsp) {
             $scope.purchase = rsp;
-            console.log(rsp);
             angular.forEach(rsp.rows, function(ind) {
                 ind.Serials = [];
                 if(parseInt(ind.IsSerialized)==1) {
