@@ -23,7 +23,7 @@ class Users extends REST_Controller {
                         $Branch = $this->user->branch((int)$userinfo['UID']); break;
 //                        $Branch = array('ID'=>0,'Name'=>'Head Office', 'Avatar'=>$this->config->item('Avatar'));
                     default:
-                        $Branch = array('BranchID'=>0,'Description'=>'Head Office', 'IsActive'=>'1', 'Avatar'=>$this->config->item('Avatar')); break;
+                        $Branch = array('BranchID'=>0, 'BranchCode'=>'HO','Description'=>'Head Office', 'IsActive'=>'1', 'Avatar'=>$this->config->item('Avatar')); break;
                 }
                 
                 if($Branch['IsActive']=='1') {
