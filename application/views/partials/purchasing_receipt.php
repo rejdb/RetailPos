@@ -48,8 +48,8 @@
 							<p style="margin-bottom:0">Contact: {{purchase.header.ContactPerson}}</p>
 							<p style="margin-bottom:0">Email: {{purchase.header.SupplierEmail}}</p>
 						</div>
-						<div class="col-xs-3 hidden-sm">&nbsp;</div>
-						<div class="col-sm-6 col-xs-5">
+						<div class="col-sm-2 col-xs-3">&nbsp;</div>
+						<div class="col-sm-4 col-xs-5">
 							<h1 style="padding-left:0">PURCHASE ORDER</h1>
 							<p style="margin-bottom:0">Date: {{purchase.header.TransDate | date:'MM/dd/yyyy'}}</p>
 							<p>Number: {{purchase.header.PONumber}}</p>
@@ -88,7 +88,7 @@
                 
                 <div class="invoice-box-total">
                     <b><i>Remarks:</i></b> {{purchase.header.Comments}}
-					<p>Delivery Date: {{purchase.header.DeliveryDate | date:'MM/dd/yyyy'}} / {{purchase.header.Address}}</p>
+					<p>Delivery Date: {{purchase.header.DeliveryDate | date:'MM/dd/yyyy'}} / Deliver to {{purchase.header.Description}} @ {{purchase.header.Address}}</p>
                 </div>
 				
 				<div class="invoice-summary row">
