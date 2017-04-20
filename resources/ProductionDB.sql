@@ -2888,6 +2888,8 @@ SELECT T0.*
 ,T2.Email AS 'SupplierEmail'
 ,T2.BillTo
 ,T3.DisplayName
+,IF(T0.Status=0,'Open',IF(T0.Status=1,'Partial',IF(T0.Status=2,'Closed','Canceled'))) as StatusDesc
+
 FROM trx_purchase T0 
 INNER JOIN view_branches T1 ON T0.ShipToBranch = T1.BranchID
 INNER JOIN md_supplier T2 ON T0.Supplier = T2.SuppID
@@ -3340,6 +3342,28 @@ IF(a.PriceAfVat>19999 and a.PriceAfVat<=24999, "20,000 - 24,999",
 , (a.TotalAfDiscount * (a.CardPayment/a.NetTotal)) as NonCash_Payment
 FROM (SELECT *,'invoice' as Module FROM `report_sales` UNION ALL
 SELECT *,'return' FROM `report_return`) AS a;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `report_purchase`
+--
+DROP VIEW IF EXISTS `report_purchase`;
+CREATE VIEW report_purchase AS
+SELECT T0.*
+,T1.BarCode
+,T1.ProductDesc
+,T1.SKU
+,T1.WhsName
+,T1.Cost
+,T1.InputVat
+,T1.Quantity as RowQuantity
+,T1.ReceivedQty as RowReceivedQty
+,T1.Total as RowTotal
+,T1.GTotal as RowGTotal
+
+FROM view_purchase T0 
+INNER JOIN view_purchase_row T1 ON T0.TransID=T1.TransID;
 
 -- --------------------------------------------------------
 
