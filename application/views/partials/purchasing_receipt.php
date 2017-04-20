@@ -29,14 +29,14 @@
 			<div class="main-box-body clearfix" style="padding:30px">
 				<div class="row">
 					<div class="container">
-						<div class="col-sm-3 col-xs3">
-							<img ng-src="/resources/img/avatar/store/{{config.Avatar}}" width="100%" height="75"/>
+						<div class="col-sm-1 col-xs-2">
+							<img ng-src="/resources/img/avatar/store/{{config.Avatar}}" width="100%" height="65"/>
 						</div>
 						<div class="col-sm-5 col-xs-6">
 							<h2>{{config.CompanyName}}</h2>
 							<p>{{config.CompanyAddress}}</p>
 						</div>
-						<div class="col-sm-7 col-xs-6">&nbsp;</div>
+						<div class="col-sm-6 col-xs-4">&nbsp;</div>
 					</div>
 				</div>
 
