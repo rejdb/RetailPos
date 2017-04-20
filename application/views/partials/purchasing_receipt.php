@@ -52,7 +52,8 @@
 						<div class="col-sm-4 col-xs-5">
 							<h1 style="padding-left:0">PURCHASE ORDER</h1>
 							<p style="margin-bottom:0">Date: {{purchase.header.TransDate | date:'MM/dd/yyyy'}}</p>
-							<p>Number: {{purchase.header.PONumber}}</p>
+							<p style="margin-bottom:0">P.O Number: {{purchase.header.PONumber}}</p>
+							<p>Ref: {{purchase.header.TransID}}</p>
 						</div>
 					</div>
 				</div>
