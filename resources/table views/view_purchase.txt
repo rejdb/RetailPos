@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS `view_purchase`;
 CREATE VIEW view_purchase AS
 SELECT T0.*
 ,T1.BranchCode
@@ -16,6 +17,8 @@ SELECT T0.*
 ,T2.Email AS 'SupplierEmail'
 ,T2.BillTo
 ,T3.DisplayName
+,IF(T0.Status=0,'Open',IF(T0.Status=1,'Partial',IF(T0.Status=2,'Closed','Canceled'))) as StatusDesc
+
 FROM trx_purchase T0 
 INNER JOIN view_branches T1 ON T0.ShipToBranch = T1.BranchID
 INNER JOIN md_supplier T2 ON T0.Supplier = T2.SuppID

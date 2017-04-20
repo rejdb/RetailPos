@@ -13,10 +13,14 @@
                     <a href="#/purchase/order" class="btn btn-success pull-right" style="margin-left:5px" permission="[1,2]">
                         <i class="fa fa-arrow-circle-left fa-lg"></i> New P.O
                     </a>
-                    <button ng-json-export-excel data="pList" report-fields="exportFields" filename ="'Purchase Summary'" separator=","
-                            ng-show="userProfile.Roles!=4"
-                            class="btn btn-info pull-right" style="margin-left:5px">
+                    <button class="btn btn-info pull-right" style="margin-left:5px"
+                        ng-show="userProfile.Roles!=4" ng-click="ExportCSV(advance)">
                         <i class="fa fa-external-link fa-lg"></i> CSV
+                    </button>
+                    <button ng-json-export-excel data="PurchaseList" report-fields="exportFields" filename ="'Purchase Summary'" separator=","
+                            ng-show="false" id="HideExport"
+                            class="btn btn-info pull-right" style="margin-left:5px">
+                        <i class="fa fa-external-link fa-lg"></i> HideCSV
                     </button>
                     <button class="btn" ng-init="collapse=true" ng-click="collapse = !collapse"
                             ng-class="{'btn-default': !collapse, 'btn-primary': collapse}">

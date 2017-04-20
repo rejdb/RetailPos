@@ -182,7 +182,7 @@ function purchaseReceiptCtrl($scope, $stateParams, curl, Auth, transact, spinner
     });
 }
 
-function purchaseHistoryCtrl($scope, transact, Auth, spinner, filterFilter, $filter, BrnFact) {
+function purchaseHistoryCtrl($scope, transact, Auth, spinner, filterFilter, $filter, BrnFact, $timeout) {
     if (!$('#page-wrapper').hasClass('nav-small')) {$('#page-wrapper').addClass('nav-small');}
     $scope.pList = [];
     $scope.currentPage = 1;
@@ -222,6 +222,53 @@ function purchaseHistoryCtrl($scope, transact, Auth, spinner, filterFilter, $fil
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
     });
+
+    $scope.ExportCSV = function(f) {
+        var DateFrom = $filter('date')(new Date(f.DateFrom), 'yyyy-MM-dd');
+        var DateTo = $filter('date')(new Date(f.DateTo), 'yyyy-MM-dd');
+        var status = (f.Type==-1) ? '' : ' and Status =' + parseInt(f.Type);
+        var branch = (f.AllBranch) ? '':' and ShipToBranch =' + ((usr.Roles !=4) ? parseInt(f.ShipToBranch) :parseInt(usr.Branch.BranchID));
+        
+        var params = 'TransDate <= "' + DateTo + '" and TransDate >= "' + DateFrom + '"' + status + branch;
+        spinner.show();
+        transact.history(params, 'report_purchase', function(rsp) {
+            $scope.PurchaseList = rsp;
+
+            $timeout(function() {
+                spinner.hide(); 
+                $('#HideExport').click();
+            },1000);
+        });
+
+    }
+
+    $scope.exportFields = {
+        TransDate: 'Date',
+        PONumber: 'Reference Number',
+        BranchCode: 'Store Code',
+        Description: 'Store Name',
+        CategoryDesc: 'Store Category',
+        GroupDesc: 'Store Group',
+        TypeDesc: 'Store Type',
+        ChannelDesc: 'Store Channel',
+        CityDesc: 'Store City',
+        BarCode: 'Item Code',
+        ProductDesc: 'Item Name',
+        SKU: 'SKU',
+        WhsName: 'Warehouse',
+        Cost: 'Dealers Price',
+        InputVat: 'Input Vat',
+        Quantity: 'Quantity',
+        RowReceivedQty: 'Received Qty',
+        RowTotal: 'Total',
+        RowGTotal: 'Grand Total',
+        StatusDesc: 'Status',
+        CoyName: 'Supplier Name',
+        ContactPerson: 'Contact Person',
+        SupplierEmail: 'Email',
+        BillTo: 'Bill To',
+        DisplayName: 'Cashier'
+    } 
     
     
     BrnFact.getActive(1, function(rsp) {$scope.branches = rsp});
@@ -282,26 +329,6 @@ function purchaseHistoryCtrl($scope, transact, Auth, spinner, filterFilter, $fil
                 $scope.pList.splice(indx,1);
             });   
         }
-    }
-    
-    $scope.exportFields = {
-        TransDate: 'Date',
-        PONumber: 'Reference Number',
-        BranchCode: 'Store Code',
-        Description: 'Store Name',
-        CategoryDesc: 'Store Category',
-        GroupDesc: 'Store Group',
-        TypeDesc: 'Store Type',
-        ChannelDesc: 'Store Channel',
-        CityDesc: 'Store City',
-        Quantity: 'Quantity',
-        Total: 'Total',
-        GTotal: 'Grand Total',
-        CoyName: 'Supplier Name',
-        ContactPerson: 'Contact Person',
-        SupplierEmail: 'Email',
-        BillTo: 'Bill To',
-        DisplayName: 'Cashier'
     }
 }
 
