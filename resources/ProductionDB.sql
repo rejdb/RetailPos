@@ -3202,7 +3202,7 @@ HAVING (SUM(T0.Amount)!=0);
 DROP VIEW IF EXISTS `report_return`;
 CREATE VIEW report_return AS
 SELECT T0.TransID
-, T0.RefNo
+, Concat(T0.BranchCode,'-SI',LPAD(T0.RefNo,5,0)) as RefNo
 , WEEK(T0.TransDate) as 'Week'
 , YEAR(T0.TransDate) as 'Year'
 , MONTH(T0.TransDate) as 'Month'
@@ -3249,9 +3249,9 @@ SELECT T0.TransID
 , T0.NetTotal
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
-, '' as PaymentType
-, '' as BankTerminal
-, '' as Terms
+, 'Cash' as PaymentType
+, 'Cash' as BankTerminal
+, 'Cash' as Terms
 FROM view_return T0
 INNER JOIN view_return_row T1 ON T0.TransID = T1.TransID
 INNER JOIN view_sales_customer T2 ON T0.TransID = T2.TransID;
@@ -3264,7 +3264,7 @@ INNER JOIN view_sales_customer T2 ON T0.TransID = T2.TransID;
 DROP VIEW IF EXISTS `report_sales`;
 CREATE VIEW report_sales AS
 SELECT T0.TransID
-, T0.RefNo
+, Concat(T0.BranchCode,'-SI',LPAD(T0.RefNo,5,0)) as RefNo
 , WEEK(T0.TransDate) as 'Week'
 , YEAR(T0.TransDate) as 'Year'
 , MONTH(T0.TransDate) as 'Month'
@@ -3312,8 +3312,8 @@ SELECT T0.TransID
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
 , IFNULL((SELECT I0.PaymentName FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 order by PaymentName ASC limit 0,1),'Cash') as PaymentType
-, IFNULL((SELECT (BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'') as BankTerminal
-, IFNULL((SELECT MAX(InstDesc) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'') as Terms
+, IFNULL((SELECT MAX(BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'Cash') as BankTerminal
+, IFNULL((SELECT MAX(InstDesc) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'Cash') as Terms
 
 FROM view_sales T0
 INNER JOIN view_sales_row T1 ON T0.TransID = T1.TransID

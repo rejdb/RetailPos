@@ -115,3 +115,15 @@ app.filter('xpry_day', function($filter) {
         return days;
     }
 });
+
+app.filter('padZero', function($filter) {
+    return function(input) {
+        Number.prototype.pad = function(size) {
+          var s = String(this);
+          while (s.length < (size || 2)) {s = "0" + s;}
+          return s;
+        }
+
+        return input.pad(5);
+    }
+});

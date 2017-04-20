@@ -1,7 +1,7 @@
 DROP VIEW IF EXISTS `report_return`;
 CREATE VIEW report_return AS
 SELECT T0.TransID
-, T0.RefNo
+, Concat(T0.BranchCode,'-SI',LPAD(T0.RefNo,5,0)) as RefNo
 , WEEK(T0.TransDate) as 'Week'
 , YEAR(T0.TransDate) as 'Year'
 , MONTH(T0.TransDate) as 'Month'
@@ -49,8 +49,8 @@ SELECT T0.TransID
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
 , 'Cash' as PaymentType
-, '' as BankTerminal
-, '' as Terms
+, 'Cash' as BankTerminal
+, 'Cash' as Terms
 FROM view_return T0
 INNER JOIN view_return_row T1 ON T0.TransID = T1.TransID
 INNER JOIN view_sales_customer T2 ON T0.TransID = T2.TransID

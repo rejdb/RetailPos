@@ -118,7 +118,7 @@
                                         <small>Branch Code: {{b.BranchCode}}</small>
                                     </div>
                                 </td>
-                                <td><span><a href="#/sales/invoice/receipt/{{b.TransID}}">{{b.RefNo}}</a></span></td>
+                                <td><span><a href="#/sales/invoice/receipt/{{b.TransID}}">SI{{b.RefNo-0 | padZero}}</a></span></td>
                                 <td class="text-center">{{b.TransDate}}</td>
                                 <td class="text-center">{{b.Quantity | number:0}}</td>
                                 <td class="text-center">{{b.TotalAfVat | peso:2}}</td>

@@ -41,7 +41,7 @@
                 </div>
                 <span class="col-xs-4 col-sm-3 text-center">
                     <h1><span class="hidden-xs">Sales Invoice</span></h1>
-                    <h2><span class="hidden-xs">No. {{register.header.RefNo}}</span></h2>
+                    <h4><span class="hidden-xs">{{register.header.BranchCode}}-SI{{register.header.RefNo-0 | padZero}}</span></h4>
                     {{register.header.TransDate | date:'MM/dd/yyyy'}}
                 </span>
 			</header>
@@ -78,8 +78,8 @@
                             <div class="col-xs-1 col-sm-1 text-center">{{row.Quantity}}</div>
                             <div class="col-xs-2 col-sm-3 text-center">{{row.BarCode}}</div>
                             <div class="col-xs-4 col-sm-4">{{row.ProductDesc}} <br/><small>{{(row.IsSerialized=='1') ? 'IMEI: ' + row.Serial : ''}}</small></div>
-                            <div class="col-xs-2 col-sm-2 text-center">{{row.PriceAfSub | peso:2}}</div>
-                            <div class="col-xs-2 col-sm-2 text-center">{{row.TotalAfSub | peso:2}}</div>
+                            <div class="col-xs-2 col-sm-2 text-center">{{row.PriceAfVat | peso:2}}</div>
+                            <div class="col-xs-2 col-sm-2 text-center">{{row.TotalAfVat | peso:2}}</div>
                         </div>
                     </div>
 				</div>
@@ -91,17 +91,17 @@
                                 <b><i>Return No.</i></b> {{register.header.TransID}} <br/>
                                 <b><i>Remarks:</i></b> {{register.header.Comments}} <br/>
                                 <b><i>Payment Details:</i></b><br/>
-                                <div class="row" style="margin-left:10px">
-                                    <div class="col-xs-3">Payment Type</div>
+                                <!--<div class="row" style="margin-left:10px">
                                     <div class="col-xs-3">Amount</div>
-                                    <div class="col-xs-2">Ref.</div>
+                                    <div class="col-xs-3">Payment Type</div>
                                     <div class="col-xs-4">Installment</div>
-                                </div>
+                                    <div class="col-xs-2">Ref.</div>
+                                </div>-->
                                 <div class="row" ng-repeat="payment in register.payments" style="margin-left:10px">
+                                    <div class="col-xs-3">{{payment.Amount | peso:2}}</div>
                                     <div class="col-xs-3">{{payment.PaymentName}}:</div>
-                                    <div class="col-xs-3">{{payment.Amount}}</div>
-                                    <div class="col-xs-2">{{payment.RefNumber}}</div>
                                     <div class="col-xs-4">{{payment.InstDesc}}</div>
+                                    <div class="col-xs-2">{{payment.BankName}}</div>
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-4">

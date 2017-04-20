@@ -554,6 +554,7 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
     
     curl.get('/transactions/SalesReceipt/' + $stateParams.TransID, function(rsp) {
         $scope.register = rsp;
+        console.log(rsp);
     });
     
     var th = ['','thousand','million', 'billion','trillion'];
@@ -606,8 +607,15 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
        if (x != s.length)
        {
            var y = s.length; 
-           str += 'and '; 
-           for (var i=x+1; i<y; i++) str += dg[n[i]] +' ';
+           var decimal = parseInt(n[y-2]) + parseInt(n[y-1]);
+           if(decimal === 0) {
+                str += 'pesos only';
+           }else{
+                str += 'and '; 
+                for (var i=x+1; i<y; i++) str += dg[n[i]] +' ';
+                str += 'pesos only';
+           }
+           
        }
         return str.replace(/\s+/g,' ');
     }
