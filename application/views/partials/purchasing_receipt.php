@@ -89,8 +89,8 @@
                 
                 <div class="invoice-box-total">
                     <b><i>Remarks:</i></b> {{purchase.header.Comments}}
-					<p style="margin-bottom:0">Delivery Date {{purchase.header.DeliveryDate | date:'MM/dd/yyyy'}}</p>
-					<p style="margin-bottom:0">Delivery to {{purchase.header.Description}}</p>
+					<p style="margin-bottom:0">Delivery Date: {{purchase.header.DeliveryDate | date:'MM/dd/yyyy'}}</p>
+					<p style="margin-bottom:0">Delivery to: {{purchase.header.Description}}</p>
 					<p>Address: {{purchase.header.Address}}</p>
                 </div>
 				
