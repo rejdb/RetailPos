@@ -97,11 +97,11 @@
                                     <div class="col-xs-4">Installment</div>
                                     <div class="col-xs-2">Ref.</div>
                                 </div>-->
-                                <div class="row" ng-repeat="payment in register.payments" style="margin-left:10px">
-                                    <div class="col-xs-3">{{payment.Amount | peso:2}}</div>
-                                    <div class="col-xs-3">{{payment.PaymentName}}:</div>
+                                <div class="row" ng-repeat="payment in register.payments">
+                                    <div class="col-xs-3 text-right">{{payment.Amount | peso:2}}</div>
+                                    <div class="col-xs-2">{{payment.PaymentName}}</div>
                                     <div class="col-xs-4">{{payment.InstDesc}}</div>
-                                    <div class="col-xs-2">{{payment.BankName}}</div>
+                                    <div class="col-xs-3">{{payment.BankName}}</div>
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-4">
