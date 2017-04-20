@@ -29,16 +29,14 @@
 			<div class="main-box-body clearfix" style="padding:30px">
 				<div class="row">
 					<div class="container">
-						<div class="col-sm-4 col-xs-5">
+						<div class="col-sm-3 col-xs3">
+							<img ng-src="/resources/img/avatar/store/{{config.Avatar}}" width="100%" height="75"/>
+						</div>
+						<div class="col-sm-5 col-xs-6">
 							<h2>{{config.CompanyName}}</h2>
 							<p>{{config.CompanyAddress}}</p>
 						</div>
-						<div class="col-sm-4 col-xs-2">&nbsp;</div>
-						<div class="col-sm-4 col-xs-5">
-							<h1 style="padding-left:0">PURCHASE ORDER</h1>
-							<p style="margin-bottom:0">Date: {{purchase.header.TransDate | date:'MM/dd/yyyy'}}</p>
-							<p>Number: {{purchase.header.PONumber}}</p>
-						</div>
+						<div class="col-sm-7 col-xs-6">&nbsp;</div>
 					</div>
 				</div>
 
@@ -52,9 +50,9 @@
 						</div>
 						<div class="col-xs-3 hidden-sm">&nbsp;</div>
 						<div class="col-sm-6 col-xs-5">
-							<span style="margin-bottom:0">Deliver To: <h2>{{purchase.header.Description}}</h2></span>
-							<p style="margin-bottom:0">{{purchase.header.Address}}</p>
-                            <p>{{purchase.header.BranchEmail}}</p>
+							<h1 style="padding-left:0">PURCHASE ORDER</h1>
+							<p style="margin-bottom:0">Date: {{purchase.header.TransDate | date:'MM/dd/yyyy'}}</p>
+							<p>Number: {{purchase.header.PONumber}}</p>
 						</div>
 					</div>
 				</div>
