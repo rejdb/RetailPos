@@ -141,7 +141,7 @@
                             Total
                         </div>
                         <div class="col-sm-3 col-md-2 col-xs-6 text-right invoice-box-total-value">
-                            {{purchase.header.GTotal | peso:2}}
+                            {{getReceivedTotal()  | peso:2}}
                         </div>
                     </div>
 				</div>

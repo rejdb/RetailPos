@@ -521,7 +521,15 @@ function purchaseReceivedReceiptCtrl($scope, $stateParams, curl, Auth, transact)
                 }
             });
         });
-        
+    }
+
+    $scope.getReceivedTotal = function() {
+        var totals = 0;
+        angular.forEach($scope.purchase.rows, function(i) {
+            totals += i.Cost * i.ReceivedQty;
+        });
+
+        return totals;
     }
 }
 
