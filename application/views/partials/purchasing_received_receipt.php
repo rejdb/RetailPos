@@ -102,7 +102,7 @@
 								<td>{{row.ProductDesc}}</td>
 								<td class="text-center">{{row.ReceivedQty}} <small>/{{row.Quantity}}</small></td>
 								<td class="text-center">{{row.Cost | peso:2}}</td>
-								<td class="text-center">{{row.Total | peso:2}}</td>
+								<td class="text-center">{{row.Cost * row.ReceivedQty | peso:2}}</td>
 								<td class="text-center">
                                     <ul style="list-style: none;">
                                         <li ng-repeat="serial in row.Serials">{{serial}}</li>
