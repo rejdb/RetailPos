@@ -238,7 +238,7 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
                     price: (campaign.status) ? parseFloat(campaign.price) : parseFloat(data.CurrentPrice),
                     cost: parseFloat(data.StdCost),
                     OutputVat: ($scope.register.IsTaxable==1) ? $scope.register.SalesTax : 0,
-                    tax: ($scope.register.IsTaxable==1) ? (1+($scope.register.SalesTax/100)) : 1,
+                    tax: ($scope.register.IsTaxable==1) ? (($scope.register.SalesTax/100)) : 0,
                     subsidy: ($scope.register.Subsidy==0) ? 1: (1+($scope.register.Subsidy/100)),
                     Campaign: (campaign.status) ? campaign.name : data.PriceListDesc
                 }
@@ -247,10 +247,10 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
                 $scope.register.header.SalesTax += ((a.price * a.subsidy) * (a.OutputVat/100)) * a.free;
                 $scope.register.header.TotalBefSub += (a.price * a.subsidy) * a.free;
                 $scope.register.header.TotalAfSub += (a.price * a.subsidy) * a.free;
-                $scope.register.header.TotalAfVat += ((a.price * a.subsidy) * a.tax) * a.free;
-                $scope.register.header.NetTotal += ((a.price * a.subsidy) * a.tax) * a.free;
-                $scope.register.header.AmountDue += ((a.price * a.subsidy) * a.tax) * a.free;
-                $scope.register.header.ShortOver += ((a.price * a.subsidy) * a.tax) * a.free;
+                $scope.register.header.TotalAfVat += ((a.price * a.subsidy) + ((a.price * a.subsidy) * a.tax)) * a.free;
+                $scope.register.header.NetTotal += ((a.price * a.subsidy) + ((a.price * a.subsidy) * a.tax)) * a.free;
+                $scope.register.header.AmountDue += ((a.price * a.subsidy) + ((a.price * a.subsidy) * a.tax)) * a.free;
+                $scope.register.header.ShortOver += ((a.price * a.subsidy) + ((a.price * a.subsidy) * a.tax)) * a.free;
                 
                 if(data.IsSerialized == 1) {
                     imei.push(data.Serial.toLowerCase());
@@ -282,7 +282,7 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
                     InvSerID: data.InvSerID,
                     Serials: data.Serial,
                     Campaign: a.Campaign
-                }; 
+                };
                 $scope.register.rows.push(item);
                 $timeout(function() {updatePayment();},100);
             }
