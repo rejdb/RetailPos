@@ -89,7 +89,7 @@
                             </td>
                             <td class="text-center" ng-hide="true">{{row.Subsidy = row.Price* (register.Subsidy/100) || 0.00 | peso:2}}</td>
                             <td class="text-center" ng-hide="true">{{row.PriceAfSub = row.Price + row.Subsidy || 0.00 | peso:2}}</td>
-                            <td class="text-center">{{row.PriceAfVat = row.PriceAfSub + (row.PriceAfSub * row.SalesTax) || 0.00 | peso:2}}</td>
+                            <td class="text-center">{{row.PriceAfVat = (row.PriceAfSub * row.SalesTax) || 0.00 | peso:2}}</td>
                             <td class="text-center">
                                 <div class="popover-wrapper">
                                     <a editable-number='row.Quantity' 
@@ -105,8 +105,8 @@
                             <td class="text-center" ng-hide="true">{{row.TotalAfSub = (row.PriceAfSub * (row.Quantity||1)) || 0.00 | number:2}}</td>
                             <td class="text-center" ng-hide="true">{{row.TotalAfVat = row.TotalAfSub + (row.TotalAfSub * row.SalesTax) || 0.00 | number:2}}</td>
                             <td class="text-center" ng-hide="true">{{row.DiscValue = (row.TotalAfVat * (row.Discount/100)) || 0.00 | number:2}}</td>
-                            <td class="text-center" ng-hide="true">{{row.AmountDue = ((row.PriceAfSub * (1-(row.Discount/100))) + ((row.PriceAfSub * (1-(row.Discount/100))) * row.SalesTax)) * (row.Quantity||1) || 0.00 | number:2}}</td>
-                            <td class="text-center">{{row.GTotal = row.AmountDue || 0.00 | number:2}}</td>
+                            <td class="text-center" ng-hide="true">{{row.AmountDue = ((row.PriceAfSub * (1-(row.Discount/100))) * row.SalesTax) * (row.Quantity||1) || 0.00 | number:2}}</td>
+                            <td class="text-center">{{row.GTotal = row.AmountDue || 0.00 | peso:2}}</td>
                         </tr>
                         <tr class="register-item-bottom">
                             <td>&nbsp;</td>
@@ -138,7 +138,7 @@
                 </table>
             </div>
         </div>
-        <pre>{{register | json}}</pre>
+        <!--<pre>{{register | json}}</pre>-->
     </div>
     
     <div class="col-sm-4 clearfix">

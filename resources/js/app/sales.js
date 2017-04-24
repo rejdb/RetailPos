@@ -238,19 +238,19 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
                     price: (campaign.status) ? parseFloat(campaign.price) : parseFloat(data.CurrentPrice),
                     cost: parseFloat(data.StdCost),
                     OutputVat: ($scope.register.IsTaxable==1) ? $scope.register.SalesTax : 0,
-                    tax: ($scope.register.IsTaxable==1) ? (($scope.register.SalesTax/100)) : 0,
+                    tax: ($scope.register.IsTaxable==1) ? (1+($scope.register.SalesTax/100)) : 1,
                     subsidy: ($scope.register.Subsidy==0) ? 1: (1+($scope.register.Subsidy/100)),
                     Campaign: (campaign.status) ? campaign.name : data.PriceListDesc
                 }
                 
                 $scope.register.header.Quantity += 1;
-                $scope.register.header.SalesTax += ((a.price * a.subsidy) * (a.OutputVat/100)) * a.free;
+                $scope.register.header.SalesTax += (((a.price * a.subsidy) * (a.OutputVat/100))).toFixed(2) * a.free;
                 $scope.register.header.TotalBefSub += (a.price * a.subsidy) * a.free;
                 $scope.register.header.TotalAfSub += (a.price * a.subsidy) * a.free;
-                $scope.register.header.TotalAfVat += ((a.price * a.subsidy) + ((a.price * a.subsidy) * a.tax)) * a.free;
-                $scope.register.header.NetTotal += ((a.price * a.subsidy) + ((a.price * a.subsidy) * a.tax)) * a.free;
-                $scope.register.header.AmountDue += ((a.price * a.subsidy) + ((a.price * a.subsidy) * a.tax)) * a.free;
-                $scope.register.header.ShortOver += ((a.price * a.subsidy) + ((a.price * a.subsidy) * a.tax)) * a.free;
+                $scope.register.header.TotalAfVat += ((a.price * a.subsidy) * a.tax).toFixed(2) * a.free;
+                $scope.register.header.NetTotal += ((a.price * a.subsidy) * a.tax).toFixed(2) * a.free;
+                $scope.register.header.AmountDue += ((a.price * a.subsidy) * a.tax).toFixed(2) * a.free;
+                $scope.register.header.ShortOver += ((a.price * a.subsidy) * a.tax).toFixed(2) * a.free;
                 
                 if(data.IsSerialized == 1) {
                     imei.push(data.Serial.toLowerCase());
@@ -402,13 +402,13 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
         $timeout(function() {
             angular.forEach($scope.register.rows, function(index) {
                 $scope.register.header.Quantity += index.Quantity;
-                $scope.register.header.SalesTax += index.TotalAfSub * (index.OutputVat/100);
-                $scope.register.header.TotalBefSub += index.Total;
-                $scope.register.header.TotalAfSub += index.TotalAfSub;
-                $scope.register.header.TotalAfVat += index.TotalAfVat;
-                $scope.register.header.NetTotal += index.GTotal;
-                $scope.register.header.AmountDue += index.AmountDue;
-                $scope.register.header.ShortOver += index.AmountDue;
+                $scope.register.header.SalesTax += parseFloat((index.TotalAfSub * (index.OutputVat/100)).toFixed(2));
+                $scope.register.header.TotalBefSub += parseFloat((index.Total).toFixed(2));
+                $scope.register.header.TotalAfSub += parseFloat((index.TotalAfSub).toFixed(2));
+                $scope.register.header.TotalAfVat += parseFloat((index.TotalAfVat).toFixed(2));
+                $scope.register.header.NetTotal += parseFloat((index.GTotal).toFixed(2));
+                $scope.register.header.AmountDue += parseFloat((index.AmountDue).toFixed(2));
+                $scope.register.header.ShortOver += parseFloat((index.AmountDue).toFixed(2));
                 $scope.register.header.Discount += (index.Quantity*index.PriceAfVat) * (index.Discount/100);
             });
         },100);
