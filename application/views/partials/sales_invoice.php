@@ -392,7 +392,7 @@
                                ng-maxlength=20 maxlength=20 ng-model="Payment.RefNumber" />
                     </div>
                     <div class="input-group add-payment-form">
-                        <input type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" ng-keyup="Enter($event)"
+                        <input type="number" step="0.01" ng-keyup="Enter($event)"
                                ng-maxlength="18" placeholder="Enter Amount" ng-model="Payment.Amount"
                                class="add-input form-control" maxlength="18"/>
                         <span class="input-group-addon">
