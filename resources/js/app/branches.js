@@ -40,10 +40,11 @@ function brnListCtrl($scope, curl, $state, $timeout, spinner
     $scope.currentPage = 1;
     $scope.pageSize = 10; // items per page
 
-    
+    spinner.show();
     BrnFact.getReferences(function(rsp) { $scope.lnk = rsp; });    
     BrnFact.getBranches(function(rsp) {
         $scope.branches = rsp;
+        spinner.hide();
         $scope.totalItems = $scope.branches.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
     });
