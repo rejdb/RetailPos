@@ -103,7 +103,7 @@
                             <td class="text-center">{{row.Discount || 0 | number:2}}%</td>
                             <td class="text-center" ng-hide="true">{{row.Total = (row.Price * (row.Quantity||1)) || 0.00 | number:2}}</td>
                             <td class="text-center" ng-hide="true">{{row.TotalAfSub = (row.PriceAfSub * (row.Quantity||1)) || 0.00 | number:2}}</td>
-                            <td class="text-center" ng-hide="true">{{row.TotalAfVat = row.TotalAfSub + (row.TotalAfSub * row.SalesTax) || 0.00 | number:2}}</td>
+                            <td class="text-center" ng-hide="true">{{row.TotalAfVat = (row.TotalAfSub * row.SalesTax) || 0.00 | number:2}}</td>
                             <td class="text-center" ng-hide="true">{{row.DiscValue = (row.TotalAfVat * (row.Discount/100)) || 0.00 | number:2}}</td>
                             <td class="text-center" ng-hide="true">{{row.AmountDue = ((row.PriceAfSub * (1-(row.Discount/100))) * row.SalesTax) * (row.Quantity||1) || 0.00 | number:2}}</td>
                             <td class="text-center">{{row.GTotal = row.AmountDue || 0.00 | peso:2}}</td>
@@ -138,7 +138,7 @@
                 </table>
             </div>
         </div>
-        <!--<pre>{{register | json}}</pre>-->
+        <pre>{{register | json}}</pre>
     </div>
     
     <div class="col-sm-4 clearfix">

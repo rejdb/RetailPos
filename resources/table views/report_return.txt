@@ -48,6 +48,9 @@ SELECT T0.TransID
 , T0.NetTotal
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
+, 0 as CreditSales
+, 0 as HomeCredit
+, 0 as DebitSales
 , 'Cash' as PaymentType
 , 'Cash' as BankTerminal
 , 'Cash' as Terms

@@ -433,7 +433,7 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
         angular.forEach($scope.register.payments, function(i) {
             $scope.register.header.Payment += i.Amount;
         }); $scope.register.header.ShortOver = $scope.register.header.AmountDue - $scope.register.header.Payment;
-        $scope.Payment.Amount = $scope.register.header.ShortOver;
+        $scope.Payment.Amount = parseFloat($scope.register.header.ShortOver.toFixed(2));
     }
     
     $scope.Enter = function(e) {
@@ -552,9 +552,10 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
         return (type==1) ? selected[0].WhsName : selected[0].Description;
     }
     
+    spinner.show();
     curl.get('/transactions/SalesReceipt/' + $stateParams.TransID, function(rsp) {
         $scope.register = rsp;
-        console.log(rsp);
+        spinner.hide();
     });
     
     var th = ['','thousand','million', 'billion','trillion'];
