@@ -14,6 +14,5 @@ IF(a.PriceAfVat>19999 and a.PriceAfVat<=24999, "20,000 - 24,999",
 , (a.TotalAfDiscount * (a.CardPayment/a.NetTotal)) as NonCash_Payment
 , ROUND(a.TotalAfDiscount * (a.CreditSales/a.NetTotal),2) as Credit_Payment
 , ROUND(a.TotalAfDiscount * (a.HomeCredit/a.NetTotal),2) as Home_Payment
-, ROUND(a.TotalAfDiscount * (a.DebitSales/a.NetTotal),2) as Debit_Payment
 FROM (SELECT *,'invoice' as Module FROM `report_sales` UNION ALL
 SELECT *,'return' FROM `report_return`) AS a

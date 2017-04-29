@@ -352,7 +352,7 @@
                                    onaftersave="updateBank(t.BankID, 'IsActive', $data-0, true)"
                                    ng-class="{'label-success':(t.IsActive=='1'),'label-danger':(t.IsActive=='0')}"
                                    e-ng-true-value="1" e-ng-false-value="0"
-                                   e-title="{{(t.IsActive=='0') ? 'Activate':'Deactivate'}} this Warehouse?">{{(t.IsActive=='0') ? 'No':'Yes'}}</a>
+                                   e-title="{{(t.IsActive=='0') ? 'Activate':'Deactivate'}} this Terminal?">{{(t.IsActive=='0') ? 'No':'Yes'}}</a>
                                 </span>
                             </td>
                         </tr>
