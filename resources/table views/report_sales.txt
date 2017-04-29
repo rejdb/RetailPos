@@ -56,4 +56,4 @@ SELECT T0.TransID
 
 FROM view_sales T0
 INNER JOIN view_sales_row T1 ON T0.TransID = T1.TransID
-INNER JOIN view_sales_customer T2 ON T0.TransID = T2.TransID
+INNER JOIN view_sales_customer T2 ON T0.TransID = T2.TransID;

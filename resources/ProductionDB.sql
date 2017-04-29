@@ -3251,6 +3251,8 @@ SELECT T0.TransID
 , T0.NetTotal
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
+, 0 as CreditSales
+, 0 as HomeCredit
 , 'Cash' as PaymentType
 , 'Cash' as BankTerminal
 , 'Cash' as Terms
@@ -3313,8 +3315,10 @@ SELECT T0.TransID
 , T0.NetTotal
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
+, IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType=2 and NOT I0.Terminal IN (6)),0) as CreditSales
+, IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType=2 and I0.Terminal=6),0) as HomeCredit
 , IFNULL((SELECT I0.PaymentName FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 order by PaymentName ASC limit 0,1),'Cash') as PaymentType
-, IFNULL((SELECT MAX(BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'Cash') as BankTerminal
+, IFNULL((SELECT MAX(BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.BankName != 'HOME CREDIT'),'HOME CREDIT') as BankTerminal
 , IFNULL((SELECT MAX(InstDesc) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'Cash') as Terms
 
 FROM view_sales T0
@@ -3340,6 +3344,8 @@ IF(a.PriceAfVat>19999 and a.PriceAfVat<=24999, "20,000 - 24,999",
 "25,000 and Above")))))))) as PriceBand
 , (a.TotalAfDiscount * (a.CashPayment/a.NetTotal)) as Cash_Payment
 , (a.TotalAfDiscount * (a.CardPayment/a.NetTotal)) as NonCash_Payment
+, ROUND(a.TotalAfDiscount * (a.CreditSales/a.NetTotal),2) as Credit_Payment
+, ROUND(a.TotalAfDiscount * (a.HomeCredit/a.NetTotal),2) as Home_Payment
 FROM (SELECT *,'invoice' as Module FROM `report_sales` UNION ALL
 SELECT *,'return' FROM `report_return`) AS a;
 
