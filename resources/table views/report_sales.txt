@@ -51,8 +51,9 @@ SELECT T0.TransID
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType=2 and NOT I0.Terminal IN (6)),0) as CreditSales
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType=2 and I0.Terminal=6),0) as HomeCredit
 , IFNULL((SELECT I0.PaymentName FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 order by PaymentName ASC limit 0,1),'Cash') as PaymentType
-, IFNULL((SELECT MAX(BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.BankName != 'HOME CREDIT'),'HOME CREDIT') as BankTerminal
+, IFNULL((SELECT MAX(BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.BankName != 'HOME CREDIT'),(SELECT MAX(BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.BankName = 'HOME CREDIT')) as BankTerminal
 , IFNULL((SELECT MAX(InstDesc) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'Cash') as Terms
+, IFNULL((SELECT MAX(RefNumber) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'') as PaymentRefNumber
 
 FROM view_sales T0
 INNER JOIN view_sales_row T1 ON T0.TransID = T1.TransID
