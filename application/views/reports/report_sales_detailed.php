@@ -8,7 +8,7 @@
             </ol>
             
             <div class="clearfix">
-                <h1 class="pull-left">Sales Summary</h1>
+                <h1 class="pull-left">Sales Detailed Report</h1>
                 
                 <div class="pull-right top-page-ui">
                     <a href="#/sales/invoice" class="btn btn-success pull-right" style="margin-left:5px" permission="[1,2]">
