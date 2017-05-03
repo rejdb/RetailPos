@@ -83,6 +83,7 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
             Address: c.Address
         }
         
+        $scope.updateValue(); $timeout(function() {updatePayment();},100);
         $scope.CustSelected = true;
     }
     
@@ -102,6 +103,7 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
         reg.discount = null;
         used_customer_points = 0;
         reg.customer = {};
+        reg.payments = [];
         if(reg.header.IsMember==1) {
             reg.header.IsMember = 0;
             angular.forEach(reg.rows, function(i) {i.Discount=0});
