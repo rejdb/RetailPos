@@ -50,7 +50,7 @@
 						<div class="invoice-dates col-sm-10 col-xs-12">
 							<div class="invoice-number clearfix">
 								<strong>Ref No.</strong>
-								<span class="pull-right">{{register.header.RefNo}}</span>
+								<span class="pull-right">SI{{register.header.RefNo-0 | padZero}}</span>
 							</div>
 							<div class="invoice-date clearfix">
 								<strong>Date:</strong>
@@ -161,7 +161,7 @@
 					<div class="col-md-3 col-sm-6 col-xs-3">
 						<div class="invoice-summary-item">
 							<span>Invoice Ref No.</span>
-							<div>{{register.header.RefNo}}</div>
+							<div>{{register.header.ReturnedSI}}</div>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6 col-xs-3">

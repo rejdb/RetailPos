@@ -98,8 +98,12 @@ login.controller('loginCtrl', function($scope, spinner, Auth, $window, $rootScop
         spinner.show();
         Auth.login(username, password, function(rsp) {
             if(rsp.success) {
-//                console.log(Auth.currentUser());
-                $window.location.href = '/'
+               console.log(rsp);
+               if (rsp.user.Roles==4) {
+                    $window.location.href = '/sales/invoice';
+               }else{
+                    $window.location.href = '/';
+               }
             }else{
                 spinner.hide();
                 spinner.alert({

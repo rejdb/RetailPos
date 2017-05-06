@@ -70,7 +70,7 @@
                     <div class="form-group">
                         <label class="control-label" for="SearchPurchaseNumbuer">Search Specific Transaction</label>
                         <input type="text" class="form-control" ng-model="search.TransID" 
-                               placeholder="Enter Purchase Order Number" required />
+                               placeholder="Enter Invoice Number" required />
                     </div>
                     <button class="btn btn-primary pull-right"><i class="fa fa-check-circle"></i> Search</button>
                 </form>
