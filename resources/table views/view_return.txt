@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS `view_return`;
 CREATE VIEW view_return AS
 SELECT T0.*
 ,T1.BranchCode

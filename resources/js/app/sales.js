@@ -1,7 +1,7 @@
 'use strict';
 
 function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, BrnFact,
-                       $filter, $timeout, $location, Customer, UserFact) {
+                       $filter, $timeout, $location, Customer, UserFact, $stateParams) {
     console.log("Initializing Sales Module!");
     if (!$('#page-wrapper').hasClass('nav-small')) {$('#page-wrapper').addClass('nav-small');}
     
@@ -55,7 +55,10 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
             Payment: 0,
             ShortOver: 0,
             Comments: '',
-            CreatedBy: usr.UID
+            CreatedBy: usr.UID,
+            ReturnID: $stateParams.ReturnID || 0,
+            ReplaceID: $stateParams.ReturnSI || 0,
+            Status: ($stateParams.ReturnID) ? 0:1
         },
         customer: {},
         rows: [],
@@ -625,9 +628,10 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
     
 }
 
-function salesHistoryCtrl($scope, transact, Auth, spinner, curl,
-                        Inventory, filterFilter, $filter, BrnFact) {
+function salesHistoryCtrl($scope, transact, Auth, spinner, curl, $location,
+                        Inventory, filterFilter, $filter, BrnFact, $timeout) {
     console.log('Initializing Sales History Module');
+    if (!$('#page-wrapper').hasClass('nav-small')) {$('#page-wrapper').addClass('nav-small');}
     
     spinner.show();
     $scope.WhsList = [];
@@ -664,6 +668,7 @@ function salesHistoryCtrl($scope, transact, Auth, spinner, curl,
     transact.history(params, 'view_sales', function(rsp) {
         spinner.hide();
         $scope.pList = rsp;
+        console.log(rsp);
         
         $scope.totalItems = $scope.pList.length;
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
@@ -699,7 +704,7 @@ function salesHistoryCtrl($scope, transact, Auth, spinner, curl,
         var params = 'TransDate <= "' + DateTo + '" and TransDate >= "' + DateFrom + '"' + branch;
         
         spinner.show();
-        transact.history(params, 'view_sales    ', function(rsp) {
+        transact.history(params, 'view_sales', function(rsp) {
             $scope.pList=rsp;
             spinner.hide();
             
@@ -711,6 +716,22 @@ function salesHistoryCtrl($scope, transact, Auth, spinner, curl,
             $scope.totalItems = $scope.pList.length;
             $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
         });
+    }
+
+    $scope.ReturnView = function(id,ref) {
+        var params = 'ReturnedSI = ' + id ;
+        transact.history(params, 'view_return', function(rsp) {
+            $scope.returns = rsp;
+            $scope.ReturnRef = parseInt(ref);
+            $('#ViewReturn').modal('show');
+        });
+    }
+
+    $scope.ViewRec = function(path) {
+        $('#ViewReturn').modal('hide');
+        $timeout(function() {
+            $location.path(path);
+        },200);
     }
     
     $scope.exportFields = {

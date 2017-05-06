@@ -807,6 +807,9 @@ class Transaction extends MY_Model {
                             $this->db->insert('trx_sales_customer', $customer);
                             $this->db->insert_batch('trx_sales_row', $irows);
                             $this->db->insert_batch('trx_sales_payments', $ipayments);
+                            if($header['Status']=='0') {
+                                $this->db->update('trx_return', array('ReplacedSI'=>$header['TransID'],'Status'=>2), array('TransID'=>$header['ReturnID']));
+                            }
                             if(count($iser)>0) {
                                 $this->db->update_batch('md_inventory_serials', $iser, 'InvSerID'); }
                             $this->tbl_smr($smr);
@@ -879,16 +882,8 @@ class Transaction extends MY_Model {
         $exists = $this->filter(array(
             'params'=>array('TransID'=>$header['TransID']),
             'table'=>'trx_sales'))->result_array();
-//        $ref_number = $this->filter(array(
-//            'params' => array(
-//                'RefNo' => $header['RefNo'],
-//                'Branch' => $header['Branch']),
-//            'table'=>'trx_sales'))->result_array();
-        
         if($exists) {
             $message = array('status'=>false, 'message'=>'Transaction already exists');
-//        }else if($ref_number) {
-//            $message = array('status'=>false, 'message'=>'Duplicate Reference Number! Check your records!');
         }else{
             $this->db->trans_start();
                 $iser = array(); $smr = array();
@@ -968,11 +963,12 @@ class Transaction extends MY_Model {
                         $this->db->update('md_customer', $new_points, array('CardNo'=>$customer['CardNo']));
                     }
                 }
-            
+                
                 $this->db->insert('trx_return', $header);
                 $this->db->insert('trx_sales_customer', $customer);
                 $this->db->insert_batch('trx_return_row', $irows);
                 $this->db->insert('trx_sales_payments', $payments);
+                $this->db->update('trx_sales', array('ReturnID'=>$header['TransID'],'Status'=>2),array('TransID'=>$header['ReturnedSI']));
                 if(count($iser)>0) {
                     $this->db->update_batch('md_inventory_serials', $iser, 'Serial'); }
                 $this->tbl_smr($smr);

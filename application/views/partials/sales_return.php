@@ -31,7 +31,7 @@
                     <form ng-submit="GetSalesTransID(SalesTransID)">
                         <input type="text" id="GetProduct" ng-model="SalesTransID"
                                class="form-control add-item-input" autocomplete="off"
-                               placeholder="Enter Return No.">
+                               placeholder="Enter / Scan Return No.">
                     </form>
                     <span class="input-group-addon register-mode purchase_order-mode dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -126,7 +126,7 @@
                 </table>
             </div>
         </div>
-<!--        <pre>{{register | json}}</pre>-->
+        <!--<pre>{{register | json}}</pre>-->
     </div>
     
     <div class="col-sm-4 clearfix">

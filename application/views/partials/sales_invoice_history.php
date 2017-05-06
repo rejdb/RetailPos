@@ -107,6 +107,7 @@
                                 <th class="text-center"><span>TotalAfVat</span></th>
                                 <th class="text-center"><span>Discount</span></th>
                                 <th class="text-center"><span>NET Total</span></th>
+                                <th class="text-center"><span>View Return</span></th>
 								<th class="text-center"><span>Salesman</span></th>
 							</tr>
 						</thead>
@@ -124,6 +125,10 @@
                                 <td class="text-center">{{b.TotalAfVat | peso:2}}</td>
                                 <td class="text-center">{{b.DiscValue || 0 | peso:2}}</td>
                                 <td class="text-center">{{b.NetTotal | peso:2}}</td>
+                                <td class="text-center">
+                                    <a style="color:green" ng-show="b.Status==0" href="/sales/invoice/receipt/{{b.ReplaceID}}" title="View Replace SI"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i></a>
+                                    <a ng-show="b.Status==2" ng-click="ReturnView(b.TransID,b.RefNo)" title="View Return History"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i></a>
+                                </td>
                                 <td class="text-center"><span>{{b.DisplayName}}</span></td>
                             </tr>
                         </tbody>
@@ -131,6 +136,44 @@
                     <div class="pull-right">
                         <pagination total-items="totalItems" max-size="noOfPages" ng-model="currentPage" items-per-page="pageSize"></pagination>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ViewReturn" data-backdrop="static" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+                <h4 class="modal-title"><span>View Return Document/s</span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <div class="text-center well well-sm" style="background-color: cyan !important;"><h4 style="font-weight:bold">SI{{ReturnRef | padZero}}</h4></div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th class="text-center">Return</th>
+                                <th class="text-center">Replacement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="return in returns">
+                                <td><small>{{return.TransDate}}</small></td>
+                                <td class="text-center"><a ng-click="ViewRec('/sales/return/receipt/' + return.TransID,0)"><i class="fa fa-check-circle fa-2x"></i></a></td>
+                                <td class="text-center">
+                                    <span ng-show="return.Status==1" class="label label-success">Refund</span>
+                                    <span ng-hide="return.Status==1">
+                                        <span ng-hide="return.ReplacedSI==0"><a ng-click="ViewRec('/sales/invoice/receipt/' + return.ReplacedSI,2)"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i></a></span>
+                                        <span ng-show="return.ReplacedSI==0"><a ng-click="ViewRec('/sales/invoice/replacement/' + return.TransID + '/' + return.ReturnedSI,1)" title="Replace Now!">For Replacement</a></span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

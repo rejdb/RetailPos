@@ -99,6 +99,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         authenticate: true,
         permissions: [1,2,4,5,6]
     })
+    .state('SalesInvoicesReplace', {
+        url: '/sales/invoice/replacement/:ReturnID/:ReturnSI',
+        templateUrl: '/home/sales_invoice',
+        controller: 'salesCtrl',  
+        title: 'Sales Invoice',
+        authenticate: true,
+        permissions: [1,2,4,5,6]
+    })
     .state('SalesInvoicesReceipt', {
         url: '/sales/invoice/receipt/:TransID',
         templateUrl: '/home/sales_invoice_receipt',

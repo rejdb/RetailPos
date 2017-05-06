@@ -90,6 +90,16 @@ app.filter('postpaidStatus', function($filter) {
     }
 });
 
+app.filter('returnStatus', function($filter) {
+    return function(input) {
+         switch(input) {
+            case 0: return 'Returned';
+            case 1: return 'Refund';
+            case 2: return 'Replaced';
+        }
+    }
+});
+
 app.filter('expiry', function($filter) {
     return function(input) {
         var current = new Date().getTime();

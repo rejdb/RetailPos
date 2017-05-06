@@ -2365,7 +2365,9 @@ CREATE TABLE `trx_return` (
   `Status` int(11) NOT NULL DEFAULT '1',
   `Comments` varchar(100) DEFAULT NULL,
   `CreatedBy` int(11) NOT NULL,
-  `ReplacedBy` int(11) DEFAULT NULL
+  `ReplacedBy` int(11) DEFAULT NULL,
+  `ReturnedSI` bigint(20) NOT NULL DEFAULT '0',
+  `ReplacedSI` bigint(20) NOT NULL DEFAULT '0',
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2425,7 +2427,9 @@ CREATE TABLE `trx_sales` (
   `Status` int(11) NOT NULL DEFAULT '1',
   `Comments` varchar(100) DEFAULT NULL,
   `CreatedBy` int(11) NOT NULL,
-  `ReplacedBy` int(11) DEFAULT NULL
+  `ReplacedBy` int(11) DEFAULT NULL,
+  `ReturnID` bigint(20) DEFAULT NULL,
+  `ReplaceID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

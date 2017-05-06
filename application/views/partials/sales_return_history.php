@@ -108,6 +108,9 @@
                                 <th class="text-center"><span>Discount</span></th>
                                 <th class="text-center"><span>NET Total</span></th>
 								<th class="text-center"><span>Salesman</span></th>
+                                <th class="text-center"><span>Old-SI</span></th>
+                                <th class="text-center"><span>New-SI</span></th>
+                                <th class="text-center"><span>Status</span></th>
 							</tr>
 						</thead>
                         <tbody>
@@ -118,13 +121,23 @@
                                         <small>Branch Code: {{b.BranchCode}}</small>
                                     </div>
                                 </td>
-                                <td><span><a href="#/sales/return/receipt/{{b.TransID}}">{{b.RefNo}}</a></span></td>
+                                <td><span><a href="#/sales/return/receipt/{{b.TransID}}">SI{{b.RefNo-0 | padZero}}</a></span></td>
                                 <td class="text-center">{{b.TransDate}}</td>
                                 <td class="text-center">{{b.Quantity * -1 | number:0}}</td>
                                 <td class="text-center">{{b.TotalAfVat * -1 | peso:2}}</td>
                                 <td class="text-center">{{b.DiscValue * -1 || 0 | peso:2}}</td>
                                 <td class="text-center">{{b.NetTotal * -1 | peso:2}}</td>
                                 <td class="text-center"><span>{{b.DisplayName}}</span></td>
+                                <td class="text-center">
+                                    <span><a href="/sales/invoice/receipt/{{b.ReturnedSI}}"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i></a></span>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-hide="b.Status==1">
+                                        <span ng-hide="b.ReplacedSI==0"><a href="/sales/invoice/receipt/{{b.ReplacedSI}}"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i></a></span>
+                                        <span ng-show="b.ReplacedSI==0"><a href="/sales/invoice/replacement/{{b.TransID}}/{{b.ReturnedSI}}" title="Replace Now!">For Replacement</a></span>
+                                    </span>
+                                </td>
+                                <td class="text-center"><span class="label" ng-class="{'label-info':b.Status==2,'label-success':b.Status==1,'label-danger':b.Status==0}">{{b.Status-0 | returnStatus}}</span></td>
                             </tr>
                         </tbody>
                     </table>

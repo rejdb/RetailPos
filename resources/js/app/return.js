@@ -42,7 +42,10 @@ function returnCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, 
             Payment: 0,
             ShortOver: 0,
             Comments: '',
-            CreatedBy: usr.UID
+            CreatedBy: usr.UID,
+            ReturnedSI: 0,
+            ReplacedSI: 0,
+            Status: 0
         },
         customer: {},
         rows: [],
@@ -54,6 +57,7 @@ function returnCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, 
     $scope.ChangeMethod = function(m) {
         Reset();
         $scope.register.Method = m;
+        $scope.register.header.Status = m;
         $scope.register.MethodName = (m==0) ? 'Sales Return':'Sales Refund';
     }
     $scope.Filler = function(WhsID) {
@@ -79,6 +83,7 @@ function returnCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, 
                 var m = $scope.register.Method;
                 $scope.register.InvoiceRefNo = rsp.invoice.header.RefNo;
                 $scope.register.header.IsMember = parseInt(rsp.invoice.header.IsMember);
+                $scope.register.header.ReturnedSI = TransID;
                 var c = rsp.invoice.customer;
                 $scope.register.Balance = c.CustCredits;
                 $scope.register.Points = c.CustPoints;
@@ -184,16 +189,16 @@ function returnCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, 
         }
     }
     
-    var AddPayment = function(amount) {
-        $scope.register.payments = {
-            PaymentType: 1,
-            RefNumber: '',
-            Terminal: 0,
-            IssuingBank: 0,
-            Installment: 0,
-            Amount: amount
-        };
-    }
+    // var AddPayment = function(amount) {
+    //     $scope.register.payments = {
+    //         PaymentType: 1,
+    //         RefNumber: '',
+    //         Terminal: 0,
+    //         IssuingBank: 0,
+    //         Installment: 0,
+    //         Amount: amount
+    //     };
+    // }
     
     $scope.SubmitRegister = function(r) {
         var TransID = transact.TransID(r.header.Branch);
@@ -231,14 +236,13 @@ function returnCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, 
         spinner.show();
         curl.post('/transactions/SubmitReturn', data, function(rsp) {
             spinner.hide();
-            console.log(rsp)
             var m = $scope.register.Method;
             var msg = (m==0) ? 'You have to create sales replacement now!':rsp.message;
             var tmr = (m==0) ? 0:1000;
             spinner.notif(msg, tmr, rsp.status);
             if(rsp.status) {
                 if(m==0) {
-                    $location.path('/sales/invoice');
+                    $location.path('/sales/invoice/replacement/' + TransID + '/' + r.header.ReturnedSI);
                 }else{$location.path('/sales/return/receipt/' + TransID);}
             }
         });
@@ -265,6 +269,7 @@ function returnReceiptCtrl($scope, $stateParams, curl, Auth, $state,
 function returnHistoryCtrl($scope, transact, Auth, spinner, curl,
                         Inventory, filterFilter, $filter, BrnFact) {
     console.log('Initializing Return History Module');
+    if (!$('#page-wrapper').hasClass('nav-small')) {$('#page-wrapper').addClass('nav-small');}
     
     $scope.WhsList = [];
     $scope.branches = [];
