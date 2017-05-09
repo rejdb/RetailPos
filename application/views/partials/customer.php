@@ -10,6 +10,7 @@
                 <h1 class="pull-left">Customers <small>CRM</small></h1>
                 <div class="pull-right">
                     <button class="btn" ng-init="toggle=true"
+                            ng-show="userProfile.Roles==1"
                             ng-class="{'btn-primary':toggle,'btn-default':!toggle}"
                             data-toggle="modal" data-target="#myCustomers"
                             ng-click="toggle = !toggle">
