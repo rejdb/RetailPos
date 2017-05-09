@@ -96,25 +96,29 @@ function returnCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, 
                 }
                 $scope.register.rows = [];
                 angular.forEach(rsp.invoice.rows, function(i) {
-                    var item = {
-                        PID: parseInt(i.ProductID),
-                        BarCode: i.BarCode,
-                        ProductDesc: i.ProductDesc,
-                        SKU: i.SKU,
-                        Warehouse: i.Warehouse,
-                        InStocks: parseInt(i.Quantity),
-                        Quantity: parseInt(i.Quantity),
-                        Discount: (i.Discount-0) * m,
-                        DiscValue: (i.Discount-0) * m,
-                        Subsidy: (i.Subsidy-0) * m,
-                        OutputVat: i.OutputTax-0,
-                        SalesTax: i.TaxAmount,
-                        StdCost: i.Cost-0,
-                        Price: i.Price-0,
-                        IsSerialized: parseInt(i.IsSerialized),
-                        Serials: i.Serial,
-                        Campaign: i.Campaign
-                    }; $scope.register.rows.push(item);
+                    if(i.Quantity!=i.Rqty) {
+                        var item = {
+                            SalesRowID: parseInt(i.SalesRowID),
+                            PID: parseInt(i.ProductID),
+                            BarCode: i.BarCode,
+                            ProductDesc: i.ProductDesc,
+                            SKU: i.SKU,
+                            Warehouse: i.Warehouse,
+                            InStocks: parseInt(i.Quantity) - parseInt(i.Rqty),
+                            Quantity: parseInt(i.Quantity) - parseInt(i.Rqty),
+                            Discount: (i.Discount-0) * m,
+                            DiscValue: (i.Discount-0) * m,
+                            Subsidy: (i.Subsidy-0) * m,
+                            OutputVat: i.OutputTax-0,
+                            SalesTax: i.TaxAmount,
+                            StdCost: i.Cost-0,
+                            Price: i.Price-0,
+                            IsSerialized: parseInt(i.IsSerialized),
+                            Serials: i.Serial,
+                            Campaign: i.Campaign,
+                            Rqty: parseInt(i.Rqty)
+                        }; $scope.register.rows.push(item);
+                    }
                 }); $scope.updateValue();
                 
             }else{ spinner.notif(rsp.message, rsp.timer);}
@@ -189,16 +193,16 @@ function returnCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, 
         }
     }
     
-    // var AddPayment = function(amount) {
-    //     $scope.register.payments = {
-    //         PaymentType: 1,
-    //         RefNumber: '',
-    //         Terminal: 0,
-    //         IssuingBank: 0,
-    //         Installment: 0,
-    //         Amount: amount
-    //     };
-    // }
+    var AddPayment = function(amount) {
+        $scope.register.payments = {
+            PaymentType: 1,
+            RefNumber: '',
+            Terminal: 0,
+            IssuingBank: 0,
+            Installment: 0,
+            Amount: amount
+        };
+    }
     
     $scope.SubmitRegister = function(r) {
         var TransID = transact.TransID(r.header.Branch);

@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS `view_return_row`;
 CREATE VIEW view_return_row AS
 SELECT T0.*
 , T1.BarCode

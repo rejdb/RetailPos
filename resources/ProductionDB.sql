@@ -2397,7 +2397,8 @@ CREATE TABLE `trx_return_row` (
   `TotalAfVat` decimal(18,2) NOT NULL,
   `GTotal` decimal(18,2) NOT NULL,
   `Serial` varchar(20) DEFAULT NULL,
-  `Campaign` varchar(50) NOT NULL DEFAULT 'Normal'
+  `Campaign` varchar(50) NOT NULL DEFAULT 'Normal',
+  `Rqty` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -2498,7 +2499,8 @@ CREATE TABLE `trx_sales_row` (
   `TotalAfVat` decimal(18,2) NOT NULL,
   `GTotal` decimal(18,2) NOT NULL,
   `Serial` varchar(20) DEFAULT NULL,
-  `Campaign` varchar(50) NOT NULL DEFAULT 'Normal'
+  `Campaign` varchar(50) NOT NULL DEFAULT 'Normal',
+  `Rqty` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

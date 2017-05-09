@@ -68,7 +68,7 @@
                     </thead>
                     <tbody class="register-item-content"
                            ng-repeat="row in register.rows">
-                        <tr class="register-item-details">
+                        <tr class="register-item-details" ng-if="row.Quantity>0">
                             <td class="text-center"> 
                                 <a class="delete-item" ng-click="removeItem($index)"><i class="fa fa-times-circle"></i></a> 
                             </td>
@@ -96,7 +96,7 @@
                             <td class="text-center" ng-hide="true">{{row.AmountDue = ((row.PriceAfSub * (1-(row.Discount/100))) * (1+(row.OutputVat/100))) * (row.Quantity||1) || 0.00 | number:2}}</td>
                             <td class="text-center">{{row.GTotal = row.AmountDue || 0.00 | number:2}}</td>
                         </tr>
-                        <tr class="register-item-bottom">
+                        <tr class="register-item-bottom" ng-if="row.Quantity>0">
                             <td>&nbsp;</td>
                             <td colspan="2">
                                 <dl class="register-item-extra-details dl-horizontal">

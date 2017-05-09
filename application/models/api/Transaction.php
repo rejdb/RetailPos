@@ -886,7 +886,7 @@ class Transaction extends MY_Model {
             $message = array('status'=>false, 'message'=>'Transaction already exists');
         }else{
             $this->db->trans_start();
-                $iser = array(); $smr = array();
+                $iser = array(); $smr = array(); $rrows = array();
                 $irows = array(); $ipayments = array();
                 foreach($rows as $row => $val) {
                     array_push($irows, array(
@@ -908,7 +908,13 @@ class Transaction extends MY_Model {
                         'TotalAfVat' => $val['TotalAfVat'] * -1,
                         'GTotal' => $val['GTotal'] * -1,
                         'Serial' => $val['Serials'],
-                        'Campaign' => $val['Campaign']
+                        'Campaign' => $val['Campaign'],
+                        'Rqty' => $val['Quantity'] * -1
+                    ));
+
+                    array_push($rrows, array(
+                        'SalesRowID' => $val['SalesRowID'],
+                        'Rqty' => $val['Rqty'] + $val['Quantity']
                     ));
                     
                     /* Return - SMR */
@@ -969,6 +975,7 @@ class Transaction extends MY_Model {
                 $this->db->insert_batch('trx_return_row', $irows);
                 $this->db->insert('trx_sales_payments', $payments);
                 $this->db->update('trx_sales', array('ReturnID'=>$header['TransID'],'Status'=>2),array('TransID'=>$header['ReturnedSI']));
+                $this->db->update_batch('trx_sales_row', $rrows, 'SalesRowID');
                 if(count($iser)>0) {
                     $this->db->update_batch('md_inventory_serials', $iser, 'Serial'); }
                 $this->tbl_smr($smr);

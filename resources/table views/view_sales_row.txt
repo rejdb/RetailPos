@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS `view_sales_row`;
 CREATE VIEW view_sales_row AS
 SELECT T0.*
 , T1.BarCode
