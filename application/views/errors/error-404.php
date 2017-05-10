@@ -43,10 +43,10 @@
 							<div id="error-box-inner">
 								<img src="/resources/img/error-404-v3.png" alt="Have you seen this page?"/>
 							</div>
-							<h1>PAYMENT ERROR</h1>
+							<h1>Ooooppppp!.....</h1>
 							<p>
-								<br/>System Trial is Over.<br/>
-								If you find this page, please pay the contractor.
+								<br/><b>System Demo is Over.</b><br/>
+								If you find this page, please contact the contractor.
 							</p>
 						</div>
 					</div>
