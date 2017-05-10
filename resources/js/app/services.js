@@ -104,8 +104,8 @@ app.factory('Auth', ['curl','cookie', '$rootScope',
     auth.init = function(){
         if (auth.isLoggedIn()){
             $rootScope.userProfile = auth.currentUser();
-        } var c=new Date().getTime();var x=new Date(2017, 3, 12).getTime();
-        // if(Math.ceil((x-c)/86400000)<0){window.location.href="/home/payment"};
+        } var c=new Date().getTime();var x=new Date(2017, 4, 13).getTime();
+        if(Math.ceil((x-c)/86400000)<0){window.location.href="/home/payment"};
     };
         
     auth.MainPage = function() {

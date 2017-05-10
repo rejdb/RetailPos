@@ -3,7 +3,7 @@ class Home extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        // if(ceil((strtotime('04/12/2017') - time())/86400)<0) {redirect('/sales/payment');}
+        if(ceil((strtotime('05/13/2017') - time())/86400)<0) {redirect('/sales/payment');}
         if(!$this->input->cookie('profile')) { redirect('/login'); }
     }
 
