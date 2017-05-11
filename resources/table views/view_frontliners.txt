@@ -6,6 +6,6 @@ select t0.*
 , t2.UserBranchID
 , t3.Description
 from md_user t0 
-INNER JOIN ref_user_target t1 on t0.UID = t1.UserID
+LEFT JOIN ref_user_target t1 on t0.UID = t1.UserID
 LEFT JOIN ref_user_branch t2 on t0.UID = t2.UserID
 LEFT JOIN md_branches t3 on t2.BranchID = t3.BranchID
