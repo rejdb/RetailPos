@@ -43,7 +43,8 @@
                                 </span>
                             </td>
                             <td class="text-center">{{b.WhsName}}</td>
-                            <td class="text-center">{{b.ReceivedQty | number:0}} /<small>{{b.Quantity || 0}}</small></td>
+                            <td class="text-center" ng-show="(b.IsSerialized=='0')">{{b.ReceivedQty | number:0}} /<small>{{b.Quantity || 0}}</small></td>
+                            <td class="text-center" ng-show="(b.IsSerialized=='1')">{{b.Serials.length | number:0}} /<small>{{b.Quantity || 0}}</small></td>
                             <td class="text-center" >
                                 <span ng-show="(b.IsSerialized=='0')" class="popover-wrapper">
                                     <a editable-number="b.ReceivedQty" buttons="no" e-min="0" onbeforesave="updateReceivedQty(b.PurRowID, $data-0, po, $index, b.ReceivedQty-0)"
@@ -51,13 +52,13 @@
                                        e-title="Enter Item Quantity" e-max="{{b.Quantity}}">{{b.ReceivedQty-0 || 'Enter Quantity'}}</a>
                                 </span>
                                 <span ng-show="(b.IsSerialized=='1')">
-                                    <a editable-tags-input="b.Serials" e-placeholder="Add Serial" e-max-length="20" e-max-tags={{b.Quantity}}
+                                    <a editable-tags-input="b.Serials" e-placeholder="Add Serial" e-max-length="20" e-max-tags="{{b.Quantity}}"
                                        edit-disabled="po.header.Status=='2' || po.header.Status=='3'"
                                        e-on-tag-adding="checkSerial($data, po, $tag, $index, true)"
                                        e-on-tag-removing="checkSerial($data, po, $tag, $index, false)"
                                        onbeforesave="countSerial(b, $data)"
                                        onaftersave="addSerial($index, $data, b.ReceivedQty)">
-                                      <ul>
+                                      <ul style="list-style: none">
                                         <li ng-repeat="serial in b.Serials">{{serial || 'Enter Serial'}}</li>  
                                       </ul> Add Serial
                                     </a>
