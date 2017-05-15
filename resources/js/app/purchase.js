@@ -419,7 +419,7 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
             save.push({PurRowID: parseInt($scope.po.rows[index].PurRowID), Serial: i.text})
         });
         
-        // $scope.po.rows[index].ReceivedQty = $scope.po.rows[index].Serials.length;
+        $scope.po.rows[index].ReceivedQty = $scope.po.rows[index].Serials.length;
 
         angular.forEach($scope.po.rows, function(ind) {
             $scope.po.header.ReceivedQty += parseInt(ind.ReceivedQty);
