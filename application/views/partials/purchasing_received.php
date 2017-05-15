@@ -56,10 +56,11 @@
                                        edit-disabled="po.header.Status=='2' || po.header.Status=='3'"
                                        e-on-tag-adding="checkSerial($data, po, $tag, $index, true)"
                                        e-on-tag-removing="checkSerial($data, po, $tag, $index, false)"
-                                       onbeforesave="countSerial(b, $data)"
-                                       onaftersave="addSerial($index, $data, b.ReceivedQty)">
+                                       e-add-on-blur="false" buttons="no"
+                                       e-ng-blur="addSerial($index, $data, b.ReceivedQty)"
+                                       onbeforesave="countSerial(b, $data)">
                                       <ul style="list-style: none">
-                                        <li ng-repeat="serial in b.Serials">{{serial || 'Enter Serial'}}</li>  
+                                        <li ng-repeat="serial in b.Serials">{{serial.text || serial}}</li>  
                                       </ul> Add Serial
                                     </a>
                                 </span>

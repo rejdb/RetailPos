@@ -412,9 +412,9 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
         $scope.po.rows[index].Serials = [];
         
         var save = [];
-        
         spinner.show();
         angular.forEach(data, function(i) {
+            console.log(i.text);
             $scope.po.rows[index].Serials.push(i.text);
             save.push({PurRowID: parseInt($scope.po.rows[index].PurRowID), Serial: i.text})
         });
@@ -448,8 +448,17 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
             });
         }
     }
+
+    $scope.test = function(data) {
+        console.log(data);
+    }
     
     $scope.checkSerial = function(data, po, tag, index, type) {
+        var incr = data.length + 1;
+        if(type && incr > po.rows[index].Quantity) {
+            spinner.notif('Serial exceeds quantity', 1000);
+            return false;
+        }
         var datas = {
             Branch: parseInt(po.header.ShipToBranch),
             Product: parseInt(po.rows[index].ProductID),
@@ -473,7 +482,6 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
         }];
         
         spinner.show();
-        
         var result;
         curl.ajax('/inventories/InsertRemoveSerial', 
                   {datas: datas, type: type}, function(rsp) {
