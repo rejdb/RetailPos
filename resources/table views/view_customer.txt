@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS `view_customer`;
 CREATE VIEW view_customer AS
 SELECT t0.*
 , t1.BranchCode

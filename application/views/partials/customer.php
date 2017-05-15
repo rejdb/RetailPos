@@ -49,6 +49,7 @@
 							<tr>
 								<th><span>Customer Name</span></th>
 								<th><span>Branch</span></th>
+                                <th><span>Birth Date</span></th>
                                 <th><span>Contact No.</span></th>
                                 <th><span>Email</span></th>
                                 <th><span>City</span></th>
@@ -102,6 +103,19 @@
                                 </td>
                                 <td>
                                     <div class="popover-wrapper">
+                                        <a editable-date="cs.CustBDate"
+                                            edit-disabled="cs.IsActive==1"
+                                            onaftersave="updateField(cs.CustID, 'CustBDate', $data)">
+                                            {{ cs.CustBDate || 'empty' }}</a>
+                                        <!--<a buttons="no" editable-text="cs.ContactNo" 
+                                           e-ng-maxlength="15" edit-disabled="cs.IsActive==1"
+                                           onaftersave="updateField(cs.CustID, 'ContactNo', $data)">
+                                            {{cs.ContactNo || 'Mobile No.'}}
+                                        </a>-->
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="popover-wrapper">
                                         <a buttons="no" editable-text="cs.ContactNo" 
                                            e-ng-maxlength="15" edit-disabled="cs.IsActive==1"
                                            onaftersave="updateField(cs.CustID, 'ContactNo', $data)">
@@ -111,7 +125,7 @@
                                 </td>
                                 <td>
                                     <div class="popover-wrapper">
-                                        <a buttons="no" editable-text="cs.CustEmail" 
+                                        <a buttons="no" editable-email="cs.CustEmail" 
                                            e-ng-maxlength="30" edit-disabled="cs.IsActive==1"
                                            onaftersave="updateField(cs.CustID, 'CustEmail', $data)">
                                             {{cs.CustEmail || 'Email'}}

@@ -131,11 +131,11 @@
                         <tbody>
                             <tr ng-repeat="b in filtered = pList | orderBy:'+Description' | filter:find | DataFilter:(currentPage-1) * pageSize | limitTo:pageSize">
                                 <td>
-                                    <img ng-src="/resources/img/avatar/store/{{b.Avatar}}" alt="{{user.Avatar}}"/>
-									<span class="user-link">{{(userProfile.Roles!=4) ? b.Description : b.CoyName}}</span>
-									<span class="user-subhead">
+                                    <!--<img ng-src="/resources/img/avatar/store/{{b.Avatar}}" alt="{{user.Avatar}}"/>-->
+									<span>{{(userProfile.Roles!=4) ? b.Description : b.CoyName}}</span>
+									<div class="user-subhead">
                                         Delivery Date: {{b.DeliveryDate}}
-                                    </span>
+                                    </div>
                                 </td>
                                 <td class="text-center">{{b.TransDate}}</td>
                                 <td class="text-center"><a title="View Receipt" href="/purchase/receipt/{{b.TransID}}">{{b.PONumber}}</a></td>

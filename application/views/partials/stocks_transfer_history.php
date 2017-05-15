@@ -107,7 +107,8 @@
                     <table class="table user-list table-hover">
                         <thead>
 							<tr>
-								<th><span>Store Name</span></th>
+                                <th ng-hide="(userProfile.Roles==4)"><span>Branch</span></th>
+								<th><span>Reference No.</span></th>
                                 <th class="text-center"><span>Transfer Date</span></th>
                                 <th class="text-center"><span>Source</span></th>
                                 <th class="text-center"><span>Destination</span></th>
@@ -119,12 +120,18 @@
 						</thead>
                         <tbody>
                             <tr ng-repeat="b in filtered = pList | orderBy:'+TransDate' | filter:find | DataFilter:(currentPage-1) * pageSize | limitTo:pageSize">
+                                <td ng-hide="(userProfile.Roles==4)">
+                                    <span>{{b.Description}}</span>
+									<div class="user-subhead">
+                                        <small>Branch Code: {{b.BranchCode}}</small>
+                                    </div>
+                                </td>
                                 <td>
-                                    <img ng-src="/resources/img/avatar/store/{{b.Avatar}}" alt="{{user.Avatar}}"/>
-                                    <span class="user-link"><a href="#/stocks/transfer/receipt/{{b.TransID}}">{{b.TransferNo}}</a></span>
-									<span class="user-subhead">
+                                    <!--<img ng-src="/resources/img/avatar/store/{{b.Avatar}}" alt="{{user.Avatar}}"/>-->
+                                    <span><a href="#/stocks/transfer/receipt/{{b.TransID}}">{{b.TransferNo}}</a></span>
+									<div class="user-subhead">
                                         {{(b.TransferType==1) ? 'Warehouse Transfer':'Store Transfer'}}
-                                    </span>
+                                    </div>
                                 </td>
                                 <td class="text-center">{{b.TransDate}}</td>
                                 <td class="text-center" ng-bind="Filler(b.InvFrom, b.TransferType)"></td>

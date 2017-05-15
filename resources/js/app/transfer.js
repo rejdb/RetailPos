@@ -175,11 +175,6 @@ function transferCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory
                     imei.push(data.Serial.toLowerCase());
                 }else{ items.push(data.BarCode.toLowerCase()); }
                 
-                console.log(imei);
-                console.log(items);
-                console.log(items.indexOf($scope.SearchProduct));
-                
-                
                 var item = {
                     PID: parseInt(data.Product),
                     BarCode: data.BarCode,
@@ -316,6 +311,7 @@ function transferReceiptCtrl($scope, $stateParams, curl, Auth, $state,
 function transferHistoryCtrl($scope, transact, Auth, spinner, curl,
                         Inventory, filterFilter, $filter, BrnFact) {
     console.log('Initializing Transfer History Module');
+    if (!$('#page-wrapper').hasClass('nav-small')) {$('#page-wrapper').addClass('nav-small');}
     
     $scope.WhsList = [];
     $scope.branches = [];

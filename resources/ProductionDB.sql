@@ -126,6 +126,7 @@ CREATE TABLE `md_customer` (
   `Branch` int(11) NOT NULL,
   `CustFirstName` varchar(50) DEFAULT NULL,
   `CustLastName` varchar(50) DEFAULT NULL,
+  `CustBDate` Date DEFAULT NULL,
   `CustEmail` varchar(50) DEFAULT NULL,
   `ContactNo` varchar(30) DEFAULT NULL,
   `Address` varchar(100) DEFAULT NULL,
