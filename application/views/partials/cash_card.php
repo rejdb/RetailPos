@@ -100,7 +100,7 @@
                                         <small>Branch Code: {{b.BranchCode}}</small>
                                     </div>
                                 </td>
-                                <td class="text-center"><a href="#/sales/invoice/receipt/{{b.TransID}}">{{b.InvoiceRef}}</a></td>
+                                <td class="text-center"><a href="#/sales/invoice/receipt/{{b.TransID}}">SI{{b.InvoiceRef-0 | padZero}}</a></td>
                                 <td>{{b.TransDate | dateFilter:'MM/dd/yyyy'}}</td>
                                 <td>{{b.PaymentName}}</td>
                                 <td>{{b.RefNumber}}</td>
