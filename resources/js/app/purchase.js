@@ -414,7 +414,6 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
         var save = [];
         spinner.show();
         angular.forEach(data, function(i) {
-            console.log(i.text);
             $scope.po.rows[index].Serials.push(i.text);
             save.push({PurRowID: parseInt($scope.po.rows[index].PurRowID), Serial: i.text})
         });
