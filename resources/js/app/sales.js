@@ -83,7 +83,8 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
             Fullname: c.CustFirstName + ' ' + c.CustLastName,
             Email: c.CustEmail,
             ContactNo: c.ContactNo,
-            Address: c.Address
+            Address: c.Address,
+            BDate: c.CustBDate
         }
         
         $scope.updateValue(); $timeout(function() {updatePayment();},100);

@@ -466,13 +466,22 @@
                                            ng-model="register.CustLastName" 
                                            placeholder="Dabu" />
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="forEmail">Email <small>(required)</small></label>
                                         <input type="email" class="form-control" required="required" 
                                                id="forEmail" ng-maxlength=50
                                                ng-model="register.customer.Email" 
                                                placeholder="email@company.com" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for="forBDate">Birth Date <small>(required)</small></label>
+                                        <input type="date" class="form-control" required="required" 
+                                               id="forBDate" ng-maxlength=50
+                                               ng-model="register.customer.BDate" 
+                                               placeholder="Date" />
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
