@@ -4,9 +4,6 @@ function frontlinerCtrl($scope, curl, filterFilter,
                          $timeout, $state, $filter, UserFact, $window) {
     console.log('Initializing Frontliner Module!');
     
-//    $('#myFrontLiner').modal('show');
-//    $('#StoreAssign').select2();
-    
     $scope.users = [];
     $scope.branches = [];
     $scope.currentPage = 1;
@@ -34,17 +31,12 @@ function frontlinerCtrl($scope, curl, filterFilter,
         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
     });
     
-    curl.get('/branches/status/1', function(rsp) {
-        $scope.branches = rsp;
-    });
+    curl.get('/branches/status/1', function(rsp) {$scope.branches = rsp;});
     
     //Update int data function
     $scope.updateIntFl = function(id, type, data) {
         var save = '{"UID":' + id + ',"type": {"' + type + '":' + data + '}}';
-        
-        curl.post('/setup/updateFl', save, function(rsp) {
-            console.log(rsp);
-        });
+        curl.post('/setup/updateFl', save, function(rsp) {console.log(rsp);});
     }
     
     //Update string data function
@@ -104,7 +96,6 @@ function frontlinerCtrl($scope, curl, filterFilter,
         angular.extend(data, {fl: $scope.fl});
         
         curl.post('/setup/frontliner', data, function(rsp) {
-            console.log(rsp);
             $scope.notify = true;
             $scope.response = rsp;
             
