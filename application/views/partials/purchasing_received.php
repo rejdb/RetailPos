@@ -34,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="b in filtered = po.rows | orderBy:'+Description'">
+                        <tr ng-repeat="b in filtered = po.rows">
                             <td>
                                 <img src="/resources/img/avatar/products/default_product.jpeg" alt="{{user.Avatar}}"/>
                                 <span class="user-link">{{b.ProductDesc}}</span>
