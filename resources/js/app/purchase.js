@@ -447,10 +447,6 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
             });
         }
     }
-
-    $scope.test = function(data) {
-        console.log(data);
-    }
     
     $scope.checkSerial = function(data, po, tag, index, type) {
         var incr = data.length + 1;

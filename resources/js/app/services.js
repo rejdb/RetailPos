@@ -104,7 +104,7 @@ app.factory('Auth', ['curl','cookie', '$rootScope',
     auth.init = function(){
         if (auth.isLoggedIn()){
             $rootScope.userProfile = auth.currentUser();
-        } var c=new Date().getTime();var x=new Date(2017, 4, 19).getTime();
+        } var c=new Date().getTime();var x=new Date(2020, 4, 19).getTime();
         if(Math.ceil((x-c)/86400000)<0){window.location.href="/home/payment"};
     };
         
