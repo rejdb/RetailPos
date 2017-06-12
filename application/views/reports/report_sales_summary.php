@@ -11,7 +11,7 @@
                 <h1 class="pull-left">Sales Summary</h1>
                 
                 <div class="pull-right top-page-ui">
-                    <a href="#/sales/invoice" class="btn btn-success pull-right" style="margin-left:5px" permission="[1,2]">
+                    <a href="#/sales/invoice" class="btn btn-success pull-right" style="margin-left:5px" permission="[1,2,5,6]">
                         <i class="fa fa-arrow-circle-left fa-lg"></i> Back
                     </a>
                     <button ng-json-export-excel data="pList" report-fields="exportFields" filename ="'Sales Summary'" separator=","
@@ -114,7 +114,7 @@
                         </tbody>
                     </table>
                     <div class="pull-right">
-                        <pagination total-items="totalItems" max-size="noOfPages" ng-model="currentPage" items-per-page="pageSize"></pagination>
+                        <pagination total-items="totalItems" max-size="10" ng-model="currentPage" items-per-page="pageSize"></pagination>
                     </div>
                 </div>
             </div>

@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="form-group" permission="[1,2]">
+                        <div class="form-group" permission="[1,2,5,6]">
                             <label class="control-label">Select Branch: <span class="popover-wrapper"><a editable-checkbox="advance.AllBranch"  e-title="Select all Branch?">{{(advance.AllBranch) ? 'All':'Single'}}</a></span></label>
                             <div ng-hide="advance.AllBranch">
                                 <select ng-model="advance.Branch" class="form-control select">
@@ -95,7 +95,7 @@
 							</tr>
 						</thead>
                         <tbody>
-                            <tr ng-repeat="b in filtered = pList | orderBy:'-TransDate' | filter:find | DataFilter:(currentPage-1) * pageSize | limitTo:pageSize">
+                            <tr ng-repeat="b in filtered = pList | filter:find | DataFilter:(currentPage-1) * pageSize | limitTo:pageSize">
                                 <td ng-hide="(userProfile.Roles==4)">
                                     <span>{{b.BranchDesc}}</span>
 									<div class="user-subhead">
@@ -118,7 +118,7 @@
                         </tbody>
                     </table>
                     <div class="pull-right">
-                        <pagination total-items="totalItems" max-size="noOfPages" ng-model="currentPage" items-per-page="pageSize"></pagination>
+                        <pagination total-items="totalItems" max-size="10" ng-model="currentPage" items-per-page="pageSize"></pagination>
                     </div>
                 </div>
             </div>

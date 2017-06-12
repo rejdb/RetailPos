@@ -21,7 +21,7 @@
                             class="btn btn-info pull-right" style="margin-left:5px">
                         <i class="fa fa-external-link fa-lg"></i> CSV
                     </button>
-                    <button class="btn" ng-init="collapse=true" ng-click="collapse = !collapse" permission="[1,2]"
+                    <button class="btn" ng-init="collapse=true" ng-click="collapse = !collapse" permission="[1,2,5,6]"
                             ng-class="{'btn-default': !collapse, 'btn-primary': collapse}">
                         <i class="fa fa-search fa-lg"></i></button>
                 </div>

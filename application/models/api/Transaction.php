@@ -675,16 +675,16 @@ class Transaction extends MY_Model {
         $exists = $this->filter(array(
             'params'=>array('TransID'=>$header['TransID']),
             'table'=>'trx_sales'))->result_array();
-        $ref_number = $this->filter(array(
-            'params' => array(
-                'RefNo' => $header['RefNo'],
-                'Branch' => $header['Branch']),
-            'table'=>'trx_sales'))->result_array();
+        // $ref_number = $this->filter(array(
+        //     'params' => array(
+        //         'RefNo' => $header['RefNo'],
+        //         'Branch' => $header['Branch']),
+        //     'table'=>'trx_sales'))->result_array();
         
         if($exists) {
             $message = array('status'=>false, 'message'=>'Transaction already exists');
-        }else if($ref_number) {
-            $message = array('status'=>false, 'message'=>'Duplicate Reference Number! Check your records!');
+        // }else if($ref_number) {
+        //     $message = array('status'=>false, 'message'=>'Duplicate Reference Number! Check your records!');
         }else{
             $series = $this->db->where('Branch',$header['Branch'])->get('ref_branch_series')->first_row();
             if(!$series) {

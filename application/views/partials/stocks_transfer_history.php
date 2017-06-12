@@ -188,7 +188,7 @@
                         </tbody>
                     </table>
                     <div class="pull-right">
-                        <pagination total-items="totalItems" max-size="noOfPages" ng-model="currentPage" items-per-page="pageSize"></pagination>
+                        <pagination total-items="totalItems" max-size="10" ng-model="currentPage" items-per-page="pageSize"></pagination>
                     </div>
                 </div>
             </div>
