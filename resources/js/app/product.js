@@ -1,8 +1,8 @@
 'use strict';
 
 function productCtrl($scope, curl, ItemFact, 
-                      $filter, filterFilter, 
-                      $window, $timeout) {
+                      $filter, filterFilter,
+                      $window, $timeout, spinner) {
     console.log('Initializing product module');
     if (!$('#page-wrapper').hasClass('nav-small')) {$('#page-wrapper').addClass('nav-small');}
     
@@ -17,6 +17,8 @@ function productCtrl($scope, curl, ItemFact,
         Category: 1,
         IsSerialized: true
     }
+
+    // spinner.show();
     
     // $watch search to update pagination
 	$scope.$watch('find', function (newVal, oldVal) {
@@ -153,19 +155,98 @@ function productCtrl($scope, curl, ItemFact,
                     $scope.noOfPages = Math.ceil($scope.totalItems / $scope.pageSize);
                     $scope.currentPage = 1;
                     
-//                    $scope.onTabs(1)
                     $scope.product = {
                         Category: 1,
                         IsSerialized: true
                     }
                     
-//                      $scope.tabSel = 1;
                     $timeout(function() {
                         $('.wizard-card .nav-pills > .active').prev('li').find('a').trigger('click');    
                     });
                 });
             }
         });
+    }
+
+    $scope.openUploadDialog = function(opn) {
+        $scope.uploadItem = true;
+        if(opn) { $('#uploadItemCSV').click();
+        }else{$('#uploadPriceCSV').click();}
+    }
+
+    $('#uploadItemCSV').on('change', function() { 
+        uploadCSVItem();});
+
+    $('#uploadPriceCSV').on('change', function() { 
+        uploadCSVPrice();
+    });
+
+    var uploadCSVPrice = function() {
+        var cnf = confirm("Are you sure do you want to upload this Pricelist?");
+        if(cnf) {
+            $timeout(function() {
+                spinner.show();
+                var formData = new FormData();
+                formData.append('file', document.getElementById('uploadPriceCSV').files[0]);
+
+                $.ajax({
+                    url: '/api/Items/updatePriceList',
+                    type: 'POST',
+                    data: formData,
+                    headers: { 'x-api-key' : '3acf5c7b740d6e2538f3a7b88cf069b3' },
+                    async: true,
+                    cache: false,
+                    contentType: false,
+                    // enctype: 'multipart/form-data',
+                    processData: false,
+                    success: function (rsp) {
+                        if(rsp.success) {
+                            ItemFact.products(function(rsps) {
+                                $scope.items = rsps;
+                                $scope.totalItems = $scope.items.length;
+                            });
+                        }
+                        spinner.hide();
+                        $timeout(function() {spinner.notif(rsp.message, 0, rsp.success);},200);
+                        // console.log(rsp);
+                    }
+                });
+            },200);
+        }
+    }
+
+    var uploadCSVItem = function() {
+        var cnf = confirm("Are you sure do you want to upload this File?");
+        if(cnf) {
+            $timeout(function() {
+                spinner.show();
+                var formData = new FormData();
+                formData.append('file', document.getElementById('uploadItemCSV').files[0]);
+                
+                $.ajax({
+                    url: '/api/Items/uploadItemMaster',
+                    type: 'POST',
+                    data: formData,
+                    headers: { 'x-api-key' : '3acf5c7b740d6e2538f3a7b88cf069b3' },
+                    async: true,
+                    cache: false,
+                    contentType: false,
+                    // enctype: 'multipart/form-data',
+                    processData: false,
+                    success: function (rsp) {
+                        if(rsp.success) {
+                            ItemFact.products(function(rsps) {
+                                $scope.items = rsps;
+                                $scope.totalItems = $scope.items.length;
+                            });
+                        }
+                        spinner.hide();
+                        $timeout(function() {spinner.notif(rsp.message, 0, rsp.success);},200);
+                        // console.log(rsp);
+                    }
+                });
+            },200);
+        }
     }
     
     $scope.exportFields = {

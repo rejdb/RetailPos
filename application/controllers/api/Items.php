@@ -121,4 +121,95 @@ class Items extends REST_Controller {
         $message = $this->item->deleteCampaign($CampaignID);
         return $message;
     }
+
+    //Upload Item Master
+    function uploadItemMaster_post() {
+        $filename = $_FILES['file']['name'];
+	    $file = $_FILES['file']['tmp_name'];
+
+        if($filename != 'Item_Master_Template.csv') {
+            $this->response(array('error'=>false,'message'=>'Wrong filename (rename to: Item_Master_Template.csv)'));
+        }else{
+            $fp = file($file);
+            $handle = fopen($file, "r");
+            $skipRowZero = 0; $items = array(); $price = array();
+            $all_items = array_column($this->item->get_all(), 'BarCode');
+            $pricelist = $this->item->getTableLinks()['pricelists'];
+
+            $newid = $this->item->getLastID();
+            $id = (int)$newid[0]->Auto_increment;
+            $found_key = array();
+
+            while(($filesop = fgetcsv($handle, 1000, ",")) !== false) {
+                if($skipRowZero>0) {
+                    $found = array_search(trim($filesop[0]), $all_items);
+                    if($found===false) {
+                        // array_push($found_key, $found);
+                        array_push($items, array(
+                            'PID' => $id,
+                            'BarCode' => trim($filesop[0]),
+                            'ProductDesc' => trim($filesop[1]),
+                            'SKU' => trim($filesop[2]),
+                            'ItemType' => (int)trim($filesop[3]),
+                            'Brand' => (int)trim($filesop[4]),
+                            'Category' => (int)trim($filesop[6]),
+                            'LifeCycle' => (int)trim($filesop[7]),
+                            'Family' => (int)trim($filesop[5]),
+                            'IsSerialized' => (int)$filesop[8],
+                            'OrderLevel' => (int)trim($filesop[9]),
+                            'StdCost' => (float)trim($filesop[10]),
+                            // 'Price' => (float)trim($filesop[11]),
+                            'PriceList' => (int)trim($filesop[12])
+                        ));
+
+                        foreach($pricelist as $srp) {
+                            array_push($price, array(
+                                'PLID' => (int)$srp['PLID'],
+                                'PID' => $id,
+                                'Price' => (float)trim($filesop[11])
+                            ));
+                        }
+                        $id++;
+                    }
+                } $skipRowZero++;
+            }
+
+            $Save = array('success'=>false, 'message'=>'All Items Exists!');
+            if(count($items)>0) {
+                $Save = $this->item->uploadItemMaster($items,$price);
+            }
+            $this->response($Save);
+        }
+        // $this->response($this->post());
+    }
+
+    function updatePriceList_post() {
+        $filename = $_FILES['file']['name'];
+	    $file = $_FILES['file']['tmp_name'];
+
+        if($filename != 'Price_Template.csv') {
+            $this->response(array('error'=>false,'message'=>'Wrong filename (rename to: Price_Template.csv)'));
+        }else{
+            $fp = file($file);
+            $handle = fopen($file, "r");
+            $skipRowZero = 0; $prices = array();
+
+            while(($filesop = fgetcsv($handle, 1000, ",")) !== false) {
+                if($skipRowZero>0) {
+                    $pricelist = (int)trim($filesop[1]);
+                    array_push($prices, array(
+                        'PID' => (int)trim($filesop[0]),
+                        'PLID' => (int)trim($filesop[1]),
+                        'Price' => (float)trim($filesop[2]),
+                    ));
+                } $skipRowZero++;
+            }
+
+            // $Save = array('success'=>false, 'message'=>'All Items Exists!');
+            if(count($prices)>0) {
+                $Save = $this->item->updatePriceListDet($prices,$pricelist);
+            }
+            $this->response($Save);
+        }
+    }
 }?>

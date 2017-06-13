@@ -11,6 +11,11 @@ class Item extends MY_Model {
 
     protected $after_get = array();
     protected $before_create = array();
+
+    function getLastID() {
+        $last = $this->db->query("SHOW TABLE STATUS LIKE 'md_items'");
+        return $last->result_object();
+    }
     
     function getTableLinks() {
         $brands = $this->db->get('ref_item_brand')->result_array();
@@ -161,6 +166,34 @@ class Item extends MY_Model {
             $message = array('success'=>true, 'message'=>'Campaign has been successfully deleted!');
         }else{
             $message = array('success'=>false, 'message'=>'Failed to delete campaign!');
+        }
+        return $message;
+    }
+
+    function uploadItemMaster($items, $prices) {
+        $this->db->trans_start();
+            $this->db->insert_batch('md_items', $items);
+            $this->db->insert_batch('stp_item_pricedetails', $prices);
+        $this->db->trans_complete();
+
+        if($this->db->trans_status() == true) {
+            $message = array('success'=>true, 'message'=>'Item Master Data got uploaded successfully!');
+        }else{
+            $message = array('success'=>false, 'message'=>'Uploading Failed! There must be wrong on your file.');
+        }
+        return $message;
+    }
+
+    function updatePriceListDet($prices,$pricelist) {
+        $this->db->trans_start();
+            $this->db->where('PLID', $pricelist);
+            $this->db->update_batch('stp_item_pricedetails', $prices, 'PID');
+        $this->db->trans_complete();
+
+        if($this->db->trans_status() == true) {
+            $message = array('success'=>true, 'message'=>'Price update got uploaded successfully!');
+        }else{
+            $message = array('success'=>false, 'message'=>'Uploading Failed! There must be wrong on your file.');
         }
         return $message;
     }

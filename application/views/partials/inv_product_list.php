@@ -17,10 +17,33 @@
                             class="btn btn-info pull-right" style="margin-left:5px">
                         <i class="fa fa-external-link fa-lg"></i> CSV
                     </button>
-                    <a href="" class="btn btn-primary pull-right" style="margin-left:5px" permission="[1,5]"
-                       data-toggle="modal" data-target="#addNewItemData">
-                        <i class="fa fa-plus-circle fa-lg"></i> Add Item
-                    </a>
+                    <div class="btn-group pull-right" style="margin-left:5px" permission="[1,5]">
+                        <a href="" class="btn btn-primary"
+                            data-toggle="modal" data-target="#addNewItemData">
+                            <i class="fa fa-plus-circle fa-lg"></i> Add Item
+                        </a>
+                        <button type="button" class="btn btn-primary dropdown-toggle" 
+                                data-toggle="dropdown">
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu sales-dropdown" role="menu">
+                            <li permission="[1,5]">
+                                <input type="file" accept=".csv" id="uploadItemCSV" class="hidden">
+                                <a class="none suspended_sales_btn"
+                                   title="Upload Item Master"
+                                   ng-click="openUploadDialog(true)">
+                                    <i class="ion-ios-checkmark-outline"></i> 
+                                    Upload Item Master from CSV</a> 
+                            </li>
+                            <li permission="[1,5,6]">
+                                <input type="file" accept=".csv" id="uploadPriceCSV" class="hidden">
+                                <a class="none suspended_sales_btn"
+                                   title="Upload Pricelist"
+                                   ng-click="openUploadDialog(false)">
+                                    <i class="ion-ios-checkmark-outline"></i> 
+                                    Update Price List from CSV</a> 
+                            </li>
+                        </ul>
+                    </div>
                     <button class="btn" ng-init="collapse=true" permission="[1,5]" ng-click="collapse = !collapse"
                             ng-class="{'btn-default': !collapse, 'btn-primary': collapse}">
                         <i class="fa fa-pencil fa-lg"></i> References</button>
@@ -47,7 +70,7 @@
             <ul style="margin-bottom:20px">
                 <li ng-repeat="t in lnk.brands | filter:brnFind | DataFilter:(brnCurrentPage-1) * 10 | limitTo:10">
                     <td><a editable-text="t.Description" style="font-size:10px;"
-                            onbeforesave="updateItemReference({BrandID: t.BrandID}, 'ref_item_brand', $data)">{{t.Description}}</a></td>
+                            onbeforesave="updateItemReference({BrandID: t.BrandID}, 'ref_item_brand', $data)">{{t.Description}}</a> <small>({{t.BrandID}})</small></td>
                 </li>
             </ul>
             <div class="pull-right">
@@ -71,7 +94,7 @@
             <ul style="margin-bottom:20px">
                 <li ng-repeat="t in lnk.families | filter:brnNSFind | DataFilter:(famCurrentPage-1) * 10 | limitTo:10">
                     <a editable-text="t.Description" style="font-size:10px;"
-                            onbeforesave="updateItemReference({FamID: t.FamID}, 'ref_item_family', $data)">{{t.Description}}</a>
+                            onbeforesave="updateItemReference({FamID: t.FamID}, 'ref_item_family', $data)">{{t.Description}}</a> <small>({{t.FamID}})</small>
                 </li>
             </ul>
             <div class="pull-right">
@@ -95,7 +118,7 @@
             <ul style="margin-bottom:20px">
                 <li ng-repeat="t in lnk.pricelists | filter:priceFind | DataFilter:(priceCurrentPage-1) * 10 | limitTo:10">
                     <a editable-text="t.Description" style="font-size:10px;"
-                            onbeforesave="updateItemReference({PLID: t.PLID}, 'ref_item_family', $data)">{{t.Description}}</a>
+                            onbeforesave="updateItemReference({PLID: t.PLID}, 'ref_item_family', $data)">{{t.Description}}</a> <small>({{t.PLID}})</small>
                 </li>
             </ul>
             <div class="pull-right">
@@ -119,7 +142,7 @@
             <ul style="margin-bottom:20px">
                 <li ng-repeat="t in lnk.cycles | filter:cycleFind | DataFilter:(cycleCurrentPage-1) * 10 | limitTo:10">
                     <a editable-text="t.Description" style="font-size:10px;"
-                            onbeforesave="updateItemReference({P_CycleID: t.P_CycleID}, 'ref_item_cycle', $data)">{{t.Description}}</a>
+                            onbeforesave="updateItemReference({P_CycleID: t.P_CycleID}, 'ref_item_cycle', $data)">{{t.Description}}</a> <small>({{t.P_CycleID}})</small>
                 </li>
             </ul>
             <div class="pull-right">
@@ -143,7 +166,7 @@
             <ul style="margin-bottom:20px">
                 <li ng-repeat="t in lnk.categories | filter:catFind | DataFilter:(catCurrentPage-1) * 10 | limitTo:10">
                     <a editable-text="t.Description" style="font-size:10px;"
-                            onbeforesave="updateItemReference({P_CatID: t.P_CatID}, 'ref_item_category', $data)">{{t.Description}}</a>
+                            onbeforesave="updateItemReference({P_CatID: t.P_CatID}, 'ref_item_category', $data)">{{t.Description}}</a> <small>({{t.P_CatID}})</small>
                 </li>
             </ul>
             <div class="pull-right">
@@ -167,7 +190,7 @@
             <ul style="margin-bottom:20px">
                 <li ng-repeat="t in lnk.types | filter:typeFind | DataFilter:(typeCurrentPage-1) * 10 | limitTo:10">
                     <a editable-text="t.Description" style="font-size:10px;"
-                            onbeforesave="updateItemReference({TypeID: t.TypeID}, 'ref_item_type', $data)">{{t.Description}}</a>
+                            onbeforesave="updateItemReference({TypeID: t.TypeID}, 'ref_item_type', $data)">{{t.Description}}</a> <small>({{t.TypeID}})</small>
                 </li>
             </ul>
             <div class="pull-right">
@@ -232,7 +255,7 @@
                             </tr>
                             <tr ng-repeat="item in filtered = items | orderBy:'+ProductDesc' | filter:find | DataFilter:(currentPage-1) * pageSize | limitTo:pageSize">
                                 <td>
-<!--									<img src="/resources/img/avatar/products/default_product.jpeg" alt=""/>-->
+ <!--									<img src="/resources/img/avatar/products/default_product.jpeg" alt=""/>-->
 									<div class="popover-wrapper">
                                         <a buttons="no" editable-text="item.ProductDesc" e-required="required" e-maxlength="50"
                                             edit-disabled="userProfile.Roles!=1"
@@ -257,7 +280,7 @@
                                 </td>
                                 <td ng-cloak ng-hide="toggle" class="text-center">
                                     <div class="popover-wrapper">
-                                        <a buttons="no" editable-number="item.StdCost"  e-required="required" e-maxlength="18"
+                                        <a buttons="no" editable-number="item.StdCost" e-step="0.001" e-required="required" e-maxlength="18"
                                            edit-disabled="(userProfile.Roles!=6 && userProfile.Roles!=1)"
                                            onaftersave="updateItem(item.PID, 'StdCost', $data, true)">
                                             {{item.StdCost | peso:2}}</a>
@@ -265,7 +288,7 @@
                                 </td>
                                 <td ng-cloak ng-hide="toggle" class="text-center">
                                     <div class="popover-wrapper">
-                                        <a buttons="no" editable-number="item.CurrentPrice"  e-required="required" e-maxlength="18"
+                                        <a buttons="no" editable-number="item.CurrentPrice" e-step="0.001" e-required="required" e-maxlength="18"
                                            edit-disabled="(userProfile.Roles!=6 && userProfile.Roles!=1)"
                                            onaftersave="updateSRP(item.PDID, 'Price', $data-0)">
                                             {{item.CurrentPrice | peso:2}}</a>
