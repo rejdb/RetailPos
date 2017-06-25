@@ -100,6 +100,8 @@ login.controller('loginCtrl', function($scope, spinner, Auth, $window, $rootScop
             if(rsp.success) {
                if (rsp.user.Roles==4) {
                     $window.location.href = '/sales/invoice';
+               }else if(rsp.user.Roles==3) {
+                    $window.location.href = '/reports/sales/summary';
                }else{
                     $window.location.href = '/cash/register';
                }
