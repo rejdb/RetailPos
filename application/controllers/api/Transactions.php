@@ -133,6 +133,11 @@ class Transactions extends REST_Controller {
         $response = $this->transaction->Get_Invoice($transid, $store);
         $this->response($response);
     }
+
+    function VoidSales_post($transid, $used) {
+        $response = $this->transaction->Void_Sales($transid, $used);
+        $this->response($response);
+    }
     
     function SubmitReturn_post() {
         $header = $this->post('header');

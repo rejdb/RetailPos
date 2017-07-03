@@ -877,6 +877,75 @@ class Transaction extends MY_Model {
                 'message'=>'Return No. not found!');
         }
     }
+
+    function Void_Sales($transid, $used) {
+        $header = $this->filter(array('params'=>array('TransID'=>$transid,'Status'=>1),'table'=>'trx_sales'))->first_row();
+
+        if($header) {
+            $this->db->trans_start();
+                $iser = array();
+                $rows = $this->filter(array('params'=>array('TransID'=>$transid),'table'=>'trx_sales_row'))->result_array();
+                $customer = $this->filter(array('params'=>array('TransID'=>$transid),'table'=>'trx_sales_customer'))->first_row();
+                
+                foreach ($rows as $row => $v) {
+                    $nr = array(
+                        'Branch' => (int)$header->Branch,
+                        'Warehouse' => (int)$v['Warehouse'],
+                        'Product' => (int)$v['ProductID'],
+                        'InStocks' => (int)$v['Quantity'],
+                        'Committed' => 0);
+
+                    $this->inventory->add_inventory($nr);
+
+                    /*** Serial update if available ***/
+                    if($v['Serial']) {
+                        array_push($iser, array(
+                            'Serial' => $v['Serial'],
+                            'IsSold' => 0,
+                            'Warehouse' => (int)$v['Warehouse']
+                        )); 
+                    }
+                }
+
+                if($header['IsMember']==1) {
+                    $per = $this->db->select('Percent,Amount')->where('Amount<=',($header['TotalAfSub']*-1))->order_by('Percent','DESC')->get('ref_points')->first_row();
+                    $add_points = 0;
+                    if($per) { 
+                        if($used['computation']==1) {
+                            $add_points = (int)($header['TotalAfSub']) * (intval($per->Percent) / 100);    
+                        }else{
+                            $add_points = ceil(intval($header['TotalAfSub'])/intval($per->Amount)) * intval($per->Percent);
+                        }
+                    }
+                    
+                    $c = $this->db->select('CustPoints')->where('CardNo', $customer['CardNo'])->get('md_customer')->first_row();
+                    if($c) {
+                        $new_points = array(
+                            'CustPoints' => intval($c->CustPoints) + $add_points);
+                        $this->db->update('md_customer', $new_points, array('CardNo'=>$customer['CardNo']));
+                    }
+                }
+
+                $this->db->delete('trx_sales', array('TransID' => $transid));
+                $this->db->delete('trx_sales_row', array('TransID' => $transid));
+                $this->db->delete('trx_sales_payments', array('TransID' => $transid));
+                $this->db->delete('trx_sales_customer', array('TransID' => $transid));
+                $this->db->delete('trx_stocks_movement', array('TransID' => $transid));
+                if(count($iser)>0) {
+                    $this->db->update_batch('md_inventory_serials', $iser, 'Serial'); }
+            $this->db->trans_complete();
+            if($this->db->trans_status()==true) {
+                $message = array('status'=>true, 'timer'=>1500, 'message'=>'Transaction has been successfully canceled!');
+            }else{
+                $message = array('status'=>false, 'timer'=>1500, 'message'=>'Database error: Can\'t save your record!');
+            }
+        }else{
+            return array(
+                'status'=>false,
+                'timer'=>1500,
+                'message'=>'Transaction does not exists!');
+        }
+    }
     
     function Insert_Return($header, $rows, $customer, $payments, $used) {
         $exists = $this->filter(array(
@@ -962,7 +1031,7 @@ class Transaction extends MY_Model {
                         }
                     }
                     
-                    $c = $this->db->where('CardNo', $customer['CardNo'])->get('md_customer')->first_row();
+                    $c = $this->db->select('CustPoints')->where('CardNo', $customer['CardNo'])->get('md_customer')->first_row();
                     if($c) {
                         $new_points = array(
                             'CustPoints' => intval($c->CustPoints) + $add_points);
