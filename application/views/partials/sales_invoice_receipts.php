@@ -16,9 +16,22 @@
                        style="margin-left:5px">
                         <i class="fa fa-history fa-lg"></i> Logs
                     </a>
-                    <a href="#/sales/invoice" class="btn btn-primary pull-right" style="margin-left:5px">
-                        <i class="fa fa-plus-circle fa-lg"></i> New Sales
-                    </a>
+                    <div class="btn-group pull-right">
+                        <a href="#/sales/invoice" class="btn btn-primary" style="margin-left:5px">
+                            <i class="fa fa-plus-circle fa-lg"></i> New Sales
+                        </a>
+                        <button type="button" class="btn btn-success dropdown-toggle" 
+                                data-toggle="dropdown">
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu sales-dropdown" role="menu">
+                            <li>
+                                <a class="none suspended_sales_btn"
+                                   title="Void this transaction"
+                                   ng-click="SubmitVoid()">
+                                    Void this Sale</a> 
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

@@ -134,9 +134,12 @@ class Transactions extends REST_Controller {
         $this->response($response);
     }
 
-    function VoidSales_post($transid, $used) {
+    function VoidSales_post() {
+        $transid = $this->post('TransID');
+        $used = $this->post('used');
         $response = $this->transaction->Void_Sales($transid, $used);
         $this->response($response);
+        // $this->response($this->post('used'));
     }
     
     function SubmitReturn_post() {

@@ -907,22 +907,21 @@ class Transaction extends MY_Model {
                     }
                 }
 
-                if($header['IsMember']==1) {
-                    $per = $this->db->select('Percent,Amount')->where('Amount<=',($header['TotalAfSub']*-1))->order_by('Percent','DESC')->get('ref_points')->first_row();
+                if($header->IsMember==1) {
+                    $per = $this->db->select('Percent,Amount')->where('Amount<=',($header->TotalAfSub))->order_by('Percent','DESC')->get('ref_points')->first_row();
                     $add_points = 0;
                     if($per) { 
                         if($used['computation']==1) {
-                            $add_points = (int)($header['TotalAfSub']) * (intval($per->Percent) / 100);    
+                            $add_points = (int)($header->TotalAfSub) * (intval($per->Percent) / 100);    
                         }else{
-                            $add_points = ceil(intval($header['TotalAfSub'])/intval($per->Amount)) * intval($per->Percent);
+                            $add_points = ceil(intval($header->TotalAfSub)/intval($per->Amount)) * intval($per->Percent);
                         }
                     }
                     
-                    $c = $this->db->select('CustPoints')->where('CardNo', $customer['CardNo'])->get('md_customer')->first_row();
+                    $c = $this->db->select('CustPoints')->where('CardNo', $customer->CardNo)->get('md_customer')->first_row();
                     if($c) {
-                        $new_points = array(
-                            'CustPoints' => intval($c->CustPoints) + $add_points);
-                        $this->db->update('md_customer', $new_points, array('CardNo'=>$customer['CardNo']));
+                        $new_points = array('CustPoints' => intval($c->CustPoints) - $add_points);
+                        $this->db->update('md_customer', $new_points, array('CardNo'=>$customer->CardNo));
                     }
                 }
 
@@ -935,15 +934,18 @@ class Transaction extends MY_Model {
                     $this->db->update_batch('md_inventory_serials', $iser, 'Serial'); }
             $this->db->trans_complete();
             if($this->db->trans_status()==true) {
-                $message = array('status'=>true, 'timer'=>1500, 'message'=>'Transaction has been successfully canceled!');
+                $message = array(
+                    'status'=>true, 
+                    'timer'=>1500, 
+                    'message'=>'Transaction has been successfully canceled!');
             }else{
                 $message = array('status'=>false, 'timer'=>1500, 'message'=>'Database error: Can\'t save your record!');
-            }
+            } return $message;
         }else{
             return array(
                 'status'=>false,
                 'timer'=>1500,
-                'message'=>'Transaction does not exists!');
+                'message'=>'Transaction does not exists or Status is not voidable!');
         }
     }
     

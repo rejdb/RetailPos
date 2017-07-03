@@ -536,9 +536,11 @@ function salesCtrl($scope, curl, transact, Auth, spinner, ItemFact, Inventory, B
     console.log("Sales module has been initialized!");
 }
 
-function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
+function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state, $location,
                             spinner, $filter, transact, Inventory, BrnFact) {
+    var tbxCnf;
     Auth.config(function(rsp) {
+        tbxCnf = rsp;
         $scope.config = rsp;
     });
     
@@ -563,6 +565,26 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state,
         $scope.register = rsp;
         spinner.hide();
     });
+
+    $scope.SubmitVoid = function() {
+        var data = {
+            TransID: $stateParams.TransID,
+            used: {
+                computation: parseInt(tbxCnf.UsedComputation)
+            }
+        }
+
+        spinner.show();
+        curl.post('/transactions/VoidSales',data, function(rsp) {
+            spinner.hide();
+
+            spinner.notif(rsp.message, rsp.timer, rsp.status);
+            if(rsp.status) {
+                $location.path('/sales/invoice/history');
+            }
+            // console.log(rsp);
+        });
+    }
     
     var th = ['','thousand','million', 'billion','trillion'];
     var dg = ['zero','one','two','three','four', 'five','six','seven','eight','nine']; 
