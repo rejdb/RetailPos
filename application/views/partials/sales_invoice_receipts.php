@@ -20,7 +20,7 @@
                         <a href="#/sales/invoice" class="btn btn-primary" style="margin-left:5px">
                             <i class="fa fa-plus-circle fa-lg"></i> New Sales
                         </a>
-                        <button type="button" class="btn btn-success dropdown-toggle" 
+                        <button type="button" class="btn btn-primary dropdown-toggle" 
                                 data-toggle="dropdown">
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu sales-dropdown" role="menu">

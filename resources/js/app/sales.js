@@ -567,23 +567,27 @@ function salesReceiptCtrl($scope, $stateParams, curl, Auth, $state, $location,
     });
 
     $scope.SubmitVoid = function() {
-        var data = {
-            TransID: $stateParams.TransID,
-            used: {
-                computation: parseInt(tbxCnf.UsedComputation)
+        var cnf = confirm("Are you sure do you want to void this transaction?");
+
+        if(cnf) {
+            var data = {
+                TransID: $stateParams.TransID,
+                used: {
+                    computation: parseInt(tbxCnf.UsedComputation)
+                }
             }
+
+            spinner.show();
+            curl.post('/transactions/VoidSales',data, function(rsp) {
+                spinner.hide();
+
+                spinner.notif(rsp.message, rsp.timer, rsp.status);
+                if(rsp.status) {
+                    $location.path('/sales/invoice/history');
+                }
+                // console.log(rsp);
+            });
         }
-
-        spinner.show();
-        curl.post('/transactions/VoidSales',data, function(rsp) {
-            spinner.hide();
-
-            spinner.notif(rsp.message, rsp.timer, rsp.status);
-            if(rsp.status) {
-                $location.path('/sales/invoice/history');
-            }
-            // console.log(rsp);
-        });
     }
     
     var th = ['','thousand','million', 'billion','trillion'];
