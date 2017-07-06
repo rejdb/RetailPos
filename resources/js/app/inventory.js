@@ -172,6 +172,13 @@ function inventorySerialCtrl ($scope, curl, transact, Auth, spinner, ItemFact, I
         InDate: 'In Date',
         Ageing: 'Ageing'
     }
+
+    if(usr.Roles!=4) {
+        angular.extend($scope.exportFields, {
+            StdCost: 'Unit Cost',
+            CurrentPrice: 'Unit Price',
+        });
+    }
     
     
     spinner.show();

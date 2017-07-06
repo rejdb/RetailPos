@@ -280,7 +280,7 @@
                                 </td>
                                 <td ng-cloak ng-hide="toggle" class="text-center">
                                     <div class="popover-wrapper">
-                                        <a buttons="no" editable-number="item.StdCost" e-step="0.001" e-required="required" e-maxlength="18"
+                                        <a buttons="no" editable-number="item.StdCost" e-step="0.00001" e-required="required" e-maxlength="18"
                                            edit-disabled="(userProfile.Roles!=6 && userProfile.Roles!=1)"
                                            onaftersave="updateItem(item.PID, 'StdCost', $data, true)">
                                             {{item.StdCost | peso:2}}</a>
@@ -288,7 +288,7 @@
                                 </td>
                                 <td ng-cloak ng-hide="toggle" class="text-center">
                                     <div class="popover-wrapper">
-                                        <a buttons="no" editable-number="item.CurrentPrice" e-step="0.001" e-required="required" e-maxlength="18"
+                                        <a buttons="no" editable-number="item.CurrentPrice" e-step="0.00001" e-required="required" e-maxlength="18"
                                            edit-disabled="(userProfile.Roles!=6 && userProfile.Roles!=1)"
                                            onaftersave="updateSRP(item.PDID, 'Price', $data-0)">
                                             {{item.CurrentPrice | peso:2}}</a>
