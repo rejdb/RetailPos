@@ -1,0 +1,61 @@
+DROP VIEW IF EXISTS `report_sales`;
+CREATE VIEW report_sales AS
+SELECT T0.TransID
+, Concat(T0.BranchCode,'-SI',LPAD(T0.RefNo,5,0)) as RefNo
+, WEEK(T0.TransDate) as 'Week'
+, YEAR(T0.TransDate) as 'Year'
+, MONTH(T0.TransDate) as 'Month'
+, DAY(T0.TransDate) as 'Day'
+, T0.TransDate
+, T0.Branch
+, T0.BranchCode
+, T0.Description as 'BranchDesc'
+, T0.CategoryDesc
+, T0.ChannelDesc
+, T0.CityDesc
+, T0.GroupDesc
+, T0.TypeDesc
+, T1.BarCode
+, T1.ProductDesc
+, T1.SKU
+, T1.TypeDesc as ItemTypeDesc
+, T1.BrandDesc
+, T1.CategoryDesc as ItemCategory
+, T1.CycleDesc
+, T1.FamilyDesc
+, T1.WhsName
+, T1.Quantity
+, T1.Cost
+, T1.Price
+, T1.Subsidy
+, T1.PriceAfSub
+, T1.OutputTax
+, T1.TaxAmount
+, T1.PriceAfVat
+, T1.Discount
+, T1.DiscValue
+, T1.Total
+, T1.TotalAfSub
+, T1.TotalAfVat
+, T1.GTotal as TotalAfDiscount
+, T1.Serial
+, T1.Campaign
+, T2.FullName as CustomerName
+, T2.ContactNo as CustomerContactNo
+, T2.Email as CustomerEmail
+, T2.Address as CustomerAddress
+, T0.DisplayName as 'Cashier'
+, T0.NetTotal
+, IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and NOT I0.PaymentType IN (2,3,4,5)),0) as CashPayment
+, IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType IN (2,3,4)),0) as CardPayment
+, IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType IN (2,3) and NOT I0.Terminal IN (12)),0) as CreditSales
+, IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and (I0.PaymentType = 5 or (I0.PaymentType=2 and I0.Terminal=12))),0) as HomeCredit
+, IFNULL((SELECT I0.PaymentName FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 order by PaymentName ASC limit 0,1),'Cash') as PaymentType
+, IFNULL((SELECT MAX(BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 5),'Cash') as BankTerminal
+, IFNULL((SELECT MAX(InstDesc) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType IN (2,3,4,5)),'Cash') as Terms
+, IFNULL((SELECT MAX(RefNumber) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 and I0.Terminal!=12),'') as PaymentRefNumber
+, IFNULL((SELECT MAX(RefNumber) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and (I0.PaymentType = 5 or (I0.PaymentType=2 and I0.Terminal=12))),'') as PaymentRefNumber_hc
+
+FROM view_sales T0
+INNER JOIN view_sales_row T1 ON T0.TransID = T1.TransID
+INNER JOIN view_sales_customer T2 ON T0.TransID = T2.TransID;
