@@ -126,6 +126,14 @@ class Transaction extends MY_Model {
         if(count($data['data'])) {
             $this->db->insert_batch('trx_purchase_detail', $data['data']);
         }
+
+        if(count($data['inventories'])>0) {
+            $this->db->insert_batch('md_inventory_serials',$data['inventories']);
+        }
+
+        if(count($data['smr'])>0) {
+            $this->db->insert_batch('trx_stocks_movement',$data['smr']);
+        }
     }
     
     /**** Receiving Module ******************/

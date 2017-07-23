@@ -59,6 +59,7 @@ class Transactions extends REST_Controller {
     function InsertPurchaseSerial_post() {
         $this->transaction->Insert_Purchase_Serial($this->post());
         $this->response(array('message'=>'Purchase serial has been added!'));
+        // $this->response($m);
     }
     
     function SubmitReceiving_post() {

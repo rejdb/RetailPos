@@ -411,8 +411,8 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
         $scope.po.header.ReceivedQty = 0;
         $scope.po.rows[index].Serials = [];
         
-        var save = [];
-        spinner.show();
+        var save = []; var serialData = []; var smr = [];
+        // spinner.show();
         angular.forEach(data, function(i) {
             $scope.po.rows[index].Serials.push(i.text);
             save.push({PurRowID: parseInt($scope.po.rows[index].PurRowID), Serial: i.text})
@@ -423,18 +423,46 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
         angular.forEach($scope.po.rows, function(ind) {
             $scope.po.header.ReceivedQty += parseInt(ind.ReceivedQty);
         });
+
+        angular.forEach(imei_temp, function(i) {
+            serialData.push({
+                Branch: parseInt($scope.po.header.ShipToBranch),
+                Product: parseInt($scope.po.rows[index].ProductID),
+                Warehouse: parseInt($scope.po.rows[index].Warehouse),
+                Serial: i
+            });
+
+            smr.push({
+                TransID: $scope.po.header.TransID,
+                Date: $scope.po.header.TransDate,
+                RefNo: $scope.po.header.PONumber,
+                Module: '/purchase',
+                TransType: '',
+                Product: parseInt($scope.po.rows[index].ProductID),
+                Warehouse: parseInt($scope.po.rows[index].Warehouse),
+                Branch: parseInt($scope.po.header.ShipToBranch),
+                Serial: i,
+                MoveIn: 1,
+                MoveOut: 0,
+            });
+        }); imei_temp = [];
         
         curl.post('/transactions/InsertPurchaseSerial', {
             PurRowID: $scope.po.rows[index].PurRowID,
-            data: save
+            data: save,
+            inventories: serialData,
+            smr: smr
         }, function(rsp) { 
             spinner.hide();
-            updateDBQty(
-                parseInt($scope.po.rows[index].PurRowID), 
-                $scope.po.rows[index].Serials.length, 
-                $scope.po, index, currentQty
-            );
+            console.log(rsp);
         });
+
+        updateDBQty(
+            parseInt($scope.po.rows[index].PurRowID), 
+            $scope.po.rows[index].Serials.length, 
+            $scope.po, index, currentQty
+        );
+        // console.log(serialData);
     }
     
     $scope.updateStatus = function(status,hdr) {
@@ -448,46 +476,56 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
         }
     }
     
+    var imei_temp = [];
     $scope.checkSerial = function(data, po, tag, index, type) {
         var incr = data.length + 1;
         if(type && incr > po.rows[index].Quantity) {
             spinner.notif('Serial exceeds quantity', 1000);
             return false;
         }
-        var datas = {
-            Branch: parseInt(po.header.ShipToBranch),
-            Product: parseInt(po.rows[index].ProductID),
-            Warehouse: parseInt(po.rows[index].Warehouse),
-            Serial: tag.text
-        }
-        
-        var row = po.rows[index];
-        var smr = [{
-            TransID: po.header.TransID,
-            Date: po.header.TransDate,
-            RefNo: po.header.PONumber,
-            Module: '/purchase',
-            TransType: '',
-            Product: parseInt(row.ProductID),
-            Warehouse: parseInt(row.Warehouse),
-            Branch: parseInt(po.header.ShipToBranch),
-            Serial: tag.text,
-            MoveIn: (type) ? 1:0,
-            MoveOut: (!type) ? 1:0,
-        }];
-        
-        spinner.show();
-        var result;
-        curl.ajax('/inventories/InsertRemoveSerial', 
-                  {datas: datas, type: type}, function(rsp) {
-            spinner.hide();
-            result = rsp.status;
-            if(rsp.status) {
-                transact.smr(smr);
-            }else{
-                spinner.notif(rsp.message, 1000);
+
+        var result = true;
+        if(!type) {
+            imei_temp.splice(tag.text,1);
+
+            var datas = {
+                Branch: parseInt(po.header.ShipToBranch),
+                Product: parseInt(po.rows[index].ProductID),
+                Warehouse: parseInt(po.rows[index].Warehouse),
+                Serial: tag.text
             }
-        });
+
+            var row = po.rows[index];
+            transact.smr([{
+                TransID: po.header.TransID,
+                Date: po.header.TransDate,
+                RefNo: po.header.PONumber,
+                Module: '/purchase',
+                TransType: '',
+                Product: parseInt(row.ProductID),
+                Warehouse: parseInt(row.Warehouse),
+                Branch: parseInt(po.header.ShipToBranch),
+                Serial: tag.text,
+                MoveIn: 0,
+                MoveOut: 1,
+            }]);
+
+            curl.post('/inventories/InsertRemoveSerial',{datas: datas, type: type}, function(rsp) {
+                spinner.hide();
+                console.log(rsp);
+            });
+        }else{
+            curl.ajaxG('/inventories/CheckSerial/' + tag.text, function(rsp) {
+                result = !rsp.status;
+                if(rsp.status) {
+                    spinner.notif('Serial already exists!', 1000);
+                }else{
+                    imei_temp.push(tag.text);
+                    console.log("ok successful!");
+                }
+            });
+        }
+
         return result;
         
     }
