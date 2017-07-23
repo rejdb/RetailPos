@@ -412,7 +412,7 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
         $scope.po.rows[index].Serials = [];
         
         var save = []; var serialData = []; var smr = [];
-        // spinner.show();
+        spinner.show();
         angular.forEach(data, function(i) {
             $scope.po.rows[index].Serials.push(i.text);
             save.push({PurRowID: parseInt($scope.po.rows[index].PurRowID), Serial: i.text})
@@ -486,6 +486,7 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
 
         var result = true;
         if(!type) {
+            spinner.show();
             imei_temp.splice(tag.text,1);
 
             var datas = {
@@ -515,15 +516,15 @@ function purchaseReceivedCtrl($scope, transact, Auth, $location, curl, $q,
                 console.log(rsp);
             });
         }else{
+            spinner.show();
             curl.ajaxG('/inventories/CheckSerial/' + tag.text, function(rsp) {
                 result = !rsp.status;
                 if(rsp.status) {
                     spinner.notif('Serial already exists!', 1000);
                 }else{
                     imei_temp.push(tag.text);
-                    console.log("ok successful!");
                 }
-            });
+            }); spinner.hide();
         }
 
         return result;
