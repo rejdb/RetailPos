@@ -53,7 +53,7 @@ SELECT T0.TransID
 , IFNULL((SELECT I0.PaymentName FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 order by PaymentName ASC limit 0,1),'Cash') as PaymentType
 , IFNULL((SELECT MAX(BankName) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 5),'Cash') as BankTerminal
 , IFNULL((SELECT MAX(InstDesc) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType IN (2,3,4,5)),'Cash') as Terms
-, IFNULL((SELECT MAX(RefNumber) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 and I0.Terminal!=12),'') as PaymentRefNumber
+, IFNULL((SELECT MAX(RefNumber) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 2 and NOT I0.Terminal=12),'') as PaymentRefNumber
 , IFNULL((SELECT MAX(RefNumber) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and (I0.PaymentType = 5 or (I0.PaymentType=2 and I0.Terminal=12))),'') as PaymentRefNumber_hc
 
 FROM view_sales T0
