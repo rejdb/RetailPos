@@ -1,7 +1,7 @@
 DROP VIEW IF EXISTS `report_sales`;
 CREATE VIEW report_sales AS
 SELECT T0.TransID
-, Concat(T0.BranchCode,'-SI',LPAD(T0.RefNo,5,0)) as RefNo
+, Concat(T0.BranchCode,'-SI',LPAD(T0.RefNo,7,0)) as RefNo
 , WEEK(T0.TransDate) as 'Week'
 , YEAR(T0.TransDate) as 'Year'
 , MONTH(T0.TransDate) as 'Month'
