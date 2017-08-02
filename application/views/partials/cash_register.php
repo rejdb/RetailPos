@@ -92,6 +92,7 @@
                                 <th class="text-center"><span>Status</span></th>
                                 <th class="text-center"><span>Amount</span></th>
                                 <th class="text-center"><span>Deposit Slip</span></th>
+                                <th class="text-center"><span>Type</span></th>
 							</tr>
 						</thead>
                         <tbody>
@@ -114,6 +115,7 @@
                                         </a>
                                     </span>
                                 </td>
+                                <td><h2 style="color:green">{{b.PaymentName}}</h2></td>
                             </tr>
                         </tbody>
                     </table>

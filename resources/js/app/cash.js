@@ -52,7 +52,7 @@ function cashHistoryCtrl($scope, transact, Auth, spinner, curl,
         var branch = (f.AllBranch) ? '':' and Branch =' + ((usr.Roles !=4) ? parseInt(f.Branch) :parseInt(usr.Branch.BranchID));
         var IsDeposited = (f.IsDeposited==-1) ? '':' and IsDeposited =' + parseInt(f.IsDeposited);
         
-        var params = '(TransDate between "' + DateFrom + '" and "' + DateTo + '") and NOT PaymentType IN (2,3,4,5)' + branch + IsDeposited;
+        var params = 'PaymentType !=2 and PaymentType != 5 and (TransDate between "' + DateFrom + '" and "' + DateTo + '")' + branch + IsDeposited;
         
         spinner.show();
         transact.history(params, 'report_cash_register    ', function(rsp) {
