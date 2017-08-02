@@ -771,7 +771,7 @@ class Transaction extends MY_Model {
                                     "Terminal" => (int)$p['Terminal'],
                                     "Installment" => (int)$p['Installment'],
                                     "Amount" => (float)$p['Amount'],
-                                    "IsDeposited" => ($p['PaymentType']=='1') ? 0:1,
+                                    "IsDeposited" => (in_array($p['PaymentType'],[2,3,4,5])) ? 1:0,
                                     "Branch" => (int)$p['Branch']
                                 ));
                             }

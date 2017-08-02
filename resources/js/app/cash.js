@@ -52,7 +52,7 @@ function cashHistoryCtrl($scope, transact, Auth, spinner, curl,
         var branch = (f.AllBranch) ? '':' and Branch =' + ((usr.Roles !=4) ? parseInt(f.Branch) :parseInt(usr.Branch.BranchID));
         var IsDeposited = (f.IsDeposited==-1) ? '':' and IsDeposited =' + parseInt(f.IsDeposited);
         
-        var params = 'PaymentType=1 and (TransDate between "' + DateFrom + '" and "' + DateTo + '")' + branch + IsDeposited;
+        var params = '(TransDate between "' + DateFrom + '" and "' + DateTo + '") and NOT PaymentType IN (2,3,4,5)' + branch + IsDeposited;
         
         spinner.show();
         transact.history(params, 'report_cash_register    ', function(rsp) {
@@ -135,7 +135,7 @@ function cardHistoryCtrl($scope, transact, Auth, spinner, curl,
 	}, true);
     
     spinner.show();
-    var params = (usr.Roles!=4) ? 'PaymentType!="1" and TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"' : 'PaymentType != "1" and Branch =' +usr.Branch.BranchID + ' and TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"';
+    var params = (usr.Roles!=4) ? 'PaymentType IN (2,3,4,5) and TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"' : 'PaymentType IN (2,3,4,5) and Branch =' +usr.Branch.BranchID + ' and TransDate="' + $filter('date')(new Date(), 'yyyy-MM-dd') + '"';
     transact.history(params, 'view_sales_payments', function(rsp) {
         $scope.pList = rsp;
         spinner.hide();
@@ -154,7 +154,7 @@ function cardHistoryCtrl($scope, transact, Auth, spinner, curl,
         var branch = (f.AllBranch) ? '':' and Branch =' + ((usr.Roles !=4) ? parseInt(f.Branch) :parseInt(usr.Branch.BranchID));
 //        var IsDeposited = (f.IsDeposited==-1) ? '':' and IsDeposited =' + parseInt(f.IsDeposited);
         
-        var params = 'PaymentType!=1 and (TransDate between "' + DateFrom + '" and "' + DateTo + '")' + branch;
+        var params = 'PaymentType IN (2,3,4,5) and (TransDate between "' + DateFrom + '" and "' + DateTo + '")' + branch;
         
         spinner.show();
         transact.history(params, 'view_sales_payments', function(rsp) {

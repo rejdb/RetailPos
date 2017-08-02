@@ -138,7 +138,7 @@
                 </table>
             </div>
         </div>
-        <!--<pre>{{register | json}}</pre>-->
+        <!-- <pre>{{register | json}}</pre> -->
     </div>
     
     <div class="col-sm-4 clearfix">
