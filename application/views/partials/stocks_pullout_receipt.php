@@ -33,15 +33,15 @@
                                    title="Cancel Pullout"><i class="ion-ios-close"></i> Cancel Pullout</a> </li>
                             <li permission="[1,5]" ng-show="(register.header.Status==1)" class="divider"></li>
                             
-                            <li ng-show="(register.header.Status==2 && register.header.Branch==userProfile.Branch.BranchID)">
+                            <li ng-show="(register.header.Status==2 && (register.header.Branch==userProfile.Branch.BranchID || userProfile.UID == register.header.CreatedBy)) ">
                                 <a class="none suspended_sales_btn" 
                                    ng-click="PulloutStatus(register.header.TransID, 3)"
                                    title="Confirmed Pullout"><i class="ion-ios-checkmark-outline"></i> Confirmed Pullout</a> </li>
-                            <li ng-show="(register.header.Status<=2 && register.header.Branch==userProfile.Branch.BranchID)">
+                            <li ng-show="(register.header.Status<=2 && (register.header.Branch==userProfile.Branch.BranchID || userProfile.UID == register.header.CreatedBy))">
                                 <a class="none suspended_sales_btn" 
                                    ng-click="PulloutStatus(register.header.TransID, 4)"
                                    title="Cancel Pullout"><i class="ion-ios-close"></i> Cancel Pullout</a> </li>
-                            <li ng-show="(register.header.Status==2 && register.header.Branch==userProfile.Branch.BranchID)" class="divider"></li>
+                            <li ng-show="(register.header.Status==2 && (register.header.Branch==userProfile.Branch.BranchID)" class="divider"></li>
                             <li><a href="#/stocks/pullout"><i class="ion-ios-compose-outline"></i> Create Pullout</a></li>
                         </ul>
                     </div>
