@@ -13,7 +13,7 @@
                     <button class="btn" ng-init="collapse=true" ng-click="collapse = !collapse"
                             ng-class="{'btn-default': !collapse, 'btn-primary': collapse}">
                         <i class="fa fa-search fa-lg"></i></button>
-                    <button class="btn" ng-init="toggle=true" permission="[4]"
+                    <button class="btn" ng-init="toggle=true" permission="[1,4,5]"
                             ng-class="{'btn-primary':toggle,'btn-default':!toggle}"
                             data-toggle="modal" data-target="#myPostpaid"
                             ng-click="toggle = !toggle">

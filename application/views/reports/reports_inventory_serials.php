@@ -17,7 +17,6 @@
                     </a>
 -->
                     <button ng-json-export-excel data="pList" report-fields="exportFields" filename ="'Available Serials'" separator=","
-                            ng-show="userProfile.Roles!=4"
                             class="btn btn-info pull-right" style="margin-left:5px">
                         <i class="fa fa-external-link fa-lg"></i> CSV
                     </button>
