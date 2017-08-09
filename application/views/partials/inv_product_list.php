@@ -17,8 +17,8 @@
                             class="btn btn-info pull-right" style="margin-left:5px">
                         <i class="fa fa-external-link fa-lg"></i> CSV
                     </button>
-                    <div class="btn-group pull-right" style="margin-left:5px" permission="[1,5]">
-                        <a href="" class="btn btn-primary"
+                    <div class="btn-group pull-right" style="margin-left:5px" permission="[1,5,6]">
+                        <a href="" class="btn btn-primary" permission = "[1,5]"
                             data-toggle="modal" data-target="#addNewItemData">
                             <i class="fa fa-plus-circle fa-lg"></i> Add Item
                         </a>
