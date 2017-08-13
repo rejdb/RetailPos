@@ -102,7 +102,7 @@
                                 <th><span>Deposit Amount</span></th>
                                 <th><span>Comments</span></th>
 								<th class="text-center"><span>Status</span></th>
-								<th class="text-center"><span>Action</span></th>
+								<th class="text-center"><span>Action / <small>Activation Date</small></span></th>
 							</tr>
 						</thead>
                         <tbody>
@@ -159,6 +159,15 @@
                                         </a>
                                     </div>
 								</td>
+                                <td ng-hide="cs.Status==0" class="text-center">
+                                    <div class="popover-wrapper">
+                                        <a buttons="no" editable-date="cs.ActivationDate" edit-disabled="['1','5'].indexOf(userProfile.Roles)==-1"
+                                           e-ng-maxlength="100"
+                                           onaftersave="updateField(cs.PostpaidID, 'ActivationDate', $data)">
+                                            {{cs.ActivationDate || 'Not Set'}}
+                                        </a>
+                                    </div>
+                                </td>
                                 <td class="text-center">
                                     <span>
                                         <a ng-show="cs.Status==0" ng-click="CancelPostpaid(cs)"
@@ -214,7 +223,13 @@
                                 <div class="col-sm-11 col-sm-offset-1">
                                     <h4 class="info-text">Let's start with the basic information</h4>
                                     <div class="col-sm-11">
-                                        <div class="form-group col-sm-6">
+                                        <div class="form-group col-sm-4">
+                                            <label for="PostpaidDate">Date</label>
+                                            <input type="date" class="form-control" required="required" 
+                                                id="PostpaidDate" ng-model="PostpaidDate" 
+                                                placeholder="Validate SI" />
+                                        </div>
+                                        <div class="form-group col-sm-4">
                                             <label for="InvoiceNo">SI Number</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" required="required" 
@@ -234,7 +249,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="form-group col-sm-6">
+                                        <div class="form-group col-sm-4">
                                             <label>ICCID</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" required="required" 
@@ -260,17 +275,17 @@
                                         <div class="form-group col-sm-4">
                                             <label for="CustLName">Last Name <small>(required)</small></label>
                                             <input type="text" class="form-control" required ng-disabled="!(ValidSI==true && ValidICC==true)"
-                                                   ng-maxlength="20" ng-model="postpaid.LastName" placeholder="Dabu" />
+                                                   ng-maxlength="20" ng-model="postpaid.LastName" placeholder="Dela Cruz" />
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label for="CustFName">Given Name <small>(required)</small></label>
                                             <input type="text" class="form-control" required ng-disabled="!(ValidSI==true && ValidICC==true)"
-                                                   ng-maxlength="30" ng-model="postpaid.FirstName" placeholder="Reggie" />
+                                                   ng-maxlength="30" ng-model="postpaid.FirstName" placeholder="Juan" />
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label for="CustLName">Middle Name <small>(required)</small></label>
                                             <input type="text" class="form-control" required ng-disabled="!(ValidSI==true && ValidICC==true)"
-                                                   ng-maxlength="20" ng-model="postpaid.MiddleName" placeholder="Dequin" />
+                                                   ng-maxlength="20" ng-model="postpaid.MiddleName" placeholder="Tamad" />
                                         </div>
                                     </div>
                                     <div class="col-sm-11">

@@ -7,6 +7,7 @@ function postpaidCtrl($scope, transact, Auth, spinner, curl, $timeout,
     $scope.pList = [];
     $scope.currentPage = 1;
     $scope.pageSize = 10; // items per page
+    $scope.PostpaidDate = $filter('date')(new Date(), 'yyyy-MM-dd');
     
     var usr = Auth.currentUser();
     
@@ -109,15 +110,15 @@ function postpaidCtrl($scope, transact, Auth, spinner, curl, $timeout,
     
     /* Add New Postpaid */
     $scope.addNewPostpaid = function() {
-        console.log($scope.postpaid);
         $scope.saving = true;
         
         angular.extend($scope.postpaid, {
-            TransDate: $filter('date')(new Date(), 'yyyy-MM-dd'),
+            TransDate: $filter('date')($scope.PostpaidDate, 'yyyy-MM-dd'),
             CreateDate: $filter('date')(new Date(), 'yyyy-MM-dd'),
             Branch: usr.Branch.BranchID,
             CreatedBy: usr.UID
         });
+        // console.log($scope.postpaid);
         curl.post('/transactions/addPostpaid', $scope.postpaid, function(r) {
             console.log(r);
             $scope.saving = false;
