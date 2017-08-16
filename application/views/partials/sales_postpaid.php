@@ -146,7 +146,8 @@
                                     </div>
                                 </td>
                                 <td class="text-center" >
-                                    <div class="popover-wrapper">
+                                    <span class="label label-danger" ng-show="cs.Status==2">{{(cs.Status-0) | postpaidStatus}}</span>
+                                    <div class="popover-wrapper" ng-show="cs.Status!=2">
                                         <a editable-checkbox="cs.Status" buttons="no" style="color:white"
                                                e-ng-true-value="1" e-ng-false-value="0" edit-disabled="['2','4','6'].indexOf(userProfile.Roles)>=0"
                                            onaftersave="updateField(cs.PostpaidID, 'Status', $data-0, true)"
