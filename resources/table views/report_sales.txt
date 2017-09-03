@@ -55,6 +55,7 @@ SELECT T0.TransID
 , IFNULL((SELECT MAX(InstDesc) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),'Cash') as Terms
 , IFNULL((SELECT MAX(RefNumber) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 and I0.Terminal!=6),'') as PaymentRefNumber
 , IFNULL((SELECT MAX(RefNumber) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1 and I0.Terminal=6),'') as PaymentRefNumber_hc
+, T0.Comments
 
 FROM view_sales T0
 INNER JOIN view_sales_row T1 ON T0.TransID = T1.TransID

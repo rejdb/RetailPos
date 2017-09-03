@@ -2447,7 +2447,7 @@ CREATE TABLE `trx_sales_customer` (
   `CardNo` varchar(20) NOT NULL,
   `Fullname` varchar(50) NOT NULL,
   `Email` varchar(30) NOT NULL,
-  `ContactNo` int(12) NOT NULL,
+  `ContactNo` date NOT NULL,
   `Address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -3256,6 +3256,7 @@ SELECT T0.TransID
 , T2.Address as CustomerAddress
 , T0.DisplayName as 'FrontLiner'
 , T0.NetTotal
+, T0.Comments
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
 , 0 as CreditSales
@@ -3322,6 +3323,7 @@ SELECT T0.TransID
 , T2.Address as CustomerAddress
 , T0.DisplayName as 'Cashier'
 , T0.NetTotal
+, T0.Comments
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType = 1),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType != 1),0) as CardPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType=2 and NOT I0.Terminal IN (6)),0) as CreditSales

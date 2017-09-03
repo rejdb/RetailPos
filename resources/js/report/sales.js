@@ -214,7 +214,8 @@ function salesDetailedCtrl($scope, transact, Auth, spinner, curl, $timeout,
             CustomerEmail: 'Customer Email.',
             CustomerAddress: 'Customer Address',
             Cashier: 'Cashier',
-            Module: 'Module'
+            Module: 'Module',
+            Comments: 'Comments'
     });
     
     console.log('Sales Report Detailed Module has been initialized');
