@@ -42,10 +42,12 @@ SELECT T0.TransID
 , T1.Campaign
 , T2.FullName as CustomerName
 , T2.ContactNo as CustomerContactNo
+, T2.BDate as CustomerBDate
 , T2.Email as CustomerEmail
 , T2.Address as CustomerAddress
 , T0.DisplayName as 'Cashier'
 , T0.NetTotal
+, T0.Comments
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and NOT I0.PaymentType IN (2,3,4,5)),0) as CashPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType IN (2,3,4)),0) as CardPayment
 , IFNULL((SELECT SUM(I0.Amount) FROM view_sales_payments I0 WHERE I0.TransID = T0.TransID and I0.PaymentType IN (2,3) and NOT I0.Terminal IN (12)),0) as CreditSales

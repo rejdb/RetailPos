@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS `view_sales_customer`;
 CREATE VIEW view_sales_customer AS
 SELECT T0.*
 , T1.CustPoints

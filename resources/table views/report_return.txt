@@ -42,6 +42,7 @@ SELECT T0.TransID
 , T1.Campaign
 , T2.FullName as CustomerName
 , T2.ContactNo as CustomerContactNo
+, T2.BDate as CustomerBDate
 , T2.Email as CustomerEmail
 , T2.Address as CustomerAddress
 , T0.DisplayName as 'FrontLiner'
