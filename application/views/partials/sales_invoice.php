@@ -364,7 +364,7 @@
                            class="btn btn-pay select-payment"
                            btn-radio="pay.PaymentId" ng-model="register.PayType">{{pay.PaymentName}}</label>
                 </div>
-                <div class="form-group" ng-show="register.PayType!='2' && register.PayType!='5'">
+                <div class="form-group" ng-show="register.PayType!='2' && register.PayType!='5' && register.PayType!='8'">
                     <div class="input-group add-payment-form">
                         <input type="number" step="0.01" ng-keyup="Enter($event)"
                                ng-maxlength="18" placeholder="Enter Amount" ng-model="Payment.Amount"
@@ -403,9 +403,9 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group" ng-show="register.PayType=='5'">
+                <div class="form-group" ng-show="register.PayType=='9'">
                     <div class="input-group">
-                        <span class="input-group-addon">Home Credit</span>
+                        <span class="input-group-addon">Aeon</span>
                         <input class="form-control" type="text" placeholder="Ref. No."
                                ng-maxlength=20 maxlength=20 ng-model="Payment.RefNumber" />
                     </div>
